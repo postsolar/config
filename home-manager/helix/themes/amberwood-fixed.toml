@@ -1,0 +1,19 @@
+inherits = "amberwood"
+
+# fix whitespace rendering
+"ui.virtual.whitespace" = { fg = "gray", modifiers = [ "dim" ] }
+
+# "ui.virtual.jump-label" = { fg = "green", bg = "black", modifiers = [ "italic" ] }
+"ui.virtual.jump-label" = { modifiers = ["reversed"] }
+
+# fix distinguishing between primary and secondary cursors
+"ui.cursor.primary"     = { fg = "bg", bg = "cursor" }
+"ui.cursor"             = { fg = "bg", bg = "gray03" }
+"ui.cursorline.primary" = { bg = "gray02" }
+"ui.selection"          = { bg = "gray03" }
+
+"diagnostic.error"   = { underline = { color = "gray", style = "line" } }
+"diagnostic.warning" = { underline = { color = "gray", style = "line" } }
+"diagnostic.hint"    = { underline = { color = "gray", style = "line" } }
+"diagnostic.info"    = { underline = { color = "gray", style = "line" } }
+

@@ -1,0 +1,177 @@
+# vim:ft=dircolors
+# (This is not a dircolors file but it helps to highlight colors and comments)
+
+# default values from dircolors
+# (entries with a leading # are not implemented in lf)
+# #no     00              # NORMAL
+# fi      00              # FILE
+# #rs     0               # RESET
+# di      01;34           # DIR
+# ln      01;36           # LINK
+# #mh     00              # MULTIHARDLINK
+# pi      40;33           # FIFO
+# so      01;35           # SOCK
+# #do     01;35           # DOOR
+# bd      40;33;01        # BLK
+# cd      40;33;01        # CHR
+# or      40;31;01        # ORPHAN
+# #mi     00              # MISSING
+# su      37;41           # SETUID
+# sg      30;43           # SETGID
+# #ca     30;41           # CAPABILITY
+# tw      30;42           # STICKY_OTHER_WRITABLE
+# ow      34;42           # OTHER_WRITABLE
+# st      37;44           # STICKY
+# ex      01;32           # EXEC
+
+# default values from lf (with matching order)
+# ln      01;36   # LINK
+# or      31;01   # ORPHAN
+# tw      01;34   # STICKY_OTHER_WRITABLE
+# ow      01;34   # OTHER_WRITABLE
+# st      01;34   # STICKY
+# di      01;34   # DIR
+# pi      33      # FIFO
+# so      01;35   # SOCK
+# bd      33;01   # BLK
+# cd      33;01   # CHR
+# su      01;32   # SETUID
+# sg      01;32   # SETGID
+# ex      01;32   # EXEC
+# fi      00      # FILE
+
+# file types (with matching order)
+ln      92      # LINK
+or      31      # ORPHAN
+tw      34      # STICKY_OTHER_WRITABLE
+ow      34      # OTHER_WRITABLE
+st      34      # STICKY
+di      95      # DIR
+pi      94      # FIFO
+so      94      # SOCK
+bd      33      # BLK
+cd      33      # CHR
+su      32      # SETUID
+sg      32      # SETGID
+ex      93      # EXEC
+fi      00      # FILE
+
+# other
+*.log   02;90
+
+# archives or compressed (dircolors defaults)
+*.tar   31
+*.tgz   31
+*.arc   31
+*.arj   31
+*.taz   31
+*.lha   31
+*.lz4   31
+*.lzh   31
+*.lzma  31
+*.tlz   31
+*.txz   31
+*.tzo   31
+*.t7z   31
+*.zip   31
+*.z     31
+*.dz    31
+*.gz    31
+*.lrz   31
+*.lz    31
+*.lzo   31
+*.xz    31
+*.zst   31
+*.tzst  31
+*.bz2   31
+*.bz    31
+*.tbz   31
+*.tbz2  31
+*.tz    31
+*.deb   31
+*.rpm   31
+*.jar   31
+*.war   31
+*.ear   31
+*.sar   31
+*.rar   31
+*.alz   31
+*.ace   31
+*.zoo   31
+*.cpio  31
+*.7z    31
+*.rz    31
+*.cab   31
+*.wim   31
+*.swm   31
+*.dwm   31
+*.esd   31
+
+# image formats (dircolors defaults)
+*.jpg   96
+*.jpeg  96
+*.mjpg  96
+*.mjpeg 96
+*.gif   96
+*.bmp   96
+*.pbm   96
+*.pgm   96
+*.ppm   96
+*.tga   96
+*.xbm   96
+*.xpm   96
+*.tif   96
+*.tiff  96
+*.png   96
+*.svg   96
+*.svgz  96
+*.mng   96
+*.pcx   96
+*.mov   96
+*.mpg   96
+*.mpeg  96
+*.m2v   96
+*.mkv   96
+*.webm  96
+*.ogm   96
+*.mp4   96
+*.m4v   96
+*.mp4v  96
+*.vob   96
+*.qt    96
+*.nuv   96
+*.wmv   96
+*.asf   96
+*.rm    96
+*.rmvb  96
+*.flc   96
+*.avi   96
+*.fli   96
+*.flv   96
+*.gl    96
+*.dl    96
+*.xcf   96
+*.xwd   96
+*.yuv   96
+*.cgm   96
+*.emf   96
+*.ogv   96
+*.ogx   96
+
+# audio formats (dircolors defaults)
+*.aac   00;36
+*.au    00;36
+*.flac  00;36
+*.m4a   00;36
+*.mid   00;36
+*.midi  00;36
+*.mka   00;36
+*.mp3   00;36
+*.mpc   00;36
+*.ogg   00;36
+*.ra    00;36
+*.wav   00;36
+*.oga   00;36
+*.opus  00;36
+*.spx   00;36
+*.xspf  00;36

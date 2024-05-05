@@ -1,0 +1,33 @@
+unset __HM_SESS_VARS_SOURCED
+source "/etc/profiles/per-user/me/etc/profile.d/hm-session-vars.sh" || :
+
+setopt no_global_rcs no_rcs
+
+typeset -U path cdpath fpath manpath
+
+for profile in ${(z)NIX_PROFILES}; do
+  fpath+=(
+    $profile/share/zsh/site-functions
+    $profile/share/zsh/$ZSH_VERSION/functions
+    $profile/share/zsh/vendor-completions
+  )
+done
+
+path+=(~/.local/bin)
+
+export ZSH_CONFIG_DIR=${${(%):-%x}:h}
+export ZSH_CACHE_DIR=$ZSH_CONFIG_DIR/cache
+
+if [[ ! -d $ZSH_CACHE_DIR ]]; then
+  mkdir -p $ZSH_CACHE_DIR
+fi
+
+fpath+=($ZSH_CONFIG_DIR/autoload)
+
+source $ZSH_CONFIG_DIR/environment/shell-options.zsh || :
+
+if [[ -o interactive ]]; then
+  source $ZSH_CONFIG_DIR/environment/shell-options-interactive.zsh || :
+  source $ZSH_CONFIG_DIR/interactive/interactive.zsh || :
+fi
+

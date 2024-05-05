@@ -1,0 +1,62 @@
+# Load vendored modules
+# eval %sh{ printf "try %%:source %s:\n" $kak_runtime/rc/**/*.* }
+
+# Commands
+
+# Colorscheme
+
+# Scrolloff
+set-option global scrolloff 5,5
+
+# UI options
+set-option -add global ui_options terminal_status_on_top=no
+set-option -add global ui_options terminal_assistant=none
+set-option -add global ui_options terminal_enable_mouse=no
+set-option -add global ui_options terminal_padding_char= 
+
+# Remove startup version info, relies on a patch
+# https://github.com/arachsys/packages/blob/bc433b105415b1b9ec14ee068003c622f15d16ea/kakoune/news.diff#L9
+set-option -add global startup_info_version -1
+
+# Built-in highlighters
+try %{
+  add-highlighter global/ show-whitespaces -only-trailing
+  add-highlighter global/ show-matching -previous
+}
+
+# Shebangs highlighter
+try %{ add-highlighter global/ regex "^(#![\w/ -]+)" 0:+b }
+
+# Set window title to buffer name
+# Depends on https://github.com/mawww/kakoune/pull/4265
+hook global WinDisplay '.*' %{
+  set -add window ui_options "terminal_set_title=%val{bufname}"
+}
+
+# Automatic deletion of empty scratch buffers
+# Depends on https://github.com/mawww/kakoune/pull/3451
+hook global BufCreate '(.*)' %{
+  evaluate-commands %sh{
+    $kak_scratch && echo "
+      hook global BufCreate '^(?!\*scratch).*' %{
+        try %{
+          exec -buffer $kak_quoted_hook_param_capture_1 'L<a-K>..<ret>'
+          db $kak_quoted_hook_param_capture_1
+        }
+      }
+    "
+  }
+}
+
+# Plugins
+
+# Tabs.kak plugin
+set-option global tabs_modelinefmt '%val{cursor_line}:%val{cursor_char_column}/%val{buf_line_count} %val{selection_count} sel '
+set-option global tabs_options --minified
+
+# Keybindings
+source "%val{config}/keybindings/keybindings.kak"
+
+# delete the initial debug buffer
+hook -once global NormalIdle '.*' %{ delete-buffer *debug* }
+

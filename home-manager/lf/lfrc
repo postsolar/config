@@ -1,0 +1,238 @@
+# → settings
+
+clearmaps
+set shell            zsh
+set shellflag        -c
+# NOTE that any of these can be overridden by rc files anyways
+# in fact we do, as our zshenv contains some extra options
+set shellopts        -eu
+
+set findlen          0
+set cursoractivefmt  "\033[7m"
+set cursorparentfmt  "\033[7m"
+set cursorpreviewfmt ""
+set borderfmt        "\033[90m"
+set drawbox          false
+set hidden           true
+set icons            true
+set incsearch        true
+set incfilter        true
+set preview          true
+set promptfmt        "\033[34;1m %d\033[0m\033[1m%f \033[0m"
+set ratios           2:2:5
+set reverse          true
+set scrolloff        1000
+set sixel            true
+set statfmt          "\033[36m %S | \033[32m %t |\033[31m ⇒ %l"
+set tabstop          2
+set tempmarks        12345
+set truncatechar     …
+set truncatepct      0
+set wrapscroll       true
+
+# NOTE that arguments to `eval` *within lf* would need to be quoted
+# because lf does its own word-splitting
+cmd shell-eval &{{
+  cmd="send $id"
+  for arg; do
+    cmd="$cmd $(eval printf '%q' \"$arg\")"
+  done
+  lf -remote $cmd
+}}
+
+shell-eval set user_lfhome "${XDG_CONFIG_HOME:-~/.config}/lf"
+
+# → cmaps
+
+cmap <esc>          cmd-escape
+cmap <tab>          cmd-menu-complete
+cmap <backtab>      cmd-menu-complete-back
+cmap <enter>        cmd-enter
+cmap <c-c>          cmd-interrupt
+
+cmap <down>         cmd-history-next
+cmap <up>           cmd-history-prev
+cmap <left>         cmd-left
+cmap <right>        cmd-right
+cmap <home>         cmd-home
+cmap <end>          cmd-end
+cmap <a-right>      cmd-word
+cmap <a-left>       cmd-word-back
+
+cmap <delete>       cmd-delete
+cmap <backspace2>   cmd-delete-back
+cmap <a-delete>     cmd-delete-word
+cmap <a-backspace2> cmd-delete-word-back
+cmap <a-minus>      cmd-delete-unix-word
+cmap <c-backspace2> cmd-delete-home
+cmap <c-delete>     cmd-delete-end
+
+cmap <a-y>          cmd-yank
+cmap <a-t>          cmd-transpose
+cmap <a-T>          cmd-transpose-word
+cmap <a-c>          cmd-capitalize-word
+cmap <a-s-up>       cmd-uppercase-word
+cmap <a-s-down>     cmd-lowercase-word
+
+# → maps
+
+# general
+map q               quit
+map <:>             read
+map <enter>         shell       # run a shell command ($)
+map '|'             shell-pipe  # run a shell command (%)
+map '!'             shell-wait  # run a shell command (!)
+map '&'             shell-async # run a shell command (&)
+
+# selection
+map <tab>           :toggle; down;
+map <backtab>       :toggle; up;
+map v               invert
+map V               invert-below
+map u               unselect
+map <a-tab>         push :glob-select<space>
+map <a-u>           push :glob-unselect<space>
+
+# search
+map /               search
+map ?               search-back
+map n               search-next
+map N               search-prev
+map *               set globsearch!
+map f               fuzzy-cd
+map F               fuzzy-select
+
+# view
+map <backspace2>p   toggle_preview
+
+# actions
+map <a-r>           push :reload<enter>:redraw<enter>
+
+map y               copy
+map p               paste
+map c               clear
+
+map d               delete
+map r               push :rename<enter>
+
+map a               :push :$touch<space>
+map A               :push :$mkdir<space>-p<space>
+
+map x               $$f # run
+map X               !$f # run and show result
+map <a-x>           &$f # run async
+map <a-X>           |$f # pipe $fx to $f (i guess)
+
+map <a-y>           copy-paths-primary
+map <a-Y>           copy-paths-clipboard
+
+map e               $$EDITOR ${(f)fx}
+
+# navigation
+map <up>            up
+map <down>          down
+map <a-up>          half-up   # half of the view
+map <a-down>        half-down # half of the view
+map <left>          updir
+map <right>         open
+
+map g.              cd ~
+map g/              cd /
+map gg              top       # top of the list
+map g<up>           top       # top of the list
+map ge              bottom    # bottom of the list
+map g<down>         bottom    # bottom of the list
+map gh              high      # high of the view
+map gm              middle    # middle of the view
+map gl              low       # low of the view
+
+# marks
+map m               mark-save
+map M               mark-remove
+map <a-m>           mark-load
+
+# other
+map <esc>           noop
+map `               !true
+
+# → commands
+
+cmd q quit
+
+cmd noop push :<esc>
+
+# Useless for Nix-managed configs
+# cmd reload-config shell-eval source "$lf_user_lfhome/lfrc"
+# cmd edit-config ${{
+#   kak $lf_user_lfhome/lfrc -e "source '$lf_user_lfhome/highlighters.kak'; set buffer filetype lfrc
+#   lf -remote "send $id reload-config"
+# }}
+
+cmd history-exec ${{
+  lf -remote "query $id history" \
+    | tail -n +2 \
+    | choose 1.. \
+    | huniq \
+    | fzf +m --scheme=history --tac \
+        --prompt='Execute: ' \
+        --bind='enter:become<c={}; lf -remote "send $id "${c:-{q} }>' \
+      || true
+}}
+
+cmd fuzzy-cd ${{
+  fd . -td -d 12 -HL0 --strip-cwd-prefix \
+    | sort \
+    | fzf --read0 +m --scheme=path --preview-window='20%,down' \
+        --preview='dir -1 {}' \
+        --bind=enter:become:'lf -remote "send $id cd {}"' \
+      || true
+}}
+
+cmd fuzzy-select ${{
+  # save already selected ones to know which not to toggle
+  typeset -a selected=(${(f)fs})
+
+  picks=${
+    fd . -c always -d 12 -HL0 --strip-cwd-prefix \
+      | fzf --read0 --print0 \
+      | xargs -0 -r realpath -z --
+  }
+  typeset -a picks=(${(0)picks})
+
+  # filter out those that are already selected, `:|` is set subtraction
+  newToSelect=(${picks:|selected})
+
+  # quote, remove empty elements and re-assign to `$picks`
+  print -v picks -- ${(q)newToSelect:#}
+
+  (( ! ${#picks} )) || lf -remote "send $id toggle $picks"
+}}
+
+# ----- UI --------------------------------------------------------------------
+
+# Hook for the select action to format the statusline
+# Disabled because of poor performance when scrolling
+# cmd on-select &{{
+#   lf -remote "send $id set statfmt \"$(eza -ld --git --color=always "$f")\""
+# }}
+
+# Enter "minimal mode" with only one pane (no preview, no parent directory)
+cmd minimal-mode :{{
+  set preview false
+  set ratios 1
+}}
+
+# Toggle visibility of preview pane, and adjust split ratios
+cmd toggle-preview %{{
+  ratios=${ eval $lf_preview && print 2:3 || print 2:2:5 }
+  lf -remote "send $id :set preview!; set ratios $ratios"
+}}
+
+# ----- General ---------------------------------------------------------------
+
+cmd usage                $ dust -d 1 --force-colors | $PAGER
+cmd open-in-glow         & footclient -E glow -p $fx
+cmd follow-link          % lf -remote "send $id select ${(qqq)${ readlink -f -- $f }}"
+cmd copy-paths-primary   $ wl-copy -p -n <<< ${(F)fx}
+cmd copy-paths-clipboard $ wl-copy -n    <<< ${(F)fx}
+
