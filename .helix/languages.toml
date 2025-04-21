@@ -1,0 +1,5 @@
+[language-server.nixd.config.nixd]
+nixpkgs.expr = "(builtins.getFlake (toString ./.)).inputs.nixpkgs"
+options.nixos.expr = "(builtins.getFlake (toString ./.)).nixosConfigurations.nixos.options"
+options.home_manager.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.nixos.options.home-manager.users.type.getSubOptions []"
+

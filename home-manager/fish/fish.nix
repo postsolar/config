@@ -1,0 +1,47 @@
+{ config, lib, pkgs, ... }:
+
+let
+
+  # shave 5ms off startup time by not calling the bin each time
+  atuinInit = pkgs.runCommandLocal "fish atuin init" {}
+    ''
+    tmp=$(mktemp -d)
+    export XDG_CONFIG_HOME=$tmp XDG_DATA_HOME=$tmp
+    ${lib.getExe config.programs.atuin.package} init fish --disable-up-arrow --disable-ctrl-r > $out
+    '';
+
+  # shave 3ms off startup time by not calling the bin each time
+  starshipInit = pkgs.runCommandLocal "fish starship init" {}
+    ''
+    ${lib.getExe config.programs.starship.package} init fish --print-full-init > $out 2>/dev/null
+    '';
+
+in
+
+{
+
+  imports = [
+    ./keybindings.nix
+  ];
+
+  programs.fish = {
+    enable = true;
+
+    shellInit = # fish
+      ''
+      source /run/secrets/api_keys
+      '';
+
+    interactiveShellInit = # fish
+      ''
+      source ${starshipInit}
+      source ${atuinInit}
+      source ${./functions.fish}
+
+      set -x FZF_CTRL_T_COMMAND 'fd -- "$(set -q CDPATH; and echo \$CDPATH; or echo .)"'
+      set -x FZF_ALT_C_COMMAND 'fd -td -tl -- "$(set -q CDPATH; and echo \$CDPATH; or echo .)"'
+      '';
+  };
+
+}
+

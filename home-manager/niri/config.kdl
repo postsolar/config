@@ -1,0 +1,307 @@
+// ref: https://github.com/YaLTeR/niri/wiki/Configuration:-Overview
+
+input {
+  keyboard {
+    xkb {
+      // ref: xkeyboard-config(7)
+      layout "us,ee,ru"
+      variant "colemak_dh_iso,,"
+      options "compose:rctrl,grp:win_space_toggle"
+      // file "~/.config/keymap.xkb"
+    }
+    track-layout "window"
+  }
+
+  touchpad {
+    tap
+    dwt
+    drag true
+    drag-lock
+    natural-scroll
+    accel-speed 0.5
+    scroll-factor 1.0
+  }
+
+  mouse {
+    natural-scroll
+  }
+
+  trackpoint {
+    natural-scroll
+  }
+
+  workspace-auto-back-and-forth
+}
+
+output "eDP-1" {
+  off
+}
+
+layout {
+  gaps 12
+
+  focus-ring {
+    // off
+    width 4
+    active-gradient from="hotpink" to="palevioletred" angle=210 relative-to="workspace-view"
+  }
+
+  border {
+    off
+    width 4
+    active-color "#ffc87f"
+    inactive-color "#505050"
+    active-gradient from="#ffbb66" to="#ffc880" angle=45 relative-to="workspace-view"
+    inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+  }
+
+  shadow {
+    on
+    // draw-behind-window true
+    softness 20
+    spread 2
+    offset x=8 y=8
+    color "#00000099"
+  }
+
+  tab-indicator {
+    gap -10
+    position "bottom"
+    gaps-between-tabs 5
+  }
+
+  struts {
+    left 4
+    right 4
+    top 8
+    bottom 4
+  }
+
+  preset-column-widths {
+    proportion 0.25
+    proportion 0.33333
+    proportion 0.5
+    proportion 0.66667
+    proportion 0.75
+    proportion 1.0
+  }
+
+}
+
+prefer-no-csd
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+cursor {
+  hide-when-typing
+  hide-after-inactive-ms 3000
+}
+
+// TODO
+environment {
+  QT_QPA_PLATFORN "wayland"
+}
+
+window-rule {
+  match app-id="kitty"
+  opacity 0.95
+}
+
+window-rule {
+  match app-id=r#"^org\.telegram\.desktop$"#
+  exclude title="^Media viewer$"
+
+  opacity 0.95
+  draw-border-with-background false
+}
+
+// TODO
+animations {
+  slowdown 2.0
+}
+
+// Open the Firefox picture-in-picture player as floating by default.
+window-rule {
+  match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+  match app-id=r#"firefox$"# title="^Pilt-pildis$"
+  open-floating true
+}
+
+// Try open the Chrome picture-in-picture player as floating by default.
+window-rule {
+  match title="Pilt pildis"
+  open-floating true
+}
+
+window-rule {
+  match app-id="\\+float"
+  open-floating true
+}
+
+layer-rule {
+  match namespace="notification"
+  match namespace="swaync-control-center"
+  block-out-from "screencast"
+}
+
+// maybe fix auto-numlock missing in niri. another option might be try set it in TTY
+spawn-at-startup "sh" "-c" "echo key numlock | dotool"
+
+// TODO kept a lot of defaults here which i don't need
+// needs a lot of refactoring
+
+binds {
+  Mod+Shift+Slash { show-hotkey-overlay; }
+  Mod+Shift+E { quit; }
+  Ctrl+Alt+Delete { quit; }
+  Mod+Shift+P { power-off-monitors; }
+  // doesn't work or maybe i'm misunderstanding it
+  Mod+Escape { toggle-keyboard-shortcuts-inhibit; }
+  Mod+Q { close-window; }
+
+  Mod+Return { spawn "kitty" "-1"; }
+  Mod+Shift+Return { spawn "kitty" "-1" "--class" "kitty +float"; }
+
+  Mod+D { spawn "fuzzel"; }
+
+  XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+  F1                   allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+  XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-" "--limit" "1.5"; }
+  F2                   allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-" "--limit" "1.5"; }
+  XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+" "--limit" "1.5"; }
+  F3                   allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+" "--limit" "1.5"; }
+  XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+  F4                   allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+  XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "play-pause"; }
+  XF86AudioPause       allow-when-locked=true { spawn "playerctl" "play-pause"; }
+  XF86AudioStop        allow-when-locked=true { spawn "playerctl" "stop"; }
+  XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "previous"; }
+  XF86AudioNext        allow-when-locked=true { spawn "playerctl" "next"; }
+  Mod+XF86AudioPrev    allow-when-locked=true { spawn "playerctl" "position" "10-"; }
+  Mod+XF86AudioNext    allow-when-locked=true { spawn "playerctl" "position" "10+"; }
+
+  Mod+Left  { focus-column-left; }
+  Mod+Down  { focus-window-down; }
+  Mod+Up    { focus-window-up; }
+  Mod+Right { focus-column-right; }
+  Mod+H     { focus-column-left; }
+  Mod+J     { focus-window-down; }
+  Mod+K     { focus-window-up; }
+  Mod+L     { focus-column-right; }
+
+  Mod+Ctrl+Left  { move-column-left; }
+  Mod+Ctrl+Down  { move-window-down; }
+  Mod+Ctrl+Up    { move-window-up; }
+  Mod+Ctrl+Right { move-column-right; }
+  Mod+Ctrl+H     { move-column-left; }
+  Mod+Ctrl+J     { move-window-down; }
+  Mod+Ctrl+K     { move-window-up; }
+  Mod+Ctrl+L     { move-column-right; }
+
+  // Alternative commands that move across workspaces when reaching
+  // the first or last window in a column.
+  // Mod+J   { focus-window-or-workspace-down; }
+  // Mod+K   { focus-window-or-workspace-up; }
+  // Mod+Ctrl+J   { move-window-down-or-to-workspace-down; }
+  // Mod+Ctrl+K   { move-window-up-or-to-workspace-up; }
+
+  Mod+Home { focus-column-first; }
+  Mod+End  { focus-column-last; }
+  Mod+Ctrl+Home { move-column-to-first; }
+  Mod+Ctrl+End  { move-column-to-last; }
+
+  Mod+Shift+Left  { focus-monitor-left; }
+  Mod+Shift+Down  { focus-monitor-down; }
+  Mod+Shift+Up    { focus-monitor-up; }
+  Mod+Shift+Right { focus-monitor-right; }
+  Mod+Shift+H     { focus-monitor-left; }
+  Mod+Shift+J     { focus-monitor-down; }
+  Mod+Shift+K     { focus-monitor-up; }
+  Mod+Shift+L     { focus-monitor-right; }
+
+  Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+  Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+  Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+  Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+  Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
+  Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
+  Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
+  Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+
+  // Alternatively, there are commands to move just a single window:
+  // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
+  // ...
+
+  // And you can also move a whole workspace to another monitor:
+  // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
+  // ...
+
+  Mod+Page_Down      { focus-workspace-down; }
+  Mod+Page_Up        { focus-workspace-up; }
+  Mod+U              { focus-workspace-down; }
+  Mod+I              { focus-workspace-up; }
+  Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
+  Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
+  Mod+Ctrl+U         { move-column-to-workspace-down; }
+  Mod+Ctrl+I         { move-column-to-workspace-up; }
+
+  Mod+Shift+Page_Down { move-workspace-down; }
+  Mod+Shift+Page_Up   { move-workspace-up; }
+  Mod+Shift+U         { move-workspace-down; }
+  Mod+Shift+I         { move-workspace-up; }
+
+  Mod+1 { focus-workspace 1; }
+  Mod+2 { focus-workspace 2; }
+  Mod+3 { focus-workspace 3; }
+  Mod+4 { focus-workspace 4; }
+  Mod+5 { focus-workspace 5; }
+  Mod+6 { focus-workspace 6; }
+  Mod+7 { focus-workspace 7; }
+  Mod+8 { focus-workspace 8; }
+  Mod+9 { focus-workspace 9; }
+  Mod+Ctrl+1 { move-column-to-workspace 1; }
+  Mod+Ctrl+2 { move-column-to-workspace 2; }
+  Mod+Ctrl+3 { move-column-to-workspace 3; }
+  Mod+Ctrl+4 { move-column-to-workspace 4; }
+  Mod+Ctrl+5 { move-column-to-workspace 5; }
+  Mod+Ctrl+6 { move-column-to-workspace 6; }
+  Mod+Ctrl+7 { move-column-to-workspace 7; }
+  Mod+Ctrl+8 { move-column-to-workspace 8; }
+  Mod+Ctrl+9 { move-column-to-workspace 9; }
+
+  Mod+Tab { focus-workspace-previous; }
+
+  Mod+BracketLeft  { consume-or-expel-window-left; }
+  Mod+BracketRight { consume-or-expel-window-right; }
+
+  Mod+Comma  { consume-window-into-column; }
+  Mod+Period { expel-window-from-column; }
+
+  Mod+R { switch-preset-column-width; }
+  Mod+Shift+R { switch-preset-window-height; }
+  Mod+Ctrl+R { reset-window-height; }
+  Mod+F { maximize-column; }
+  Mod+Shift+F { fullscreen-window; }
+  Mod+F11 { toggle-windowed-fullscreen; }
+
+  Mod+Ctrl+F { expand-column-to-available-width; }
+
+  Mod+C { center-column; }
+
+  Mod+Minus { set-column-width "-5%"; }
+  Mod+Equal { set-column-width "+5%"; }
+
+  Mod+Shift+Minus { set-window-height "-5%"; }
+  Mod+Shift+Equal { set-window-height "+5%"; }
+
+  Mod+V     { toggle-window-floating; }
+  Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+
+  Mod+W { toggle-column-tabbed-display; }
+
+  Print { screenshot; }
+  Ctrl+Print { screenshot-screen; }
+  Alt+Print { screenshot-window; }
+
+}
