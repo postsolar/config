@@ -8,6 +8,8 @@ function e1 -w eza; e -1 $argv; end
 function ee -w eza; e -l $argv; end
 function et -w eza; e -T $argv; end
 
+function bb -w btm; command btm $argv; end
+
 # ~ functions
 
 # change directory into one of child directories using fzf
