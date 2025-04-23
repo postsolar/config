@@ -50,12 +50,9 @@
       NIXPKGS_ALLOW_UNFREE = 1;
       NIXOS_OZONE_WL = 1;
       TERMINAL = "kitty";
-      BROWSER = "google-chrome-stable";
+      # BROWSER = "google-chrome-stable";
+      BROWSER = "firefox";
       XCOMPOSEFILE = ./XCompose;
-      PAGER = "moar";
-      MOAR = "--no-linenumbers --no-statusbar --scroll-left-hint=ESC[90m‹ --scroll-right-hint=ESC[90m› --terminal-fg";
-      # actually should be in global zprofile/zenv, but won't bother configuring a shell i don't use
-      ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
       # source updated hm variables on each shell init
       __HM_SESS_VARS_SOURCED = "";
       KOOHA_EXPERIMENTAL = "all";
@@ -79,7 +76,14 @@
       (lib.lowPrio pkgs.home-manager)
 
       # media
-      (pkgs.google-chrome.override { commandLineArgs = [ "--new-window" "--enable-features=TouchpadOverscrollHistoryNavigation" ]; })
+      (pkgs.google-chrome.override {
+        commandLineArgs = [
+          "--new-window"
+          "--disable-features=OutdatedBuildDetector,UseChromeOSDirectVideoDecoder"
+          "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder,WaylandWindowDecorations,TouchpadOverscrollHistoryNavigation"
+          "--enable-wayland-ime=true"
+          "--ozone-platform-hint=auto"
+        ]; })
       (pkgs.hyprshot.override { hyprland = config.wayland.windowManager.hyprland.package; })
       pkgs.brave
       pkgs.firefox
@@ -177,6 +181,14 @@
       ];
     };
     swayimg.enable = true;
+  };
+
+  # ref: https://issues.chromium.org/issues/40272818
+  # ref: https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#Chromium_.2F_Electron
+  # todo: see if fcitx could be replaced with ibus (although fcitx has some extras which are rather nice to have)
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.waylandFrontend = true;
   };
 
 }

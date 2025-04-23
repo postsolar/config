@@ -159,8 +159,6 @@ bind = SUPER, A, focusurgentorlast
 bindm = SUPER, mouse:272, movewindow
 bindm = SUPER, mouse:273, resizewindow
 
-# currently mostly broken, see: https://github.com/hyprwm/Hyprland/discussions/9872
-# allegedly fixed now, didn't test yet
 binde = SUPER    , minus, exec, $scripts/gaps.zsh inner -3
 binde = SUPER    , equal, exec, $scripts/gaps.zsh inner 3
 binde = SUPER ALT, minus, exec, $scripts/gaps.zsh outer -3

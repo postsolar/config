@@ -130,7 +130,8 @@ in
         kb_variant = colemak_dh_iso,,
         kb_options = compose:rctrl,grp:win_space_toggle
         numlock_by_default = yes
-        resolve_binds_by_sym = yes
+        # same binds on all layouts
+        resolve_binds_by_sym = no
         follow_mouse = 2
         sensitivity = 0.25
         touchpad {

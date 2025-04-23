@@ -37,9 +37,6 @@ in
       source ${starshipInit}
       source ${atuinInit}
       source ${./functions.fish}
-
-      set -x FZF_CTRL_T_COMMAND 'fd -- "$(set -q CDPATH; and echo \$CDPATH; or echo .)"'
-      set -x FZF_ALT_C_COMMAND 'fd -td -tl -- "$(set -q CDPATH; and echo \$CDPATH; or echo .)"'
       '';
   };
 

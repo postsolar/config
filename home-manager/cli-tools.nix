@@ -1,4 +1,5 @@
 # provides a selection of CLI tools and configuration for these tools
+# TODO: should probably merge it back with home.nix
 
 { pkgs, lib, ... }:
 
@@ -25,13 +26,24 @@
     pkgs.ouch
     pkgs.pastel
     pkgs.sd
-    pkgs.skate
     pkgs.socat
     pkgs.uni
     pkgs.urlencode
     pkgs.watchexec
     pkgs.yj
   ];
+
+  home.sessionVariables = {
+    # WARN: for some reason widgets don't work with `--with-shell='zsh -ic'`, only with non-interactive zsh
+    FZF_CTRL_T_COMMAND = "fd -- '$cdpath'";
+    FZF_ALT_C_COMMAND = "fd -td -tl -- '$cdpath'";
+
+    PAGER = "moar";
+    MOAR = "--no-linenumbers --no-statusbar --scroll-left-hint=ESC[90m‹ --scroll-right-hint=ESC[90m› --terminal-fg";
+
+    # actually should be in global zprofile/zenv, but won't bother configuring a shell i don't really use
+    ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
+  };
 
   services = {
     pueue.enable = true;
@@ -79,6 +91,7 @@
     fzf = {
       enable = true;
       defaultOptions = [
+        "--with-shell='zsh -c'"
         "--multi"
         "--cycle"
         "--ansi"

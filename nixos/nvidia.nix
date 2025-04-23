@@ -2,7 +2,7 @@
 
 let
 
-  nvidiaDriver = config.boot.kernelPackages.nvidiaPackages.beta;
+  nvidiaDriver = config.boot.kernelPackages.nvidiaPackages.stable;
 
   # This pins the mesa version to what is specified by Hyprland
   openglDriver = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.system}.mesa;
