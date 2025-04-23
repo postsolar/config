@@ -99,3 +99,8 @@ function ns
   command nix shell --impure nixpkgs#{$argv}
 end
 
+# write a commit message with aichat
+function aichat-commit-message -w "git diff"
+  git diff --no-ext-diff | aichat write a commit message based on this diff
+end
+
