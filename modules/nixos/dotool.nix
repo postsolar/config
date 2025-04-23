@@ -23,38 +23,45 @@ in
 
   };
 
-  config = lib.mkIf cfg.enable {
+  config =
+    let pipePath = "/run/dotool-pipe"; in
 
-    environment.systemPackages = [ cfg.package ];
+    lib.mkIf cfg.enable {
 
-    systemd.services.dotoold = {
-      description = "dotoold - dotool daemon";
-      wantedBy = [ "multi-user.target" ];
-      partOf = [ "multi-user.target" ];
-      serviceConfig = {
-        Environment = [
-          "PATH=$PATH:${ lib.makeBinPath deps }"
-          "DOTOOL_PIPE=/run/dotool-pipe"
-        ];
-        ExecStart = "${lib.getExe' cfg.package "dotoold"}";
+      environment.systemPackages = [ cfg.package ];
+
+      environment.sessionVariables = {
+        DOTOOL_PIPE = pipePath;
       };
-    };
 
-    # may be unnecessary
+      systemd.services.dotoold = {
+        description = "dotoold - dotool daemon";
+        wantedBy = [ "multi-user.target" ];
+        partOf = [ "multi-user.target" ];
+        serviceConfig = {
+          Environment = [
+            "PATH=$PATH:${ lib.makeBinPath deps }"
+            "DOTOOL_PIPE=${pipePath}"
+          ];
+          ExecStart = "${lib.getExe' cfg.package "dotoold"}";
+        };
+      };
 
-    # hardware.uinput.enable = true;
+      # may be unnecessary
 
-    # services.udev.extraRules = ''
-    #   KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"
-    # '';
+      # hardware.uinput.enable = true;
 
-    # users.groups.input = {};
+      # services.udev.extraRules = ''
+      #   KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"
+      # '';
 
-    # users.users =
-    #   lib.attrsets.genAttrs
-    #     (cfg.dotool.users)
-    #     (_: { extraGroups = [  "uinput" "input" ]; })
-    #   ;
+      # users.groups.input = {};
+
+      # users.users =
+      #   lib.attrsets.genAttrs
+      #     (cfg.dotool.users)
+      #     (_: { extraGroups = [  "uinput" "input" ]; })
+      #   ;
 
   };
 }
