@@ -32,7 +32,10 @@ in
       wantedBy = [ "multi-user.target" ];
       partOf = [ "multi-user.target" ];
       serviceConfig = {
-        Environment = [ "PATH=$PATH:${ lib.makeBinPath deps }" ];
+        Environment = [
+          "PATH=$PATH:${ lib.makeBinPath deps }"
+          "DOTOOL_PIPE=/run/dotool-pipe"
+        ];
         ExecStart = "${lib.getExe' cfg.package "dotoold"}";
       };
     };
