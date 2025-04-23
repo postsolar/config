@@ -18,6 +18,9 @@
   services.blueman.enable = true;
   environment.systemPackages = [ pkgs.bluetui pkgs.fbset ];
 
+  # by default it's null i.e. decided by the kernel, in my case "powersave"
+  powerManagement.cpuFreqGovernor = "performance";
+
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-uuid/081352c6-6f25-4607-87e7-069c55da61f7";
