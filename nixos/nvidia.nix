@@ -1,3 +1,10 @@
+# it got a bit messy so probably needs a full reset,
+# also hyprland env vars should be given a review/reset
+#
+# ref: https://github.com/TLATER/dotfiles/tree/master/nixos-modules/nvidia
+# ref: https://discourse.nixos.org/t/nvidia-open-breaks-hardware-acceleration/58770/
+# (and anything on nixos discourse mentioning nvidia)
+
 { pkgs, config, inputs, ... }:
 
 let
@@ -24,9 +31,11 @@ in
       extraPackages = [
         pkgs.vaapiVdpau
         pkgs.libvdpau-va-gl
-        pkgs.nvidia-vaapi-driver
         pkgs.vaapi-intel-hybrid
         pkgs.egl-wayland
+        pkgs.intel-compute-runtime-legacy1
+        pkgs.intel-vaapi-driver
+        pkgs.nvidia-vaapi-driver
       ];
     };
 

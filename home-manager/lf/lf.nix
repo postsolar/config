@@ -4,10 +4,7 @@
   programs.lf = {
     enable = true;
     extraConfig = builtins.readFile ./lfrc;
-    # previewer.source = ./<TODO>;
-    # or
-    # ...
-    # maybe just switch to broot
+    # previewer.source = ./previewer;
   };
 
   xdg.configFile = {

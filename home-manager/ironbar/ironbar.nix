@@ -87,7 +87,7 @@ let
     height = 30;
     start = [ workspaces ];
     center = [ clock ];
-    end = [ tray keyboardLayouts music volume ];
+    end = [ music tray keyboardLayouts volume ];
   };
 
   niribarConf = {

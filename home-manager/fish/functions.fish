@@ -97,7 +97,7 @@ function hx-temp -a suffix
 end
 
 # a `nix shell` which removes the need for the `nixpkgs#` prefix
-function ns
+function ns -w 'nix shell'
   command nix shell --impure nixpkgs#{$argv}
 end
 

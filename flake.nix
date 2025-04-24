@@ -32,7 +32,6 @@
           (import ./overlays/packages.nix inputs)
           inputs.niri-flake.overlays.niri
           inputs.hyprpicker.overlays.hyprpicker
-          # TODO maybe add hyprland's overlay
         ];
 
         nixosModules = {
