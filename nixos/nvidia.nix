@@ -22,6 +22,9 @@ in
     pkgs.nvtopPackages.full
   ];
 
+  boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+  boot.kernelParams = [ "nvidia_drm.modeset=1" ];
+
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware = {
@@ -67,6 +70,27 @@ in
       };
     };
 
+  };
+
+  environment.sessionVariables = {
+    # makes firefox crash?
+    # GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    LIBVA_DRIVER_NAME = "nvidia";
+    VDPAU_DRIVER = "nvidia";
+    MOZ_DISABLE_RDD_SANDBOX = "1";
+    MOZ_ENABLE_WAYLAND = "1";
+    MOZ_DRM_DEVICE = "/dev/dri/renderD129";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    WLR_backend = "vulkan";
+    DRI_PRIME = "pci-0000_03_00_0";
+    NVD_BACKEND = "direct";
+    NVD_BACKEND__GLX_VENDOR_LIBRARY_NAME = "nvidia";
+
+    # put everything onto nvidia card
+    __NV_PRIME_RENDER_OFFLOAD = "1";
+    __NV_PRIME_RENDER_OFFLOAD_PROVIDER = "NVIDIA-G0";
+    __VK_LAYER_NV_optimus = "NVIDIA_only";
   };
 
 }

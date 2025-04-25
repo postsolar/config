@@ -2,15 +2,15 @@
 
 {
   imports = [
-    ./nvidia.nix
+    # ./nvidia.nix
+    ./intel_only.nix
   ];
 
   hardware.enableRedistributableFirmware = true;
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" "sr_mod" "rtsx_usb_sdmmc" ];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = [ "kvm-intel" "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-  boot.kernelParams = [ "nvidia_drm.modeset=1" ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [];
   boot.kernelPackages = pkgs.linuxPackages_latest;
 

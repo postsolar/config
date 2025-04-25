@@ -65,28 +65,6 @@ in
 
     extraConfig = /* hyprlang */
       ''
-      env = GDK_BACKEND, wayland
-      env = QT_QPA_PLATFORM, wayland
-      # makes firefox crash
-      # env = GBM_BACKEND, nvidia-drm
-      env = __GLX_VENDOR_LIBRARY_NAME, nvidia
-      env = LIBVA_DRIVER_NAME, nvidia
-      env = VDPAU_DRIVER, nvidia
-      env = MOZ_DISABLE_RDD_SANDBOX, 1
-      env = MOZ_ENABLE_WAYLAND, 1
-      env = MOZ_DRM_DEVICE, /dev/dri/renderD129
-      env = WLR_NO_HARDWARE_CURSORS, 1
-      env = WLR_backend, vulkan
-      env = DRI_PRIME, pci-0000_03_00_0
-      env = NVD_BACKEND, direct
-      env = NVD_BACKEND__GLX_VENDOR_LIBRARY_NAME, nvidia
-
-      # put everything onto nvidia card
-      env = __NV_PRIME_RENDER_OFFLOAD, 1
-      env = __NV_PRIME_RENDER_OFFLOAD_PROVIDER, NVIDIA-G0
-      env = __GLX_VENDOR_LIBRARY_NAME, nvidia
-      env = __VK_LAYER_NV_optimus, NVIDIA_only
-
       # set the scripts directory
       $scripts = ${./scripts}
 
