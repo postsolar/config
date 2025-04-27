@@ -34,7 +34,6 @@
     ./swaync/swaync.nix
     ./theme.nix
     ./xdg.nix
-    ./sops.nix
   ];
 
   home = {

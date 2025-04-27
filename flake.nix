@@ -12,14 +12,12 @@
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = { inherit inputs outputs system; };
         home-manager.sharedModules = [
-          inputs.sops-nix.homeManagerModules.sops
         ];
         home-manager.users.alice.imports =
           (builtins.attrValues outputs.homeManagerModules)
             ++
               [
                 ./home-manager/home.nix
-                inputs.sops-nix.homeManagerModules.sops
               ]
             ;
       };
@@ -64,10 +62,6 @@
                   # home manager
                   inputs.home-manager.nixosModules.home-manager
                   hmConfig
-
-                  # sops-nix
-                  inputs.sops-nix.nixosModules.sops
-                  ./sops.nix
                 ]
               ;
           };
@@ -136,11 +130,6 @@
 
     niri-flake = {
       url = "github:sodiboo/niri-flake";
-    };
-
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     wl-kbptr = {
