@@ -29,7 +29,7 @@ in
 
     shellInit = # fish
       ''
-      source /run/secrets/api_keys
+      source ${../../secrets/api_keys.env}
       '';
 
     interactiveShellInit = # fish

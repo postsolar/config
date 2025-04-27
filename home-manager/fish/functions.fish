@@ -112,3 +112,9 @@ function aichat-commit
     git diff --staged --no-ext-diff | aichat $prompt
   end | git commit -e -F -
 end
+
+# unlock a git-crypt-locked repo assuming the key is copied to clipboard
+function unlock-git-crypt
+  git-crypt unlock (wl-paste -t text/plain | base64 --decode | psub)
+end
+
