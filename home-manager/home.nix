@@ -19,7 +19,6 @@
     ./broot.nix
     ./cli-tools.nix
     ./fish/fish.nix
-    ./flameshot.nix
     ./helix/helix.nix
     ./hyprland/hyprland.nix
     ./ironbar/ironbar.nix
@@ -183,8 +182,6 @@
     swayimg.enable = true;
   };
 
-  # ref: https://issues.chromium.org/issues/40272818
-  # ref: https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#Chromium_.2F_Electron
   # todo: see if fcitx could be replaced with ibus (although fcitx has some extras which are rather nice to have)
   i18n.inputMethod = {
     enable = true;

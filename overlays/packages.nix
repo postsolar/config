@@ -8,9 +8,6 @@ inputs: f: p:
       { inherit (inputs) apple-color-emoji-src; }
       ;
 
-  flameshot =
-    p.flameshot.override { enableWlrSupport = true; };
-
   wl-kbptr =
     p.wl-kbptr.overrideAttrs
       (_: _: {

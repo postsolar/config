@@ -82,7 +82,6 @@
       enable = true;
       # use a wrapper instead of `programs.fd.extraOptions` because it works via
       # shell aliases which leads to surprises when used outside of a shell
-      # TODO use makeBinaryWrapper when https://github.com/NixOS/nixpkgs/pull/397604 is merged
       package = pkgs.writers.writeDashBin "fd"
         ''
         ${lib.getExe pkgs.fd} --follow --hidden --color=always --hyperlink=always "$@"

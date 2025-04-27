@@ -7,7 +7,8 @@ let
     runtimeInputs = [
       pkgs.tesseract
       pkgs.fuzzel
-      pkgs.flameshot
+      pkgs.grim
+      pkgs.slurp
       pkgs.libnotify
       pkgs.wl-clipboard
     ];
@@ -18,7 +19,10 @@ let
         if [[ -v 1 ]]; then
           tesseract -l "$langs" "$1" -
         else
-          flameshot gui -r | tesseract -l "$langs" - -
+          tmp=$(mktemp --suffix .png)
+          grim -t ppm - | satty -f - -o "$tmp" --initial-tool crop --early-exit --action-on-enter save-to-file
+          tesseract -l "$langs" "$tmp" -
+          rm -- "$tmp"
         fi
       )"
       if [[ "$text" ]]; then

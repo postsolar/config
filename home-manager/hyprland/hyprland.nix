@@ -86,9 +86,6 @@ in
 
       # autostart
 
-      # copy doesn't work when started as a systemd service
-      exec-once = flameshot
-
       # settings
 
       monitor = eDP-1, disable
