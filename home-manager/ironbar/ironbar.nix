@@ -49,9 +49,9 @@ let
     show_num = false;
     show_scroll = false;
     icons.layout_map = {
-      "English (Colemak-DH ISO)" = "🇺🇸";
-      "Estonian" = "🇪🇪";
-      "Russian" = "🇷🇺";
+      "English*"  = "🇺🇸";
+      "Estonian*" = "🇪🇪";
+      "Russian*"  = "🇷🇺";
     };
   };
 

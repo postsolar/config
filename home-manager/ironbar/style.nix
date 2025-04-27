@@ -71,12 +71,17 @@ box#end {
   }
 }
 
-box#end .widget-container:first-child revealer .widget {
-  padding-left: 10px
+box#end {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-box#end .widget-container:last-child revealer .widget {
-  padding-right: 10px
+.music.widget {
+  padding-left: 0px;
+
+  box box .image {
+    margin-left: -10px;
+  }
 }
 
 /* -- popups -- */

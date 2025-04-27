@@ -187,8 +187,14 @@
   # ref: https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#Chromium_.2F_Electron
   # todo: see if fcitx could be replaced with ibus (although fcitx has some extras which are rather nice to have)
   i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.waylandFrontend = true;
+    enable = true;
+    type = "fcitx5";
+    fcitx5 = {
+      waylandFrontend = true;
+      addons = [
+        pkgs.fcitx5-lua
+      ];
+    };
   };
 
 }

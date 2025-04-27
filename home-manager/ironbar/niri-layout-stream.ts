@@ -1,6 +1,8 @@
 // Subscribes to Niri's keyboard layout change events and outputs
 // layout changes as emoji (or 3-letter fallback if layout is not recognized)
 
+import { Glob } from "bun"
+
 const proc = Bun.spawn(["niri", "msg", "--json", "event-stream"])
 const decoder = new TextDecoder()
 
@@ -12,12 +14,21 @@ const checkIfInitState = (events: any[]) =>
 
 let layoutNames: Array<string>
 
-const showLayout = (lyt: string): string =>
-  ({
-    'English (Colemak-DH ISO)': '🇺🇸',
-    'Estonian': '🇪🇪',
-    'Russian': '🇷🇺'
-  })[lyt] || lyt.substring(0, 3).toLocaleUpperCase()
+const layoutMap =
+  Object.entries({
+    'English*': '🇺🇸',
+    'Estonian*': '🇪🇪',
+    'Russian*': '🇷🇺'
+  })
+
+const showLayout = (lyt: string): string => {
+  const text = layoutMap.find(([pat, text]) => new Glob(pat).match(lyt))
+  if (text === undefined) {
+    return lyt.substring(0, 3).toLocaleUpperCase()
+  } else {
+    return text
+  }
+}
 
 for await (const chunk of proc.stdout) {
   const events = decoder.decode(chunk).trim().split("\n").map(JSON.parse)

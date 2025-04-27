@@ -13,6 +13,7 @@ windowrulev2 = float, initialClass: \.blueman-manager-wrapped
 windowrulev2 = float, initialClass: swayimg
 windowrulev2 = float, initialClass: xdg-desktop-portal-gtk
 windowrulev2 = float, initialClass: com\.github\.hluk\.copyq
+windowrulev2 = float, initialClass: firefox, title: Laiendus\: \(Bitwardeni paroolihaldur\) - Bitwarden — Mozilla Firefox
 
 # Make swayimg prettier
 windowrulev2 = noborder, initialClass: swayimg

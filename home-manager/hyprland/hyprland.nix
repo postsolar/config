@@ -105,7 +105,8 @@ in
 
       input {
         kb_layout = us,ee,ru
-        kb_variant = colemak_dh_iso,,
+        # see /nix/store/<hash>-xkeyboard-config-2.43/share/X11/xkb/{symbols,rules}/ for possible options
+        kb_variant = colemak_dh_iso,,gost-14289-88
         kb_options = compose:rctrl,grp:win_space_toggle
         numlock_by_default = yes
         # same binds on all layouts
