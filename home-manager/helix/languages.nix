@@ -31,12 +31,12 @@ let
 
   typescript = {
     name = "typescript";
-    language-servers = [ "lsp-ai" ];
+    language-servers = [ "typescript-language-server" "lsp-ai" ];
   };
 
   markdown = {
     name = "markdown";
-    language-servers = [ "lsp-ai" ];
+    language-servers = [ "marksman" "lsp-ai" ];
   };
 
 in

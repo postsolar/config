@@ -131,18 +131,23 @@ const handleLine = (line : string): void => {
 }
 
 export const main = async () =>{
-  const decoder = new TextDecoder()
-  const ipcPath = `${process.env.XDG_RUNTIME_DIR}/hypr/${process.env.HYPRLAND_INSTANCE_SIGNATURE}/.socket2.sock`
-  const conn = Bun.spawn(["socat", "-U", "-", `UNIX-CONNECT:${ipcPath}`])
-  log(`connected to Hyprland IPC at ${ipcPath}`)
-  log(`pid: ${conn.pid}`)
+  Bun.connect({
+    unix: `${process.env.XDG_RUNTIME_DIR}/hypr/${process.env.HYPRLAND_INSTANCE_SIGNATURE}/.socket2.sock`,
 
-  for await (const chunk of conn.stdout) {
-    decoder.decode(chunk)
-      .trim()
-      .split("\n")
-      .forEach(handleLine)
-  }
+    socket: {
+      data(_socket, data) {
+        data.toString("utf8")
+          .trim()
+          .split("\n")
+          .forEach(handleLine)
+      },
+
+      end(_socket) {
+        log("Socket was closed.")
+        process.exit(1)
+      },
+    }
+  })
 }
 
 main()

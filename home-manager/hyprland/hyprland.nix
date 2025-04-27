@@ -38,7 +38,7 @@ in
       ExecStart = "${lib.getExe pkgs.bun} ${./HyprHelpers/HyprHelpers.ts}";
       Restart = "on-failure";
       RestartSec = "5s";
-      Environment = [ "PATH=${lib.makeBinPath [ pkgs.socat hlPackage ]}" ];
+      # Environment = [ "PATH=${lib.makeBinPath [ pkgs.socat hlPackage ]}" ];
     };
   };
 
