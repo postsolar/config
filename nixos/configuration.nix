@@ -8,6 +8,7 @@
     [
       ./hardware-configuration.nix
       ./keyd.nix
+      # ./xkb.nix
     ];
 
   # ~ keyboard

@@ -38,7 +38,6 @@ in
       ExecStart = "${lib.getExe pkgs.bun} ${./HyprHelpers/HyprHelpers.ts}";
       Restart = "on-failure";
       RestartSec = "5s";
-      # Environment = [ "PATH=${lib.makeBinPath [ pkgs.socat hlPackage ]}" ];
     };
   };
 
@@ -103,7 +102,8 @@ in
       input {
         kb_layout = us,ee,ru
         # see /nix/store/<hash>-xkeyboard-config-2.43/share/X11/xkb/{symbols,rules}/ for possible options
-        kb_variant = colemak_dh_iso,,gost-14289-88
+        # also: https://nixos.org/manual/nixos/stable/#custom-xkb-layouts (rumor has it it works with wayland)
+        kb_variant = colemak_dh_iso,,ruu
         kb_options = compose:rctrl,grp:win_space_toggle
         numlock_by_default = yes
         # same binds on all layouts
