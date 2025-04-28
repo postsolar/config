@@ -15,8 +15,6 @@ const minBy = <T>(f: (a: T) => number) => (as: Array<T>): T =>
 const partition = <T>(f: (a: T) => boolean) => (as: Array<T>): { yes: Array<T>, no: Array<T> } =>
   as.reduce<{ yes: Array<T>, no: Array<T> }>(({ yes, no }, a) => f(a) ? { yes: [ ...yes, a ], no: no } : { yes: yes, no: [ ...no, a ] }, { yes: [], no: [] })
 
-const last : <T>(as: Array<T>) => T | undefined = as => as[as.length - 1]
-
 // hyprctl wrappers
 
 const workspaceWindows = (): Array<HyWindow> => {
@@ -50,8 +48,6 @@ type HyWindow = {
 
 type MoveDirection = "left" | "right" | "up" | "down"
 
-const isMoveDirection = (d: string): d is MoveDirection => ["left", "right", "up", "down"].includes(d)
-
 // intra-workspace window moving
 
 const moveFloating = (direction : MoveDirection, Δ : number, address : string): (() => void) => () => {
@@ -64,18 +60,32 @@ const moveFloating = (direction : MoveDirection, Δ : number, address : string):
   hyprdo([`movewindowpixel ${resizeParams[direction]},address:${address}`])
 }
 
-const moveTiled = (direction : MoveDirection, address : string, group : Array<string>): (() => void) => () =>
-  group.length === 0
-    ? hyprdo([`movewindoworgroup ${direction[0]}`])
-    : direction === 'left' && group.indexOf(address) === 0
-    ? hyprdo([`movewindoworgroup l`])
-    : direction === 'left'
-    ? hyprdo([`movegroupwindow b`])
-    : direction == 'right' && address === last(group)
-    ? hyprdo([`movewindoworgroup r`])
-    : direction == 'right'
-    ? hyprdo([`movegroupwindow f`])
-    : hyprdo([`movewindoworgroup ${direction[0]}`])
+// map left/right/up/down to l/r/u/d
+const moveDirectionToHyDirection = (direction : MoveDirection): string =>
+  direction[0]
+
+const moveTiled = (direction : MoveDirection, address : string, group : Array<string>): (() => void) => () => {
+  const emptyGroup = group.length === 0
+  const moveLeft = direction === "left"
+  const moveRight = direction === "right"
+  const firstInGroup = group.indexOf(address) === 0
+  const lastInGroup = group.indexOf(address) === group.length - 1
+
+  const command =
+    emptyGroup
+      ? `movewindoworgroup ${moveDirectionToHyDirection(direction)}`
+      : (moveLeft && firstInGroup)
+      ? "movewindoworgroup l"
+      : moveLeft
+      ? "movegroupwindow b"
+      : (moveRight && lastInGroup)
+      ? "movewindoworgroup r"
+      : moveRight
+      ? "movegroupwindow f"
+      : `movewindoworgroup ${moveDirectionToHyDirection(direction)}`
+
+  hyprdo([command])
+}
 
 type MoveWindowOrGroupArgs = {
   direction: MoveDirection
