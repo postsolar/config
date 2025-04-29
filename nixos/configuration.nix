@@ -17,6 +17,17 @@
 
   services.dotool.enable = true;
 
+  # https://nixpk.gs/pr-tracker.html?pr=399949
+  # https://nixpk.gs/pr-tracker.html?pr=384689
+  # i18n.inputMethod = {
+  #   enable = true;
+  #   type = "ibus";
+  #   ibus.engines = with pkgs.ibus-engines; [
+  #     uniemoji
+  #     typing-booster
+  #   ];
+  # };
+
   # ~ wayland
 
   security.polkit.enable = true;

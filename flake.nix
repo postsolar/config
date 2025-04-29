@@ -76,12 +76,12 @@
 
   inputs = {
 
-    nixpkgs-master = {
-      url = "github:nixos/nixpkgs/master";
-    };
-
     nixpkgs = {
       url = "github:nixos/nixpkgs?ref=nixpkgs-unstable";
+    };
+
+    nixpkgs-master = {
+      url = "github:nixos/nixpkgs/master";
     };
 
     home-manager = {

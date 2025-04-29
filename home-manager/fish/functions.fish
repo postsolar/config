@@ -104,11 +104,11 @@ end
 # write a commit message with aichat
 function aichat-commit
   set prompt "
-    write a commit message body based on this diff. only output the message contents, and do not wrap it into a codeblock
+    write a commit message body based on this diff.
+    only output the message contents, and do not wrap it into a codeblock
     "
   begin
-    date "+%c"
-    echo
+    date +%c\n | string replace '   ' ' '
     git diff --staged --no-ext-diff | aichat $prompt
   end | git commit -e -F -
 end

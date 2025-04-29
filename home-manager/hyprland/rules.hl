@@ -13,6 +13,11 @@ windowrulev2 = float, initialClass: \.blueman-manager-wrapped
 windowrulev2 = float, initialClass: swayimg
 windowrulev2 = float, initialClass: xdg-desktop-portal-gtk
 windowrulev2 = float, initialClass: com\.github\.hluk\.copyq
+
+# browser pop ups
+# i guess no such windowrule would work for regular new window opening because a window would first open and then only set its title
+# but will keep it here for now
+windowrulev2 = float, initialClass: firefox, title: Logige sisse – Google´i kontod.+
 windowrulev2 = float, initialClass: firefox, title: Laiendus\: \(Bitwardeni paroolihaldur\) - Bitwarden — Mozilla Firefox
 
 # Make swayimg prettier

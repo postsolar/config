@@ -181,7 +181,9 @@
     swayimg.enable = true;
   };
 
-  # todo: see if fcitx could be replaced with ibus (although fcitx has some extras which are rather nice to have)
+  # TODO:
+  # see if fcitx could be replaced with ibus when nixpkgs updates ibus to 1.5.32
+  # see ../nixos/configuration.nix for pr tracker links
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";

@@ -43,7 +43,9 @@ bind = SUPER      , grave, fullscreenstate, 1 -1
 bind = SUPER SHIFT, grave, fullscreenstate, 2 -1
 bind = SUPER      , F11  , fullscreenstate, -1 2
 
+bind = SUPER, V, moveoutofgroup
 bind = SUPER, V, togglefloating
+bind = SUPER ALT, V, togglefloating
 bind = SUPER, P, pin
 
 # ~ window manipulation
@@ -58,10 +60,10 @@ bind = SUPER, down, movefocus, d
 bind = SUPER, X, event, { "name": "togglefocus" }
 
 # window or group movement
-binde = SUPER SHIFT, left,  event, { "name": "movewindoworgroup", "args": { "direction": "left",  "Δ": 10 } }
-binde = SUPER SHIFT, right, event, { "name": "movewindoworgroup", "args": { "direction": "right", "Δ": 10 } }
-binde = SUPER SHIFT, up,    event, { "name": "movewindoworgroup", "args": { "direction": "up",    "Δ": 10 } }
-binde = SUPER SHIFT, down,  event, { "name": "movewindoworgroup", "args": { "direction": "down",  "Δ": 10 } }
+binde = SUPER SHIFT, left,  event, { "name": "movewindoworgroup", "args": { "direction": "left",  "Δ": 15 } }
+binde = SUPER SHIFT, right, event, { "name": "movewindoworgroup", "args": { "direction": "right", "Δ": 15 } }
+binde = SUPER SHIFT, up,    event, { "name": "movewindoworgroup", "args": { "direction": "up",    "Δ": 15 } }
+binde = SUPER SHIFT, down,  event, { "name": "movewindoworgroup", "args": { "direction": "down",  "Δ": 15 } }
 
 bind = SUPER ALT, left, swapwindow, l
 bind = SUPER ALT, right, swapwindow, r
@@ -69,10 +71,10 @@ bind = SUPER ALT, up, swapwindow, u
 bind = SUPER ALT, down, swapwindow, d
 
 # also consider splitratio
-binde = SUPER CONTROL, left, resizeactive, -10 0
-binde = SUPER CONTROL, right, resizeactive, 10 0
-binde = SUPER CONTROL, up, resizeactive, 0 -10
-binde = SUPER CONTROL, down, resizeactive, 0 10
+binde = SUPER CONTROL, left, resizeactive, -15 0
+binde = SUPER CONTROL, right, resizeactive, 15 0
+binde = SUPER CONTROL, up, resizeactive, 0 -15
+binde = SUPER CONTROL, down, resizeactive, 0 15
 
 # group-specific
 bind = SUPER, T, togglegroup

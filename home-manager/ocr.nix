@@ -20,7 +20,7 @@ let
           tesseract -l "$langs" "$1" -
         else
           tmp=$(mktemp --suffix .png)
-          grim -t ppm - | satty -f - -o "$tmp" --initial-tool crop --early-exit --action-on-enter save-to-file
+          grim -t ppm - | satty -f - -o "$tmp" --initial-tool crop --early-exit --action-on-enter save-to-file >/dev/null 2>&1
           tesseract -l "$langs" "$tmp" -
           rm -- "$tmp"
         fi

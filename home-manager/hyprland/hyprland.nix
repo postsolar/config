@@ -88,6 +88,7 @@ in
       # settings
 
       monitor = eDP-1, disable
+      monitor = DP-1, 1600x900
 
       general {
         layout = dwindle
