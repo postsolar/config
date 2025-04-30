@@ -16,6 +16,8 @@ in
     vertical-pad = 15;
     inner-pad = 10;
     fields = "filename,name,generic,exec,categories,keywords";
+    keyboard-focus = "on-demand";
+    # no-exit-on-keyboard-focus-loss = false;
   };
 
   colors = unhashAll {

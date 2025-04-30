@@ -95,6 +95,7 @@
       pkgs.overskride
       pkgs.pwvucontrol
       pkgs.pulseaudio
+      pkgs.smile
       pkgs.telegram-desktop
       pkgs.waypaper
       pkgs.wf-recorder

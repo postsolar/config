@@ -36,6 +36,9 @@ bind = , Print, exec, grim -t ppm - | satty -f -
 # clipboard
 bind = SUPER, O, exec, copyq toggle
 
+# temporary solution for emojis as fcitx method is inadequate
+bind = SUPER, Period, exec, smile
+
 # ~ window state
 
 # the first argument is hyprland window state, the second is client's state
