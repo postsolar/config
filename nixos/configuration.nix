@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
 {
 
@@ -95,18 +95,24 @@
     shell = config.programs.fish.package;
   };
 
+  services.getty.autologinUser = "alice";
+
+  security.sudo.wheelNeedsPassword = false;
+
   services.gvfs.enable = true;
 
   environment.sessionVariables = {
     # source updated nixos variables on each shell init
+    # merge with inherited path rather than override it
     __NIXOS_SET_ENVIRONMENT_DONE = "";
+    PATH = ''''${PATH-}'';
 
     # allows using $PAGER as the pager for systemctl commands
     SYSTEMD_PAGERSECURE = "false";
 
     # i would prefer this not be set by NixOS at all, but the variable is there and if left
-    # as is ("nano") or left empty then, say, zsh, even if launched as non-login shell, would still set it to
-    # its NixOS value, which is undesirable
+    # as is ("nano") or left empty then, say, zsh, even if launched as non-login shell,
+    # would still set it to its NixOS value, which is undesirable
     EDITOR = "hx";
   };
 
@@ -115,20 +121,13 @@
   programs.fish = {
     enable = true;
     useBabelfish = true;
-
-    shellInit = # fish
-      ''
-      # source all configuration in every shell
-      set -e __fish_nixos_general_config_sourced
-      set -e __fish_nixos_login_config_sourced
-      set -e __fish_nixos_interactive_config_sourced
-      set -e __fish_nixos_env_preinit_sourced
-      '';
   };
 
   programs.zsh.enable = true;
 
   users.defaultUserShell = config.programs.fish.package;
+
+  environment.binsh = "${lib.getExe pkgs.dash}";
 
   # ~ fonts
 
