@@ -8,7 +8,7 @@
     [
       ./hardware-configuration.nix
       ./keyd.nix
-      # ./xkb.nix
+      ./xkb.nix
     ];
 
   # ~ keyboard
@@ -112,8 +112,20 @@
 
   # ~ shells
 
-  programs.fish.enable = true;
-  programs.fish.useBabelfish = true;
+  programs.fish = {
+    enable = true;
+    useBabelfish = true;
+
+    shellInit = # fish
+      ''
+      # source all configuration in every shell
+      set -e __fish_nixos_general_config_sourced
+      set -e __fish_nixos_login_config_sourced
+      set -e __fish_nixos_interactive_config_sourced
+      set -e __fish_nixos_env_preinit_sourced
+      '';
+  };
+
   programs.zsh.enable = true;
 
   users.defaultUserShell = config.programs.fish.package;
