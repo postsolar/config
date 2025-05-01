@@ -10,7 +10,6 @@ windowrulev2 = noshadow, floating:1
 
 # Some windows have to be floating by default
 windowrulev2 = float, initialClass: \.blueman-manager-wrapped
-windowrulev2 = float, initialClass: swayimg
 windowrulev2 = float, initialClass: xdg-desktop-portal-gtk
 windowrulev2 = float, initialClass: com\.github\.hluk\.copyq
 windowrulev2 = float, initialClass: it.mijorus.smile
@@ -22,6 +21,7 @@ windowrulev2 = float, initialClass: firefox, title: Logige sisse – Google´i k
 windowrulev2 = float, initialClass: firefox, title: Laiendus\: \(Bitwardeni paroolihaldur\) - Bitwarden — Mozilla Firefox
 
 # Make swayimg prettier
+windowrulev2 = float, initialClass: swayimg
 windowrulev2 = noborder, initialClass: swayimg
 windowrulev2 = noblur, initialClass: swayimg
 

@@ -22,11 +22,11 @@ const layoutMap =
   })
 
 const showLayout = (lyt: string): string => {
-  const text = layoutMap.find(([pat, text]) => new Glob(pat).match(lyt))
-  if (text === undefined) {
+  const patAndText = layoutMap.find(([pat, text]) => new Glob(pat).match(lyt))
+  if (patAndText === undefined) {
     return lyt.substring(0, 3).toLocaleUpperCase()
   } else {
-    return text
+    return patAndText[1]
   }
 }
 
