@@ -110,7 +110,7 @@ layout {
 
 // ~ other
 
-// prefer-no-csd
+prefer-no-csd
 
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
@@ -214,6 +214,8 @@ binds {
 
   Mod+R { spawn "albert" "toggle"; }
   Mod+Shift+R { spawn "fuzzel"; }
+  Mod+S { spawn "sherlock"; }
+  Mod+N { spawn "swaync-client" "--toggle-panel"; }
 
   // ~ hardware controls
 
@@ -298,6 +300,13 @@ binds {
   Mod+C { center-column; }
 
   // there doesn't seem to be any difference between window and column width
+  // ideally we'd want:
+  //   comma - shrink width (cycle backward)
+  //   period - expand width (cycle forward)
+  //   less (S+comma) - shrink height (cycle backward)
+  //   gt (S+period) - expand height (cycle forward)
+  // but it's not yet implemented i think. could be fixed by just using a submap though?
+  // i don't remember if they're already implemented
   Mod+Comma { switch-preset-window-width; }
   Mod+Period { switch-preset-window-height; }
   Mod+Shift+Period { reset-window-height; }
