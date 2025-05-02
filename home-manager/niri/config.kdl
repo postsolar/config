@@ -20,7 +20,7 @@ input {
     accel-speed 0.25
     drag true
     // wish the timeout here was configurable
-    drag-lock
+    // drag-lock
     dwt
     dwtp
     natural-scroll
@@ -112,7 +112,7 @@ layout {
 
 prefer-no-csd
 
-screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+screenshot-path "/tmp/Screenshots/%Y.%m.%d %H:%M:%S.png"
 
 cursor {
   hide-when-typing
@@ -156,6 +156,8 @@ window-rule {
   match title="^Pilt pildis$"
   // Smile emoji picker
   match app-id="^it.mijorus.smile$"
+  // CopyQ
+  match app-id="^com\\.github\\.hluk\\.copyq$"
   // Emulate window tags
   match app-id="\\+float"
 
@@ -208,7 +210,17 @@ binds {
   Mod+S { spawn "sherlock"; }
   Mod+N { spawn "swaync-client" "--toggle-panel"; }
 
+  Mod+O { spawn "copyq" "toggle"; }
   Mod+Apostrophe { spawn "smile"; }
+
+  Print { spawn "screenshot"; }
+  // a bit ugly as the API is currently lacking, but works fine
+  // see https://github.com/YaLTeR/niri/discussions/1376
+  Alt+Print { spawn "zsh" "-c" "
+      niri msg action screenshot-window --id $(niri msg --json pick-window | jq .id)
+      sleep 0.1
+      satty -f /tmp/Screenshots/*(om[1])
+    "; }
 
   // ~ hardware controls
 
