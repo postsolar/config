@@ -147,22 +147,18 @@ window-rule {
   draw-border-with-background false
 }
 
-// Open the Firefox picture-in-picture player as floating by default.
+// Windows that have to open floating
 window-rule {
-  match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-  match app-id=r#"firefox$"# title="^Pilt-pildis$"
-  open-floating true
-}
-
-// Try open the Chrome picture-in-picture player as floating by default.
-window-rule {
-  match title="Pilt pildis"
-  open-floating true
-}
-
-// emulate window tags
-window-rule {
+  // Firefox PiP
+  match app-id="^firefox$" title="^Picture-in-Picture$"
+  match app-id="^firefox$" title="^Pilt-pildis$"
+  // Chrome PiP
+  match title="^Pilt pildis$"
+  // Smile emoji picker
+  match app-id="^it.mijorus.smile$"
+  // Emulate window tags
   match app-id="\\+float"
+
   open-floating true
 }
 
@@ -171,11 +167,6 @@ layer-rule {
   match namespace="notification"
   match namespace="swaync-control-center"
   block-out-from "screencast"
-}
-
-// Albert launcher
-window-rule {
-  match title="Albert" app-id=""
 }
 
 // swayimg
@@ -216,6 +207,8 @@ binds {
   Mod+Shift+R { spawn "fuzzel"; }
   Mod+S { spawn "sherlock"; }
   Mod+N { spawn "swaync-client" "--toggle-panel"; }
+
+  Mod+Apostrophe { spawn "smile"; }
 
   // ~ hardware controls
 
@@ -277,9 +270,11 @@ binds {
   Mod+Shift+Left { swap-window-left; }
   Mod+Shift+Right { swap-window-right; }
 
+  // also acts on floating windows
   Mod+Alt+Left { move-column-left; }
   Mod+Alt+Right { move-column-right; }
 
+  // also acts on floating windows (they don't change workspace though)
   Mod+Shift+Up { move-window-up-or-to-workspace-up; }
   Mod+Shift+Down { move-window-down-or-to-workspace-down; }
 
@@ -292,7 +287,7 @@ binds {
   Mod+Shift+BracketRight { consume-or-expel-window-right; }
   Mod+Shift+BracketLeft { consume-or-expel-window-left; }
 
-  // column state
+  // column state (and window height)
 
   Mod+W { toggle-column-tabbed-display; }
 
@@ -312,6 +307,11 @@ binds {
   Mod+Shift+Period { reset-window-height; }
   Mod+Slash { maximize-column; }
   Mod+Alt+Slash { expand-column-to-available-width; }
+
+  Mod+Minus { set-window-width "-5%"; }
+  Mod+Equal { set-window-width "+5%"; }
+  Mod+Alt+Minus { set-window-height "-5%"; }
+  Mod+Alt+Equal { set-window-height "+5%"; }
 
   // ~ TODO
 
