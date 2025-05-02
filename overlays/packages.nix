@@ -4,8 +4,8 @@ inputs: f: p:
 
   apple-color-emoji =
     f.callPackage
-      ../packages/apple-color-emoji.nix
-      { inherit (inputs) apple-color-emoji-src; }
+      (import ../packages/apple-color-emoji.nix inputs.apple-color-emoji-src)
+      {}
       ;
 
   wl-kbptr =

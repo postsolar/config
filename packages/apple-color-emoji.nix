@@ -1,10 +1,10 @@
-{ stdenvNoCC, apple-color-emoji-src }:
+src: { stdenvNoCC }:
 
 stdenvNoCC.mkDerivation {
   pname = "AppleColorEmoji";
   version = "git";
 
-  src = apple-color-emoji-src;
+  inherit src;
 
   dontUnpack = true;
 
