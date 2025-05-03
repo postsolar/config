@@ -2,17 +2,9 @@
 
 let
 
-  # ~ clock
-  # https://docs.rs/chrono/latest/chrono/format/strftime/index.html
-
-  # 01:03:39
-  timeFmtShort = "%R";
-  # N 27 veebr 2025 01:03:39
-  timeFmtLong = "%a %e %b %Y %X %Z";
-
   clock = {
     type = "clock";
-    format = timeFmtShort;
+    format = "%R";
   };
 
   # ~ volume
@@ -64,17 +56,6 @@ let
     class = "keyboard niri-keyboard";
   };
 
-  # ~ focused
-  focused = {
-    type = "focused";
-    icon_size = 16;
-    truncate = {
-      mode = "end";
-      length = 60;
-      max_length = 60;
-    };
-  };
-
   # ~ workspaces
   workspaces = {
     type = "workspaces";
@@ -96,7 +77,7 @@ let
     height = 30;
     start = [ workspaces ];
     center = [ clock ];
-    end = [ tray keyboardLayoutsNiri music volume ];
+    end = [ music tray keyboardLayoutsNiri volume ];
   };
 
   stylesheet = 
