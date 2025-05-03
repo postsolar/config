@@ -18,6 +18,7 @@
     ./albert/albert.nix
     ./broot.nix
     ./cli-tools.nix
+    ./clipboard.nix
     ./fish/fish.nix
     ./helix/helix.nix
     ./hyprland/hyprland.nix
@@ -104,7 +105,6 @@
       pkgs.ffmpeg-full
       pkgs.yt-dlp
       pkgs.hyprpicker
-      pkgs.wl-clipboard
       pkgs.pandoc_3_6
       pkgs.scdl
       pkgs.streamrip
@@ -133,12 +133,6 @@
     playerctld.enable = true;
     swww.enable = true;
     network-manager-applet.enable = true;
-    # NOTE copyq seems to also fully replace `wl-clipboard` but we'll keep it anyways for now for compatibility
-    # also wl-paste appears to be much faster: 5ms vs 360ms for image/png, 5ms vs 85ms for text/plain (7 bytes)
-    copyq = {
-      enable = true;
-      forceXWayland = false;
-    };
   };
 
   programs = {
