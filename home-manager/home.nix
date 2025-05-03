@@ -34,6 +34,7 @@
     ./swayimg.nix
     ./swaync/swaync.nix
     ./theme.nix
+    ./wl-kbptr.nix
     ./xdg.nix
   ];
 

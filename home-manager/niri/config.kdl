@@ -325,7 +325,12 @@ binds {
   Mod+Alt+Minus { set-window-height "-5%"; }
   Mod+Alt+Equal { set-window-height "+5%"; }
 
-  // ~ TODO
+  // ~ other
 
+  // not sure if there's a way to query current cursor position
+  // there's defo no builtin way to move the cursor, but it can be done with dotool instead
+  Mod+Z { spawn "wl-kbptr" "-o" "modes=floating,click"; }
+  Mod+Shift+Z { spawn "wl-kbptr" "-o" "modes=floating,click" "-o" "mode_click.button=right"; }
+  Mod+Alt+Z { spawn "wl-kbptr" "-o" "modes=floating,click" "-o" "mode_click.button=middle"; }
 
 }
