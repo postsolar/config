@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 
 let package = pkgs.sherlock-launcher; in
 
@@ -10,19 +10,18 @@ let package = pkgs.sherlock-launcher; in
     package
   ];
 
-  systemd.user.services.sherlock-daemon = {
-    Unit = {
-      Description = "Sherlock: a versatile application/command launcher for Wayland";
-      Documentation = "https://github.com/Skxxtz/sherlock/tree/main/docs";
-    };
-    Install.WantedBy = [ "graphical-session.target" ];
-    Service = {
-      ExecStart = "${lib.getExe package}";
-    };
-  };
+  # daemonizing currently doesn't work with stdin input, disable it for now
+  # systemd.user.services.sherlock-daemon = {
+  #   Unit = {
+  #     Description = "Sherlock: a versatile application/command launcher for Wayland";
+  #     Documentation = "https://github.com/Skxxtz/sherlock/tree/main/docs";
+  #   };
+  #   Install.WantedBy = [ "graphical-session.target" ];
+  #   Service = {
+  #     ExecStart = "${lib.getExe package}";
+  #   };
+  # };
 
-  # there's a home-manager module in https://github.com/Skxxtz/sherlock/blob/main/nix/home-manager.nix
-  # but it's kinda goofy, i'd just write my files directly here
   xdg.configFile = {
     "sherlock/config.toml".text = # toml
       ''
@@ -35,7 +34,7 @@ let package = pkgs.sherlock-launcher; in
 
       [behavior]
       caching    =   true
-      daemonize  =   true
+      # daemonize  =   true
 
       [binds]
       prev       =   "None"
@@ -43,6 +42,7 @@ let package = pkgs.sherlock-launcher; in
       modifier   =   "alt"
 
       [files]
+      css = "/dev/null"
       '';
 
     "sherlock/fallback.json".text = # json
@@ -81,6 +81,9 @@ let package = pkgs.sherlock-launcher; in
       Avahi*
       qt*
       userfeedback*
+      Fcitx5*
+      fish*
+      Advanced Network Configuration
       '';
   };
 }
