@@ -137,13 +137,6 @@
       flake = false;
     };
 
-    sherlock = {
-      url = "github:Skxxtz/sherlock";
-      # the tradeoff: we can use `follows` and it won't add yet another rust toolchain,
-      # but will rebuild on every nixpkgs update
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
   };
 
 }
