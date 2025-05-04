@@ -84,5 +84,10 @@ final: prev:
           chmod 555 "$out/bin/${binary}"
         '';
       };
+
+  functions = {
+    apply = f: a: f a;
+  };
+
 }
 
