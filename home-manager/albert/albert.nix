@@ -78,19 +78,6 @@ in
         trigger = "\"file \"";
       };
       python.enabled = true;
-      # some emojis won't render correctly
-      # https://bugreports.qt.io/browse/QTBUG-85744
-      # https://bugreports.qt.io/browse/QTBUG-80434
-      "python.emoji" = {
-        enabled = true;
-        global_handler_enabled = false;
-        use_derived = false;
-        fuzzy = true;
-      };
-      # can't install deps for some reason
-      # "python.unit_converter" = {
-      #   enabled = true;
-      # };
       system = {
         enabled = true;
         fuzzy = true;
