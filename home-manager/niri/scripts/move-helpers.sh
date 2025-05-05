@@ -5,22 +5,19 @@ set -eu
 direction=$1
 [ "${2:-}" = "--column" ] && column=true || column=false
 
-currFloating=$(niri msg --json focused-window | jq .is_floating)
+focusedFloating=$(niri msg --json focused-window | jq .is_floating)
 
 horizontal () {
-  case "$1" in
-    left|right) return 0 ;;
-    up|down) return 1
-  esac
+  [ "$1" = left ] || [ "$1" = right ]
 }
 
-if $currFloating; then
-  horizontal "$direction" && action="move-column-$direction" || action="move-window-$direction"
+if $focusedFloating; then
+  horizontal "$direction" && action="move-column" || action="move-window"
 elif $column; then
-  horizontal "$direction" && action="move-column-$direction" || action="move-column-to-workspace-$direction"
+  horizontal "$direction" && action="move-column" || action="move-column-to-workspace"
 else
-  horizontal "$direction" && action="swap-window-$direction" || action="move-window-$direction-or-to-workspace-$direction"
+  horizontal "$direction" && action="swap-window" || action="move-window-$direction-or-to-workspace"
 fi
 
-niri msg action "$action"
+niri msg action "$action-$direction"
 
