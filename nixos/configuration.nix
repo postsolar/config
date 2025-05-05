@@ -163,6 +163,10 @@
 
   # ~ programs
 
+  environment.systemPackages = [
+    pkgs.git-crypt
+  ];
+
   services.locate = {
     enable = true;
     # all the default paths sans /nix/store
@@ -187,9 +191,7 @@
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
-  environment.systemPackages = [
-    pkgs.git-crypt
-  ];
+  services.preload.enable = true;
 
 }
 

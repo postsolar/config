@@ -40,7 +40,7 @@ end
 
 # open a manpage using arch man pages
 function webman -w man
-  xdg-open https://man.archlinux.org/search?q={$argv}
+  xdg-open https://man.archlinux.org/search?lang=en&q={$argv}
 end
 
 # print arguments separated by a newline character, with a trailing newline
