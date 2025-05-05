@@ -112,6 +112,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprscroller = {
+      # url = "github:cpiber/hyprscroller";
+      url = "github:nasirHo/hyprscroller";
+      flake = false;
+    };
+
     ironbar = {
       # TODO: move to upstream if/when my PR #949 gets merged
       url = "github:postsolar/ironbar/kb-icon-globs";

@@ -60,6 +60,11 @@ in
     plugins = [
       # FIXME: fails to build as of 17/04/2025
       # inputs.hyprspace.packages.${system}.Hyprspace
+
+      (pkgs.hyprlandPlugins.hyprscroller.overrideAttrs (_: _: {
+        src = inputs.hyprscroller;
+        buildInputs = [ hlPackage ] ++ hlPackage.buildInputs;
+      }))
     ];
 
     extraConfig = /* hyprlang */

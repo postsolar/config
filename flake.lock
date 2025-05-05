@@ -424,6 +424,22 @@
         "type": "github"
       }
     },
+    "hyprscroller": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1746326108,
+        "narHash": "sha256-ccuwXn9psnZPMRGyUCKTcU3eFiw3c2mqweuaLpvjnnU=",
+        "owner": "nasirHo",
+        "repo": "hyprscroller",
+        "rev": "35ee6662ab3b6911b3c6adab8e7807b739b087af",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nasirHo",
+        "repo": "hyprscroller",
+        "type": "github"
+      }
+    },
     "hyprspace": {
       "inputs": {
         "hyprland": [
@@ -835,6 +851,7 @@
         "hyprland": "hyprland",
         "hyprland-contrib": "hyprland-contrib",
         "hyprpicker": "hyprpicker",
+        "hyprscroller": "hyprscroller",
         "hyprspace": "hyprspace",
         "ironbar": "ironbar",
         "niri": "niri",
