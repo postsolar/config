@@ -38,6 +38,11 @@ function man -w man -a q
   end | pandoc --from man --to commonmark | glow -p
 end
 
+# open a manpage using arch man pages
+function webman -w man
+  xdg-open https://man.archlinux.org/search?q={$argv}
+end
+
 # print arguments separated by a newline character, with a trailing newline
 function lines
   printf %s\n $argv
