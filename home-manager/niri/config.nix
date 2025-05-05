@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  xdg.configFile."niri/config.kdl".text = #kdl
+  xdg.configFile."niri/config.kdl".text = # kdl
     ''
     // ref: https://github.com/YaLTeR/niri/wiki/Configuration:-Overview
 
@@ -11,8 +11,8 @@
       keyboard {
         xkb {
           // ref: xkeyboard-config(7)
-          layout "us,ee,ru"
-          variant "colemak_dh_iso,,ruu"
+          layout "us,ru"
+          variant "colemak_dh_iso,ruu"
           options "compose:rctrl,grp:win_space_toggle"
           // file "~/.config/keymap.xkb"
         }
@@ -284,15 +284,15 @@
       // shift: act on a window
       // alt: act on a column
 
-      Mod+Shift+Left { spawn "sh" "${./scripts/move-helpers.sh}" "left"; }
+      Mod+Shift+Left  { spawn "sh" "${./scripts/move-helpers.sh}" "left"; }
       Mod+Shift+Right { spawn "sh" "${./scripts/move-helpers.sh}" "right"; }
-      Mod+Shift+Up { spawn "sh" "${./scripts/move-helpers.sh}" "up"; }
-      Mod+Shift+Down { spawn "sh" "${./scripts/move-helpers.sh}" "down"; }
+      Mod+Shift+Up    { spawn "sh" "${./scripts/move-helpers.sh}" "up"; }
+      Mod+Shift+Down  { spawn "sh" "${./scripts/move-helpers.sh}" "down"; }
 
-      Mod+Alt+Left { spawn "sh" "${./scripts/move-helpers.sh}" "--column" "left"; }
-      Mod+Alt+Right { spawn "sh" "${./scripts/move-helpers.sh}" "--column" "right"; }
-      Mod+Alt+Up { spawn "sh" "${./scripts/move-helpers.sh}" "--column" "up"; }
-      Mod+Alt+Down { spawn "sh" "${./scripts/move-helpers.sh}" "--column" "down"; }
+      Mod+Alt+Left    { spawn "sh" "${./scripts/move-helpers.sh}" "left"  "--column"; }
+      Mod+Alt+Right   { spawn "sh" "${./scripts/move-helpers.sh}" "right" "--column"; }
+      Mod+Alt+Up      { spawn "sh" "${./scripts/move-helpers.sh}" "up"    "--column"; }
+      Mod+Alt+Down    { spawn "sh" "${./scripts/move-helpers.sh}" "down"  "--column"; }
 
       Mod+BracketLeft { consume-window-into-column; }
       Mod+BracketRight { expel-window-from-column; }

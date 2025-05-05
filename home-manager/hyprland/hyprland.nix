@@ -101,10 +101,10 @@ in
       }
 
       input {
-        kb_layout = us,ee,ru
+        kb_layout = us,ru
         # see /nix/store/<hash>-xkeyboard-config-2.43/share/X11/xkb/{symbols,rules}/ for possible options
         # also: https://nixos.org/manual/nixos/stable/#custom-xkb-layouts (rumor has it it works with wayland)
-        kb_variant = colemak_dh_iso,,ruu
+        kb_variant = colemak_dh_iso,ruu
         kb_options = compose:rctrl,grp:win_space_toggle
         numlock_by_default = yes
         # same binds on all layouts
