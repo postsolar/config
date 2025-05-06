@@ -70,14 +70,6 @@ in
         gaps_out = 2
       }
     }
-
-    plugin {
-      overview {
-        workspaceActiveBorder = 0xff${colors.border2}
-        workspaceInactiveBorder = 0x88ffffff
-        dragAlpha = 0.5
-      }
-    }
     '';
 
 }
