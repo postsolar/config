@@ -20,6 +20,7 @@
     ./clipboard.nix
     ./fish/fish.nix
     ./helix/helix.nix
+    ./hypridle.nix
     ./hyprland/hyprland.nix
     ./ironbar/ironbar.nix
     ./kitty/kitty.nix
