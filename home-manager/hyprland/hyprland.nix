@@ -46,7 +46,6 @@ in
     "hypr/binds.hl".source     = ./binds.hl;
     "hypr/rules.hl".source     = ./rules.hl;
     # plugins
-    "hypr/hyprspace.hl".source = ./hyprspace.hl;
   };
 
   wayland.windowManager.hyprland = {
@@ -58,9 +57,6 @@ in
     portalPackage = hlPortalPackage;
 
     plugins = [
-      # FIXME: fails to build as of 17/04/2025
-      # inputs.hyprspace.packages.${system}.Hyprspace
-
       (pkgs.hyprlandPlugins.hyprscroller.overrideAttrs (_: _: {
         src = inputs.hyprscroller;
         buildInputs = [ hlPackage ] ++ hlPackage.buildInputs;
@@ -85,8 +81,6 @@ in
       source = ${config.xdg.configHome}/hypr/theme.hl
 
       # plugins
-
-      source = ${config.xdg.configHome}/hypr/hyprspace.hl
 
       # autostart
 
