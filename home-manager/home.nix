@@ -15,7 +15,6 @@
   services.home-manager.autoExpire.enable = true;
 
   imports = [
-    ./albert/albert.nix
     ./broot.nix
     ./cli-tools.nix
     ./clipboard.nix
@@ -142,10 +141,6 @@
       enable = true;
       server.enable = true;
       settings = import ./foot.nix ctx;
-    };
-    fuzzel = {
-      enable = true;
-      settings = import ./fuzzel.nix ctx;
     };
     fzf-window = {
       enable = true;

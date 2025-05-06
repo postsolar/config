@@ -210,8 +210,6 @@
       Mod+Return { spawn "kitty" "-1"; }
       Mod+Shift+Return { spawn "kitty" "-1" "--class" "kitty +float"; }
 
-      // Mod+R { spawn "albert" "toggle"; }
-      // Mod+Shift+R { spawn "fuzzel"; }
       Mod+S { spawn "sherlock"; }
       Mod+N { spawn "swaync-client" "--toggle-panel"; }
 

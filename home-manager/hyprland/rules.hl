@@ -37,11 +37,6 @@ layerrule = ignorezero, swaync-notification-window
 # layerrule = ignorealpha 0.5, swaync-control-center
 # layerrule = ignorealpha 0.5, swaync-notification-window
 
-# Albert launcher
-windowrulev2 = noborder, initialTitle: Albert
-windowrulev2 = pin, initialTitle: Albert
-# windowrulev2 = opacity 0.8 0.8, initialTitle: Albert
-
 # ~ class-based rules controllers
 #
 # (needed for launching forking processes,
