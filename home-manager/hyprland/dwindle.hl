@@ -12,6 +12,12 @@ cursor {
   no_warps = yes
 }
 
+gestures {
+  workspace_swipe = yes
+  workspace_swipe_forever = yes  
+  workspace_swipe_create_new = no
+}
+
 source = $conf/binds/core.hl
 source = $conf/binds/dwindle.hl
 

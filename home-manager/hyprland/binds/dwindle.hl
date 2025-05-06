@@ -141,16 +141,3 @@ binde = SUPER ALT, equal, exec, $scripts/gaps.zsh outer 3
 # ~ wl-kbptr
 
 bind = SUPER, z, exec, sh $scripts/click.sh
-
-# ~ gestures
-
-gestures {
-  workspace_swipe = yes
-  workspace_swipe_forever = yes  
-  workspace_swipe_create_new = no
-
-  workspace_swipe_distance = 200
-  workspace_swipe_min_speed_to_force = 0
-  workspace_swipe_cancel_ratio = 0.3
-  workspace_swipe_direction_lock = no
-}

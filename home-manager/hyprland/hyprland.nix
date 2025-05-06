@@ -62,6 +62,15 @@ in
       monitor = eDP-1, disable
       monitor = DP-1, 1600x900, auto, auto
 
+      general {
+        snap {
+          enabled = yes
+          window_gap = 30
+          monitor_gap = 30
+          border_overlap = yes
+        }
+      }
+
       input {
         # ref: /nix/store/<hash>-xkeyboard-config-2.43/share/X11/xkb/{symbols,rules}/
         # ref: https://nixos.org/manual/nixos/stable/#custom-xkb-layouts
@@ -73,6 +82,7 @@ in
         numlock_by_default = yes
 
         sensitivity = 0.25
+        accel_profile = adaptive
 
         touchpad {
           natural_scroll = yes
