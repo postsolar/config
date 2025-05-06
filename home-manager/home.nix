@@ -126,6 +126,11 @@
       pkgs.lsp-ai
       pkgs.nixd
       pkgs.typescript-language-server
+
+      # etc
+      pkgs.libxkbcommon
+      pkgs.libinput
+      pkgs.libinput-gestures
     ];
   };
 

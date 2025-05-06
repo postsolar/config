@@ -1,3 +1,7 @@
+# open terminal
+
+bind = SUPER, Return, exec, kitty -1
+
 # exit hyprland
 
 bind = SUPER SHIFT, F12, exit

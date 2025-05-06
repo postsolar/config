@@ -18,10 +18,12 @@ in
   ];
 
   xdg.configFile = {
-    "hypr/rules.hl".source         = ./rules.hl;
-    "hypr/binds/core.hl".source    = ./binds/core.hl;
-    "hypr/dwindle.hl".source       = ./dwindle.hl;
-    "hypr/binds/dwindle.hl".source = ./binds/dwindle.hl;
+    "hypr/rules.hl".source          = ./rules.hl;
+    "hypr/binds/core.hl".source     = ./binds/core.hl;
+    "hypr/dwindle.hl".source        = ./dwindle.hl;
+    "hypr/binds/dwindle.hl".source  = ./binds/dwindle.hl;
+    "hypr/scroller.hl".source       = ./scroller.hl;
+    "hypr/binds/scroller.hl".source = ./binds/scroller.hl;
   };
 
   wayland.windowManager.hyprland = {
@@ -55,7 +57,8 @@ in
 
       # plugins and layout conf
 
-      source = $conf/dwindle.hl
+      # source = $conf/dwindle.hl
+      source = $conf/scroller.hl
 
       # core, layout-independent conf
 
