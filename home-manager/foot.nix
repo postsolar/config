@@ -1,11 +1,9 @@
 { lib, config, ... }:
 
 let
-  inherit (config.theme) colors;
+  inherit (config) theme;
   unhash = lib.strings.removePrefix "#";
-in
 
-{
   main = {
     font = "monospace:size=11";
     pad = "0x0 center";
@@ -22,24 +20,24 @@ in
   };
 
   colors = builtins.mapAttrs (_: v: if builtins.isString v then unhash v else v) {
-    foreground = colors.terminalForeground;
-    background = colors.terminalBackground;
-    regular0   = colors.terminalRegular0;
-    regular1   = colors.terminalRegular1;
-    regular2   = colors.terminalRegular2;
-    regular3   = colors.terminalRegular3;
-    regular4   = colors.terminalRegular4;
-    regular5   = colors.terminalRegular5;
-    regular6   = colors.terminalRegular6;
-    regular7   = colors.terminalRegular7;
-    bright0    = colors.terminalBright0;
-    bright1    = colors.terminalBright1;
-    bright2    = colors.terminalBright2;
-    bright3    = colors.terminalBright3;
-    bright4    = colors.terminalBright4;
-    bright5    = colors.terminalBright5;
-    bright6    = colors.terminalBright6;
-    bright7    = colors.terminalBright7;
+    foreground = theme.colors.terminalForeground;
+    background = theme.colors.terminalBackground;
+    regular0   = theme.colors.terminalRegular0;
+    regular1   = theme.colors.terminalRegular1;
+    regular2   = theme.colors.terminalRegular2;
+    regular3   = theme.colors.terminalRegular3;
+    regular4   = theme.colors.terminalRegular4;
+    regular5   = theme.colors.terminalRegular5;
+    regular6   = theme.colors.terminalRegular6;
+    regular7   = theme.colors.terminalRegular7;
+    bright0    = theme.colors.terminalBright0;
+    bright1    = theme.colors.terminalBright1;
+    bright2    = theme.colors.terminalBright2;
+    bright3    = theme.colors.terminalBright3;
+    bright4    = theme.colors.terminalBright4;
+    bright5    = theme.colors.terminalBright5;
+    bright6    = theme.colors.terminalBright6;
+    bright7    = theme.colors.terminalBright7;
     alpha = 0.9;
     # selection-foreground
     # selection-background
@@ -118,5 +116,24 @@ in
   mouse-bindings = {
     selection-override-modifiers = "Mod1";
   };
-}
+
+in
+  {
+    programs.foot = {
+      enable = true;
+      server.enable = true;
+      settings = {
+        inherit
+          main
+          scrollback
+          url
+          colors
+          key-bindings
+          search-bindings
+          mouse-bindings
+          ;
+      };
+    };
+  }
+
 

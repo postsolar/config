@@ -124,7 +124,6 @@
       hide-after-inactive-ms 3000
     }
 
-    // TODO
     environment {
     }
 
