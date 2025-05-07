@@ -1,5 +1,3 @@
-# TODO: fullscreen, gaps
-
 # ~ programs
 
 bind = SUPER SHIFT, Return, exec, kitty -1 --class 'kitty -float'
@@ -123,6 +121,7 @@ bind = SUPER SHIFT, BracketRigth, scroller:expelwindow, right
 # ~ pin
 
 bind = SUPER, P, scroller:pin
+bind = SUPER SHIFT, P, pin
 
 # ~ select
 
@@ -132,7 +131,7 @@ bind = SUPER SHIFT, F, submap, scroller_select
 submap = scroller_select
   bind = , W, scroller:selectionworkspace
   bind = , R, scroller:selectionreset
-  bind = , Left,  scroller:selectionmove, left
+  bind = , Left, scroller:selectionmove, left
   bind = , Right, scroller:selectionmove, right
   bindr = , catchall, submap, reset
 submap = reset
@@ -146,4 +145,11 @@ submap = reset
 
 bind = SUPER, V, togglefloating
 bind = SUPER SHIFT, V, event, { "name": "togglefocus" }
+
+# ~ fullscreen
+
+# the first argument is hyprland window state, the second is client's state
+bind = SUPER      , grave, fullscreenstate, 1 -1
+bind = SUPER SHIFT, grave, fullscreenstate, 2 -1
+bind = SUPER      , F11  , fullscreenstate, -1 2
 

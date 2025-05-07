@@ -9,12 +9,19 @@ let
     src = inputs.hyprscroller;
     buildInputs = [ hlPackage ] ++ hlPackage.buildInputs;
   });
+
+  hyprland-binds-viewer = pkgs.writers.writeTSBin "hyprland-binds-viewer" {} (builtins.readFile ./scripts/binds-viewer.ts);
+
 in
 
 {
   imports = [
     ./services.nix
     ./theme.nix
+  ];
+
+  home.packages = [
+    hyprland-binds-viewer
   ];
 
   xdg.configFile = {
@@ -44,6 +51,10 @@ in
 
       $scripts = ${./scripts}
       $conf = ${config.xdg.configHome}/hypr
+
+      # environment
+
+      env = NIXOS_OZONE_WL, 1
 
       # autostart
 

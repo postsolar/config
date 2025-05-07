@@ -154,6 +154,7 @@
       pkgs.gum
       pkgs.huniq
       pkgs.hyperfine
+      pkgs.jtbl
       pkgs.jq
       pkgs.killall
       pkgs.lazygit

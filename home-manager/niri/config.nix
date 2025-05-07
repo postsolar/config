@@ -125,11 +125,11 @@
     }
 
     environment {
+      NIXOS_OZONE_WL = 1;
     }
 
     // ~ animations
 
-    // TODO
     animations {
       slowdown 2.0
     }
