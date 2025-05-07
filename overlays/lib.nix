@@ -89,5 +89,36 @@ final: prev:
     apply = f: a: f a;
   };
 
+  writers = prev.writers // {
+
+    /**
+      Same as `pkgs.writers.writeJSBin`, but allows TypeScript and uses Bun as the interpreter.
+    */
+    writeTS =
+      name:
+      {
+        libraries ? [ ],
+      }:
+      content:
+      let
+        bun-env = final.pkgs.buildEnv {
+          name = "bun-env";
+          paths = libraries;
+          pathsToLink = [ "/lib/node_modules" ];
+        };
+      in
+      final.writers.writeDash name ''
+        export NODE_PATH=${bun-env}/lib/node_modules
+        exec ${final.lib.getExe final.pkgs.bun} ${final.pkgs.writeText "ts" content} "$@"
+      '';
+
+    /**
+      writeTSBin takes the same arguments as writeTS but outputs a directory (like writeScriptBin)
+    */
+    writeTSBin =
+      name: final.writers.writeTS "/bin/${name}";
+
+  };
+
 }
 

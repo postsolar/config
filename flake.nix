@@ -97,11 +97,6 @@
       url = "github:hyprwm/Hyprland";
     };
 
-    hyprspace = {
-      url = "github:KZDKM/Hyprspace";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     hyprpicker = {
       url = "github:hyprwm/hyprpicker";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -110,6 +105,12 @@
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprscroller = {
+      # url = "github:cpiber/hyprscroller";
+      url = "github:nasirHo/hyprscroller";
+      flake = false;
     };
 
     ironbar = {

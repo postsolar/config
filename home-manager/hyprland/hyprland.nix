@@ -1,52 +1,29 @@
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 
 let
   system = pkgs.stdenv.hostPlatform.system;
   hlPackage = inputs.hyprland.packages.${system}.hyprland;
   hlPortalPackage = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
+
+  hyprscroller = pkgs.hyprlandPlugins.hyprscroller.overrideAttrs (_: _: {
+    src = inputs.hyprscroller;
+    buildInputs = [ hlPackage ] ++ hlPackage.buildInputs;
+  });
 in
 
 {
   imports = [
-    ./hypridle.nix
+    ./services.nix
     ./theme.nix
   ];
 
-  systemd.user.services.hyprland-per-window-layout = {
-    Unit = {
-      Description = "Hyprland per-window layouts daemon";
-      Requires = [ "hyprland-session.target" ];
-      PartOf = [ "hyprland-session.target" ];
-      After = [ "hyprland-session.target" ];
-    };
-    Install.WantedBy = [ "hyprland-session.target" ];
-    Service = {
-      ExecStart = "${lib.getExe pkgs.hyprland-per-window-layout}";
-    };
-  };
-
-  systemd.user.services.hyprland-helpers = {
-    Unit = {
-      Description = "My Hyprland helpers";
-      Requires = [ "hyprland-session.target" ];
-      PartOf = [ "hyprland-session.target" ];
-      After = [ "hyprland-session.target" ];
-    };
-    Install.WantedBy = [ "hyprland-session.target" ];
-    Service = {
-      Type = "simple";
-      ExecStart = "${lib.getExe pkgs.bun} ${./HyprHelpers/HyprHelpers.ts}";
-      Restart = "on-failure";
-      RestartSec = "5s";
-    };
-  };
-
   xdg.configFile = {
-    # hyprland
-    "hypr/binds.hl".source     = ./binds.hl;
-    "hypr/rules.hl".source     = ./rules.hl;
-    # plugins
-    "hypr/hyprspace.hl".source = ./hyprspace.hl;
+    "hypr/rules.hl".source          = ./rules.hl;
+    "hypr/binds/core.hl".source     = ./binds/core.hl;
+    "hypr/dwindle.hl".source        = ./dwindle.hl;
+    "hypr/binds/dwindle.hl".source  = ./binds/dwindle.hl;
+    "hypr/scroller.hl".source       = ./scroller.hl;
+    "hypr/binds/scroller.hl".source = ./binds/scroller.hl;
   };
 
   wayland.windowManager.hyprland = {
@@ -58,59 +35,58 @@ in
     portalPackage = hlPortalPackage;
 
     plugins = [
-      # FIXME: fails to build as of 17/04/2025
-      # inputs.hyprspace.packages.${system}.Hyprspace
+      hyprscroller
     ];
 
     extraConfig = /* hyprlang */
       ''
-      # set the scripts directory
+      # config variables
+
       $scripts = ${./scripts}
-
-      # window/layer/workspace rules
-
-      source = ${config.xdg.configHome}/hypr/rules.hl
-
-      # keybindings
-
-      source = ${config.xdg.configHome}/hypr/binds.hl
-
-      # looks
-
-      source = ${config.xdg.configHome}/hypr/theme.hl
-
-      # plugins
-
-      source = ${config.xdg.configHome}/hypr/hyprspace.hl
+      $conf = ${config.xdg.configHome}/hypr
 
       # autostart
 
-      # settings
+      # window/layer/workspace rules
+
+      source = $conf/rules.hl
+
+      # looks
+
+      source = $conf/theme.hl
+
+      # plugins and layout conf
+
+      # source = $conf/dwindle.hl
+      source = $conf/scroller.hl
+
+      # core, layout-independent conf
 
       monitor = eDP-1, disable
       monitor = DP-1, 1600x900, auto, auto
 
       general {
-        layout = dwindle
-        resize_on_border = yes
-        extend_border_grab_area = 30
-      }
-
-      dwindle {
-        preserve_split = yes
+        snap {
+          enabled = yes
+          window_gap = 30
+          monitor_gap = 30
+          border_overlap = yes
+        }
       }
 
       input {
+        # ref: /nix/store/<hash>-xkeyboard-config-2.43/share/X11/xkb/{symbols,rules}/
+        # ref: https://nixos.org/manual/nixos/stable/#custom-xkb-layouts
         kb_layout = us,ru
-        # see /nix/store/<hash>-xkeyboard-config-2.43/share/X11/xkb/{symbols,rules}/ for possible options
-        # also: https://nixos.org/manual/nixos/stable/#custom-xkb-layouts (rumor has it it works with wayland)
         kb_variant = colemak_dh_iso,ruu
         kb_options = compose:rctrl,grp:win_space_toggle
+        # kb_rules
+        # kb_file
         numlock_by_default = yes
-        # same binds on all layouts
-        resolve_binds_by_sym = no
-        follow_mouse = 2
+
         sensitivity = 0.25
+        accel_profile = adaptive
+
         touchpad {
           natural_scroll = yes
           disable_while_typing = yes
@@ -137,7 +113,6 @@ in
 
       cursor {
         inactive_timeout = 3
-        no_warps = yes
       }
 
     '';

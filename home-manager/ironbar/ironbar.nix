@@ -2,6 +2,21 @@
 
 let
 
+  # ~ current hyprland submap
+  hyprSubmap = {
+    type = "script";
+    class = "submap";
+    mode = "watch";
+    on_click_left = "hyprctl keyword submap reset";
+    cmd = lib.getExe <| pkgs.writers.writeDashBin "hyprland-submap-watcher"
+      ''
+      nc -U $XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock \
+        | rg --no-config --line-buffered '^submap>>(.*)' -or '$1'
+      ''
+      ;
+  };
+
+  # ~ clock
   clock = {
     type = "clock";
     format = "%R";
@@ -66,7 +81,7 @@ let
     name = "hyprbar";
     position = "top";
     height = 30;
-    start = [ workspaces ];
+    start = [ workspaces hyprSubmap ];
     center = [ clock ];
     end = [ music tray keyboardLayouts volume ];
   };

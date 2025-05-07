@@ -48,7 +48,7 @@ in
     "handlr/handlr.toml".text =
       ''
       enable_selector = true
-      selector = "fuzzel --dmenu --prompt 'ava rakendusega: '"
+      selector = "sherlock"
       term_exec_args = '-e'
       expand_wildcards = true
       '';

@@ -9,8 +9,20 @@ let
 
   sleep = {
     timeout = 900;
-    on-timeout = "hyprctl dispatch dpms off";
-    on-resume = "hyprctl dispatch dpms on";
+    on-timeout = # sh
+      ''
+      case "$XDG_CURRENT_DESKTOP" in
+        Hyprland) hyprctl dispatch dpms off ;;
+        niri) niri msg action power-off-monitors ;;
+      esac
+      '';
+    on-resume = # sh
+      ''
+      case "$XDG_CURRENT_DESKTOP" in
+        Hyprland) hyprctl dispatch dpms on ;;
+        niri) niri msg action power-on-monitors ;;
+      esac
+      '';
   };
 
   suspend = {

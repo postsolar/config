@@ -23,7 +23,7 @@ let
       ''
       outputFifo=$(mktemp --dry-run --tmpdir --suffix=.fifo fzf-window-output.XXXX)
       mkfifo $outputFifo
-      ${cfg.terminalCommand} -- sh -c "${fzf} \"\$@\" </proc/$$/fd/0 >$outputFifo" &
+      ${cfg.terminalCommand} -- sh -c "${fzf} $(/usr/bin/env printf '%q ' "$@") </proc/$$/fd/0 >$ouputFifo" &
       cat <$outputFifo
       rm -- $outputFifo
       ''

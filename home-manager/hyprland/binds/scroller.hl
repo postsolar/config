@@ -1,0 +1,149 @@
+# TODO: fullscreen, gaps
+
+# ~ programs
+
+bind = SUPER SHIFT, Return, exec, kitty -1 --class 'kitty -float'
+
+bind = SUPER, S, exec, sherlock
+
+bind = SUPER, Apostrophe, exec, smile
+bind = SUPER, O, exec, copyq toggle
+
+bind = SUPER, N, exec, swaync-client --toggle-panel
+
+# ~ workspaces
+
+bind = SUPER,       Tab, workspace, +1
+bind = SUPER SHIFT, Tab, workspace, -1
+
+bind = SUPER ALT, W, submap, workspace
+submap = workspace
+  bind = , 1, workspace, 1
+  bind = , 2, workspace, 2
+  bind = , 3, workspace, 3
+  bind = , 4, workspace, 4
+  bind = , 5, workspace, 5
+  bind = , 6, workspace, 6
+  bind = , 7, workspace, 7
+  bind = , 8, workspace, 8
+  bind = , 9, workspace, 9
+  bind = , 0, workspace, 10
+  bind = , catchall, submap, reset
+submap = reset
+
+bind = SUPER, BackSpace, workspace, previous
+
+# ~ mode change
+
+# TODO: there's no toggling dispatcher, but there is an IPC event for mode change, so this could be unified
+bind = SUPER,       W, scroller:setmode, column
+bind = SUPER SHIFT, W, scroller:setmode, row
+
+# ~ focus change
+
+bind = SUPER, Left,  scroller:movefocus, left
+bind = SUPER, Right, scroller:movefocus, right
+bind = SUPER, Up,    scroller:movefocus, up
+bind = SUPER, Down,  scroller:movefocus, down
+
+bind = SUPER, Home,  scroller:movefocus, beginning
+bind = SUPER, End,   scroller:movefocus, end
+
+# ~ movement
+
+# also see: , nomode
+bind = SUPER SHIFT, Left,  scroller:movewindow, left
+bind = SUPER SHIFT, Right, scroller:movewindow, right
+bind = SUPER SHIFT, Up,    scroller:movewindow, up
+bind = SUPER SHIFT, Down,  scroller:movewindow, down
+
+bind = SUPER SHIFT, Home,  scroller:movewindow, beginning
+bind = SUPER SHIFT, End,   scroller:movewindow, end
+
+bind = SUPER ALT, Left, scroller:movewindow, left, nomode
+bind = SUPER ALT, Right, scroller:movewindow, right, nomode
+
+bind = SUPER ALT, Up, movetoworkspace, -1
+bind = SUPER ALT, Down, movetoworkspace, +1
+
+# ~ resize
+
+bind = SUPER, Comma, scroller:cyclewidth, -1
+bind = SUPER, Period, scroller:cyclewidth, +1
+bind = SUPER SHIFT, Comma, scroller:cycleheight, -1
+bind = SUPER SHIFT, Period, scroller:cycleheight, +1
+
+# ~ align + fit
+
+# a note on submaps: `ir` flags make it exit on modded keys
+
+bind = SUPER, Slash, submap, scroller_align
+submap = scroller_align
+  bind = , Left,  scroller:alignwindow, left
+  bind = , Right, scroller:alignwindow, right
+  bind = , Up,    scroller:alignwindow, up
+  bind = , Down,  scroller:alignwindow, down
+  bind = , Return, scroller:alignwindow, middle
+  bind = , Space, scroller:alignwindow, center
+  bindir = , catchall, submap, reset
+submap = reset
+
+bind = SUPER SHIFT, Slash, submap, scroller_fit
+submap = scroller_fit
+  bind = ,      A, scroller:fitsize,   active
+  bind = ,      V, scroller:fitsize,   visible
+  bind = ,      L, scroller:fitsize,   all
+  bind = ,      E, scroller:fitsize,   toend
+  bind = ,      B, scroller:fitsize,   tobeginning
+  bind = SHIFT, A, scroller:fitwidth,  active
+  bind = SHIFT, V, scroller:fitwidth,  visible
+  bind = SHIFT, L, scroller:fitwidth,  all
+  bind = SHIFT, E, scroller:fitwidth,  toend
+  bind = SHIFT, B, scroller:fitwidth,  tobeginning
+  bind = ALT,   A, scroller:fitheight, active
+  bind = ALT,   V, scroller:fitheight, visible
+  bind = ALT,   L, scroller:fitheight, all
+  bind = ALT,   E, scroller:fitheight, toend
+  bind = ALT,   B, scroller:fitheight, tobeginning
+  bindir = , catchall, submap, reset
+submap = reset
+
+# reset width/height
+bind = SUPER, K, scroller:setwidth, twothirds
+bind = SUPER, H, scroller:setheight, one
+
+# ~ admit / expel
+
+bind = SUPER, BracketLeft,  scroller:admitwindow, left
+bind = SUPER, BracketRight, scroller:admitwindow, right
+
+bind = SUPER SHIFT, BracketLeft,  scroller:expelwindow, left
+bind = SUPER SHIFT, BracketRigth, scroller:expelwindow, right
+
+# ~ pin
+
+bind = SUPER, P, scroller:pin
+
+# ~ select
+
+bind = SUPER, F, scroller:selectiontoggle
+
+bind = SUPER SHIFT, F, submap, scroller_select
+submap = scroller_select
+  bind = , W, scroller:selectionworkspace
+  bind = , R, scroller:selectionreset
+  bind = , Left,  scroller:selectionmove, left
+  bind = , Right, scroller:selectionmove, right
+  bindr = , catchall, submap, reset
+submap = reset
+
+# ~ jump
+
+# warn: crashes
+# bind = SUPER, R, scroller:jump
+
+# ~ float
+
+bind = SUPER, V, togglefloating
+bind = SUPER SHIFT, V, event, { "name": "togglefocus" }
+

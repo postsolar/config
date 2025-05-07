@@ -1,0 +1,41 @@
+# open terminal
+
+bind = SUPER, Return, exec, kitty -1
+
+# exit hyprland
+
+bind = SUPER SHIFT, F12, exit
+
+# close window
+
+bind = SUPER, Q, closewindow, activewindow
+bind = SUPER SHIFT, Q, killwindow, activewindow
+
+# no binds submap
+
+bind = SUPER, Escape, submap, clean
+
+submap = clean
+bind = SUPER, Escape, submap, reset
+submap = reset
+
+# hardware controls
+# TODO: set XF86* keys as the default layer in BIOS and remove all the Fn keys binds
+
+bindl  = , F1,              exec, pamixer -t
+bindl  = , XF86AudioMute,   exec, pamixer -t
+bindel = , F2,              exec, pamixer -d 5 --allow-boost --set-limit 150
+bindel = , XF86LowerVolume, exec, pamixer -d 5 --allow-boost --set-limit 150
+bindel = , F3,              exec, pamixer -i 5 --allow-boost --set-limit 150
+bindel = , XF86RaiseVolume, exec, pamixer -i 5 --allow-boost --set-limit 150
+
+bindl  = , XF86AudioPlay,  exec, playerctl play-pause
+bindl  = , XF86AudioPause, exec, playerctl play-pause
+bindl  = , XF86AudioStop,  exec, playerctl stop
+bindl  = , XF86AudioPrev,  exec, playerctl previous
+bindl  = , XF86AudioNext,  exec, playerctl next
+
+bindel  = ALT, XF86AudioPrev,  exec, playerctl position 10-
+bindel  = ALT, XF86AudioNext,  exec, playerctl position 10+
+
+

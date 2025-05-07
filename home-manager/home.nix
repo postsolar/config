@@ -15,12 +15,12 @@
   services.home-manager.autoExpire.enable = true;
 
   imports = [
-    ./albert/albert.nix
     ./broot.nix
     ./cli-tools.nix
     ./clipboard.nix
     ./fish/fish.nix
     ./helix/helix.nix
+    ./hypridle.nix
     ./hyprland/hyprland.nix
     ./ironbar/ironbar.nix
     ./kitty/kitty.nix
@@ -126,6 +126,11 @@
       pkgs.lsp-ai
       pkgs.nixd
       pkgs.typescript-language-server
+
+      # etc
+      pkgs.libxkbcommon
+      pkgs.libinput
+      pkgs.libinput-gestures
     ];
   };
 
@@ -142,10 +147,6 @@
       enable = true;
       server.enable = true;
       settings = import ./foot.nix ctx;
-    };
-    fuzzel = {
-      enable = true;
-      settings = import ./fuzzel.nix ctx;
     };
     fzf-window = {
       enable = true;

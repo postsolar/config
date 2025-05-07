@@ -3,8 +3,6 @@
 let package = pkgs.sherlock-launcher; in
 
 {
-  # TODO: try out sherlock for a few days,
-  # and if it works well then remove fuzzel and albert
 
   home.packages = [
     package

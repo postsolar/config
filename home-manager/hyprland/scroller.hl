@@ -1,0 +1,33 @@
+# ref: https://github.com/nasirHo/hyprscroller?tab=readme-ov-file
+
+general {
+  layout = scroller
+}
+
+gestures {
+  workspace_swipe_invert = false
+}
+
+plugin {
+  scroller {
+    column_default_width = twothirds
+    center_row_if_space_available = true
+
+    # all available sizes: oneeighth onesixth onefourth onethird threeeighths onehalf fiveeighths twothirds threequarters fivesixths seveneighths one
+    column_widths = oneeighth onesixth onefourth onethird threeeighths onehalf fiveeighths twothirds threequarters fivesixths seveneighths one
+    window_heights = oneeighth onesixth onefourth onethird threeeighths onehalf fiveeighths twothirds threequarters fivesixths seveneighths one
+
+    # gesture_sensitivity = 1.0 # 0.0 ~ 2.0
+
+    # 4-finger actions seem to be breaking 3-finger actions
+    # there's something like a "lock" that sometimes activates after a 4-finger
+    # gesture and that prevents recognition of 3-finger taps/gestures
+    # it resets after one or a few 4-finger taps/gestures
+
+    # buggy, often crashes Hyprland
+    gesture_overview_enable = false
+  }
+}
+
+source = $conf/binds/core.hl
+source = $conf/binds/scroller.hl

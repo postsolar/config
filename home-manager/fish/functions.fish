@@ -123,3 +123,9 @@ function unlock-git-crypt
   git-crypt unlock (wl-paste -t text/plain | base64 --decode | psub)
 end
 
+# print hyprland IPC events
+function hyprevents
+  # socat over nc because the latter doesn't work when an interactive shell puts it into background
+  socat -U - UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock
+end
+
