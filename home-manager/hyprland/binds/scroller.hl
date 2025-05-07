@@ -9,10 +9,29 @@ bind = SUPER, S, exec, sherlock
 bind = SUPER, Apostrophe, exec, smile
 bind = SUPER, O, exec, copyq toggle
 
+bind = SUPER, N, exec, swaync-client --toggle-panel
+
 # ~ workspaces
 
 bind = SUPER,       Tab, workspace, +1
 bind = SUPER SHIFT, Tab, workspace, -1
+
+bind = SUPER ALT, W, submap, workspace
+submap = workspace
+  bind = , 1, workspace, 1
+  bind = , 2, workspace, 2
+  bind = , 3, workspace, 3
+  bind = , 4, workspace, 4
+  bind = , 5, workspace, 5
+  bind = , 6, workspace, 6
+  bind = , 7, workspace, 7
+  bind = , 8, workspace, 8
+  bind = , 9, workspace, 9
+  bind = , 0, workspace, 10
+  bind = , catchall, submap, reset
+submap = reset
+
+bind = SUPER, BackSpace, workspace, previous
 
 # ~ mode change
 
@@ -122,3 +141,9 @@ submap = reset
 
 # warn: crashes
 # bind = SUPER, R, scroller:jump
+
+# ~ float
+
+bind = SUPER, V, togglefloating
+bind = SUPER SHIFT, V, event, { "name": "togglefocus" }
+

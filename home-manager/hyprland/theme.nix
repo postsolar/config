@@ -1,24 +1,34 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   unhash = lib.strings.removePrefix "#";
   colors = lib.mapAttrs (lib.const unhash) config.theme.colors;
+
+  dynamic-colors = pkgs.writers.writeTSBin
+    "hyprland-dynamic-color-changer"
+    {}
+    (builtins.readFile ./scripts/dynamic-color-changer.ts)
+    ;
 in
 
 {
 
+  home.packages = [
+    dynamic-colors
+  ];
+
   xdg.configFile."hypr/theme.hl".text = /* hyprlang */
     ''
-    $active = ${colors.border}
-    $inactive = 111111
+    $active = ff69b4 # hotpink
+    $inactive = ffc0cb # pink
     $locked = ${colors.terminalBright5}
 
     general {
-      border_size = 3
+      border_size = 4
       col.active_border = 0xff$active
-      col.inactive_border = 0x66$inactive
-      gaps_in = 4
-      gaps_out = 4
+      col.inactive_border = 0xff$inactive
+      gaps_in = 10
+      gaps_out = 10
     }
 
     misc {
@@ -26,12 +36,15 @@ in
     }
 
     decoration {
-      rounding = 0
+      rounding = 4
+      rounding_power = 10.0
+
       shadow {
-        enabled = true
-        offset = 5 5
+        enabled = yes
+        range = 6
+        offset = 4 4
+        color = 0x66000000
         render_power = 1
-        color = 0xaa999999
       }
 
       blur {
@@ -70,6 +83,13 @@ in
         gaps_out = 2
       }
     }
+
+    animation = workspaces, 1, 10, default, slidevert
+
+    animation = windowsIn, 1, 14, default, gnomed
+    animation = windowsOut, 1, 14, default, gnomed
+    animation = windowsMove, 1, 10, default, slide
+
     '';
 
 }

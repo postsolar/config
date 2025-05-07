@@ -1,7 +1,4 @@
 # ref: https://github.com/nasirHo/hyprscroller?tab=readme-ov-file
-# TODO: ironbar indicators ref: https://github.com/nasirHo/hyprscroller?tab=readme-ov-file#using-ipc-in-ags
-# TODO: animations are too quick, slow them down a bit
-# TODO: vertical animation for workspace switching?
 
 general {
   layout = scroller
@@ -23,8 +20,8 @@ plugin {
     # gesture_sensitivity = 1.0 # 0.0 ~ 2.0
 
     # 4-finger actions seem to be breaking 3-finger actions
-    # there's something like a "lock" that sometimes activates after a 4-finger gesture and
-    # that prevents recognition of 3-finger taps/gestures
+    # there's something like a "lock" that sometimes activates after a 4-finger
+    # gesture and that prevents recognition of 3-finger taps/gestures
     # it resets after one or a few 4-finger taps/gestures
 
     # buggy, often crashes Hyprland
