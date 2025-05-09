@@ -4,10 +4,11 @@
 
 const timestamp = (): string => `[${new Date().toUTCString()}]`
 const log = (...args : Array<any>): void => console.log(timestamp(), ...args)
-// const warn = (...args : Array<any>): void => console.warn(timestamp(), ...args)
 
-const exec = (args : Array<string>): string =>
-  Bun.spawnSync(args).stdout?.toString()
+const exec = (args : Array<string>): string => {
+  log(`executing: ${args}`)
+  return Bun.spawnSync(args).stdout?.toString()
+}
 
 const minBy = <T>(f: (a: T) => number) => (as: Array<T>): T =>
   as.reduce((a, b) => f(a) < f(b) ? a : b)
@@ -24,12 +25,20 @@ const workspaceWindows = (): Array<HyWindow> => {
 }
 
 const hyprdo = (args : Array<string>): void => {
-  log(`executing: hyprctl dispatch -- ${args}`)
   log(exec(["hyprctl", "dispatch", "--", ...args]))
 }
 
 const hyprget = (args : Array<string>): any =>
   JSON.parse(exec(["hyprctl", "-j", ...args]))
+
+// ironbar wrappers
+
+// update Ironbar variables on hyprland submap and hyprscroller mode change
+// this could actually be done within hyprland binds too, but it would be tedious to add it to every submap
+// TODO: still should try it that way too, though
+const updateIronvar = (var_: string, value: string): void => {
+  exec(["ironbar", "var", "set", var_, value])
+}
 
 // types
 
@@ -132,10 +141,36 @@ const handleToggleFocus: LineHandler = line =>
 const handleMoveWindowOrGroup: LineHandler = line =>
   onCustomEvent(line, 'movewindoworgroup', args => (moveWindowOrGroup(args)(), true))
 
+const handleSubmapChange: LineHandler = line => {
+  if (line.match(/^submap>>/)) {
+    const submap = line.replace(/^submap>>/, "")
+    const varValue =
+      submap === ""
+        ? '<span color="gray">global</span>'
+        : `<span color="hotpink" font-weight="bold">${submap}</span>`
+    updateIronvar("hyprlandSubmap", varValue)
+    return true
+  }
+  return false
+}
+
+const handleHyprscrollerModeChange: LineHandler = line => {
+  if (line.match(/^scroller>>mode, /)) {
+    const mode_ = line.match(/^scroller>>mode, (\w+)/)
+    const mode = mode_ === null ? "oops" : mode_[1]
+    const varValue = `<span color="gray" font-weight="bold">${mode}</span>`
+    updateIronvar("hyprscrollerMode", varValue)
+    return true
+  }
+  return false
+}
+
 const handleLine = (line : string): void => {
   const lineHandlers = [
     handleMoveWindowOrGroup,
-    handleToggleFocus
+    handleToggleFocus,
+    handleSubmapChange,
+    handleHyprscrollerModeChange,
   ]
   lineHandlers.some(h => h(line))
 }

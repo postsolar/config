@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  browsers = [ "google-chrome.desktop" ];
+  browsers = [ "firefox.desktop" ];
   terminals = [ "kitty.desktop" "foot.desktop" ];
   file-managers = [ "lf.desktop" "nemo.desktop" ];
   image-viewers = [ "swayimg.desktop" ];

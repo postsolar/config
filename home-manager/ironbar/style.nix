@@ -2,9 +2,7 @@
 
 # scss
 ''
-/* this stylesheet is meant to be used with Phocus GTK theme or something similar */
-
-/* -- colors -- */
+// meant to be used with Phocus GTK theme or something similar
 
 $col1: ${colors.background};
 $col2: ${colors.border};
@@ -12,7 +10,7 @@ $text: ${colors.text};
 
 $border_radius: 8px;
 
-/* -- base styles -- */
+// ~ base styles
 
 * {
   border: none;
@@ -34,7 +32,7 @@ button,
 label {
   color: $text;
   font-size: 11px;
-  font-family: "${builtins.head fonts.sansSerif}";
+  font-family: "sans";
 }
 
 scale trough {
@@ -50,7 +48,7 @@ scale contents trough slider {
   background: $col2;
 }
 
-/* -- the bar -- */
+// ~ the bar
 
 #bar {
   margin: 3px 6px 0px 6px;
@@ -84,7 +82,7 @@ box#end {
   }
 }
 
-/* -- popups -- */
+// ~ popups
 
 .popup {
   background-color: rgba($col1, 0.7);
@@ -93,7 +91,7 @@ box#end {
   padding: 10px;
 }
 
-/* -- music -- */
+// ~ music
 
 .popup-music {
 
@@ -112,7 +110,7 @@ box#end {
   }
 }
 
-/* -- clock/calendar -- */
+// ~ clock and calendar
 
 .popup-clock .calendar-clock {
   color: $text;
@@ -129,7 +127,7 @@ box#end {
   background-color: ${colors.selection};
 }
 
-/* -- keyboard -- */
+// ~ keyboard
 
 .keyboard button:not(:hover) {
   background: none;
@@ -140,7 +138,7 @@ box#end {
   margin-right: 5px;
 }
 
-/* -- workspaces -- */
+// ~ workspaces
 
 .workspaces {
   .item:not(:hover) {
@@ -178,4 +176,16 @@ box#end {
     border-bottom: 3px solid ${colors.terminalBright1};
   }
 }
+
+// hyprland extra info: submap and hyprscroller mode
+
+.hyprscroller-mode {
+  margin-left: 6px;
+}
+
+.hyprland-submap {
+  padding-left: 6px;
+  margin-right: 6px;
+}
+
 ''

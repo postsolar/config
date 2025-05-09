@@ -88,7 +88,7 @@ in
       input {
         # ref: /nix/store/<hash>-xkeyboard-config-2.43/share/X11/xkb/{symbols,rules}/
         # ref: https://nixos.org/manual/nixos/stable/#custom-xkb-layouts
-        kb_layout = us,ru
+        kb_layout = us,carpalx-qwyrfm,ru
         kb_variant = colemak_dh_iso,ruu
         kb_options = compose:rctrl,grp:win_space_toggle
         # kb_rules

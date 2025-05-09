@@ -37,7 +37,6 @@
         };
 
         homeManagerModules = {
-          fzf-window = ./modules/home-manager/fzf-window.nix;
           theme = ./modules/home-manager/theme.nix;
         };
 
@@ -108,7 +107,6 @@
     };
 
     hyprscroller = {
-      # url = "github:cpiber/hyprscroller";
       url = "github:nasirHo/hyprscroller";
       flake = false;
     };
@@ -136,6 +134,16 @@
     wl-kbptr = {
       url = "github:moverest/wl-kbptr";
       flake = false;
+    };
+
+    astal = {
+      url = "github:aylur/astal";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ags = {
+      url = "github:aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
   };

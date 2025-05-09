@@ -194,9 +194,6 @@
 
     // ~ binds
 
-    // TODO
-    // pgup+pgdn for workspace switching/moving?
-
     binds {
 
       // ~ essential

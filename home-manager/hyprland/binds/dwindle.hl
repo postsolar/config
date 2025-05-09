@@ -16,9 +16,6 @@ bind = SUPER, N, exec, swaync-client -t
 # browser
 bind = SUPER, W, exec, $BROWSER
 
-# screenshot
-bind = , Print, exec, grim -t ppm - | satty -f -
-
 # clipboard
 bind = SUPER, O, exec, copyq toggle
 
@@ -123,15 +120,10 @@ bind = SUPER ALT, 0, movetoworkspacesilent, 10
 
 bind = SUPER, Backspace, workspace, previous
 
-# ~ audio
-
 # ~ misc
 
 # bind = SUPER, A, focuscurrentorlast
 bind = SUPER, A, focusurgentorlast
-
-bindm = SUPER, mouse:272, movewindow
-bindm = SUPER, mouse:273, resizewindow
 
 binde = SUPER    , minus, exec, $scripts/gaps.zsh inner -3
 binde = SUPER    , equal, exec, $scripts/gaps.zsh inner 3

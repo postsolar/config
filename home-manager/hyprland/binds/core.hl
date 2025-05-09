@@ -19,8 +19,15 @@ submap = clean
 bind = SUPER, Escape, submap, reset
 submap = reset
 
+# mouse window move/resize
+bindm = SUPER, mouse:272, movewindow
+bindm = SUPER, mouse:273, resizewindow
+
+# screenshot
+
+bind = , Print, exec, grim -t ppm - | satty -f -
+
 # hardware controls
-# TODO: set XF86* keys as the default layer in BIOS and remove all the Fn keys binds
 
 bindl  = , F1,              exec, pamixer -t
 bindl  = , XF86AudioMute,   exec, pamixer -t
@@ -37,5 +44,4 @@ bindl  = , XF86AudioNext,  exec, playerctl next
 
 bindel  = ALT, XF86AudioPrev,  exec, playerctl position 10-
 bindel  = ALT, XF86AudioNext,  exec, playerctl position 10+
-
 

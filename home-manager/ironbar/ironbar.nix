@@ -3,17 +3,18 @@
 let
 
   # ~ current hyprland submap
-  hyprSubmap = {
-    type = "script";
-    class = "submap";
-    mode = "watch";
+  hyprlandSubmap = {
+    class = "hyprland-submap";
     on_click_left = "hyprctl keyword submap reset";
-    cmd = lib.getExe <| pkgs.writers.writeDashBin "hyprland-submap-watcher"
-      ''
-      nc -U $XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock \
-        | rg --no-config --line-buffered '^submap>>(.*)' -or '$1'
-      ''
-      ;
+    type = "label";
+    label = "#hyprlandSubmap";
+  };
+
+  # ~ current hyprscroller mode
+  hyprscrollerMode = {
+    class = "hyprscroller-mode";
+    type = "label";
+    label = "#hyprscrollerMode";
   };
 
   # ~ clock
@@ -81,9 +82,13 @@ let
     name = "hyprbar";
     position = "top";
     height = 30;
-    start = [ workspaces hyprSubmap ];
+    start = [ workspaces hyprscrollerMode hyprlandSubmap ];
     center = [ clock ];
     end = [ music tray keyboardLayouts volume ];
+    ironvar_defaults = {
+      hyprlandSubmap = ''<span color="gray">global</span>'';
+      hyprscrollerMode = ''<span color="gray" font-weight="bold">row</span>'';
+    };
   };
 
   niribarConf = {

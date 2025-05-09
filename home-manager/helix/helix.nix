@@ -15,6 +15,8 @@ in
 
     defaultEditor = true;
 
+    # todo: denixify
+
     settings = {
       keys.normal = {
         esc = "insert_mode";
@@ -65,6 +67,8 @@ in
         color-modes = true;
         jump-label-alphabet = "qaxwrcfsdptvbgjmklnhueyio";
         preview-completion-insert = false;
+
+        auto-pairs = {};
 
         statusline = {
           left = [ "mode" "spinner" "version-control" ];

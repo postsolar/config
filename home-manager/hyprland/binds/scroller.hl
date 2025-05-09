@@ -1,3 +1,6 @@
+# TODO: set up an events listener for resizing, moving and changing focus
+# TODO: use OSDs for submap hints? https://github.com/hyprland-community/awesome-hyprland?tab=readme-ov-file#osd
+
 # ~ programs
 
 bind = SUPER SHIFT, Return, exec, kitty -1 --class 'kitty -float'
@@ -8,6 +11,8 @@ bind = SUPER, Apostrophe, exec, smile
 bind = SUPER, O, exec, copyq toggle
 
 bind = SUPER, N, exec, swaync-client --toggle-panel
+
+bind = SUPER, z, exec, sh $scripts/click.sh
 
 # ~ workspaces
 

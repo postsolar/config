@@ -19,6 +19,7 @@
     ./clipboard.nix
     ./fish/fish.nix
     ./foot.nix
+    ./fzf-window.nix
     ./helix/helix.nix
     ./hypridle.nix
     ./hyprland/hyprland.nix
@@ -78,7 +79,7 @@
 
     activation.diff = lib.hm.dag.entryAfter [ "writeBoundary" ]
       ''
-      ${pkgs.nvd}/bin/nvd diff $oldGenPath $newGenPath
+      [[ -v oldGenPath ]] && ${pkgs.nvd}/bin/nvd diff $oldGenPath $newGenPath
       '';
 
 
@@ -117,7 +118,7 @@
       # cli media utils
       pkgs.ffmpeg-full
       pkgs.hyprpicker
-      pkgs.pandoc_3_6
+      pkgs.pandoc
       pkgs.scdl
       pkgs.streamrip
       pkgs.wl-kbptr
@@ -273,10 +274,6 @@
       ];
     };
     bun.enable = true;
-    fzf-window = {
-      enable = true;
-      terminalCommand = "footclient -E";
-    };
     gh.enable = true;
     git = {
       enable = true;
