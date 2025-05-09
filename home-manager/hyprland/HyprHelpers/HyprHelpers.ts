@@ -158,7 +158,7 @@ const handleHyprscrollerModeChange: LineHandler = line => {
   if (line.match(/^scroller>>mode, /)) {
     const mode_ = line.match(/^scroller>>mode, (\w+)/)
     const mode = mode_ === null ? "oops" : mode_[1]
-    const varValue = `<span color="gray" font-weight="bold">${mode}</span>`
+    const varValue = `<span color="azure" size="12pt">${mode === "row" ? "⇄" : "⇵"}</span>`
     updateIronvar("hyprscrollerMode", varValue)
     return true
   }
