@@ -1,12 +1,16 @@
 #! /usr/bin/env bun
 
+// state
+
+let hyprscrollerMode = 'row'
+
 // utils
 
 const timestamp = (): string => `[${new Date().toUTCString()}]`
 const log = (...args : Array<any>): void => console.log(timestamp(), ...args)
 
 const exec = (args : Array<string>): string => {
-  log(`executing: ${args}`)
+  log(`executing: ${args.join(' ')}`)
   return Bun.spawnSync(args).stdout?.toString()
 }
 
@@ -120,6 +124,15 @@ const toggleFocus = (): void => {
   hyprdo([`focuswindow address:${lastFocused.address}`])
 }
 
+// Toggle between `row` and `column` mode for hyprscroller
+//
+// Change of stateful `let hyprscrollerMode` within HyprHelpers is done by `handleHyprscrollerModeChange`,
+// and happens when Hyprland IPC notifies us about the successful change, so no need to set it here
+const toggleHyprscrollerMode = () => {
+  const nextMode = hyprscrollerMode === 'row' ? 'column' : 'row'
+  hyprdo([`scroller:setmode ${nextMode}`])
+}
+
 // main
 
 const onCustomEvent = (line: string, eventName: string, callback: (args: any) => boolean): boolean => {
@@ -161,13 +174,20 @@ const handleSubmapChange: LineHandler = line => {
 const handleHyprscrollerModeChange: LineHandler = line => {
   if (line.match(/^scroller>>mode, /)) {
     const mode_ = line.match(/^scroller>>mode, (\w+)/)
-    const mode = mode_ === null ? "oops" : mode_[1]
-    const varValue = `<span color="azure" size="12pt">${mode === "row" ? "⇄" : "⇵"}</span>`
-    updateIronvar("hyprscrollerMode", varValue)
+    const mode = mode_ === null ? "oops: shouldn't have happened" : mode_[1]
+    const modeDisplay = `<span color="azure" size="12pt">${mode === "row" ? "⇄" : "⇵"}</span>`
+    hyprscrollerMode = mode
+    updateIronvar("hyprscrollerMode", modeDisplay)
     return true
   }
   return false
 }
+
+const handleToggleHyprscrollerMode: LineHandler = line =>
+  onCustomEvent(line, 'toggleHyprscrollerMode', () => {
+    toggleHyprscrollerMode()
+    return true
+  })
 
 const handleLine = (line : string): void => {
   const lineHandlers = [
@@ -175,6 +195,7 @@ const handleLine = (line : string): void => {
     handleToggleFocus,
     handleSubmapChange,
     handleHyprscrollerModeChange,
+    handleToggleHyprscrollerMode,
   ]
   lineHandlers.some(h => h(line))
 }

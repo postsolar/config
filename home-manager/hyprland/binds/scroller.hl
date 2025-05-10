@@ -38,9 +38,7 @@ bind = SUPER, BackSpace, workspace, previous
 
 # ~ mode change
 
-# TODO: there's no toggling dispatcher, but there is an IPC event for mode change, so this could be unified
-bind = SUPER,       W, scroller:setmode, column
-bind = SUPER SHIFT, W, scroller:setmode, row
+bind = SUPER, W, event, { "name": "toggleHyprscrollerMode" }
 
 # ~ focus change
 
