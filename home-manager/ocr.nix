@@ -14,17 +14,17 @@ let
     if set -q argv[1]
       set text "$(tesseract -l $langs $argv[1] -)"
     else
-      set tmp "$(mktemp --suffix .png)"
-      grim -t ppm - | satty -f - -o $tmp \
-                            --early-exit \
-                            --initial-tool crop \
-                            --default-hide-toolbars \
-                            --action-on-enter save-to-file
-      set text "$(tesseract -l $langs $tmp -)"
-      rm -- $tmp
+      set text "$(
+        grim -t ppm - \
+          | satty -f - -o - \
+              --initial-tool crop \
+              --default-hide-toolbars \
+              --action-on-enter save-to-file-and-exit \
+          | tesseract -l $langs - -
+      )"
     end
 
-    if test -n "$text"
+    if test -n $text
       printf '%s' $text | wl-copy &>/dev/null
       notify-send -e -i ok -a OCR -u low 'Text copied to clipboard'
     else

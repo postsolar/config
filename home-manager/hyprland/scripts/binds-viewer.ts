@@ -35,6 +35,7 @@ const humanizeModmask = {
   68: [ "Super", "Control" ],
   72: [ "Super", "Alt" ],
   73: [ "Super", "Alt", "Shift" ],
+  76: [ "Super", "Control", "Alt" ],
 }
 
 const showFields = [

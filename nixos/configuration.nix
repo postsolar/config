@@ -116,6 +116,8 @@
     EDITOR = "hx";
   };
 
+  services.dbus.implementation = "broker";
+
   # ~ shells
 
   programs.fish = {

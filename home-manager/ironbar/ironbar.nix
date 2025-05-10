@@ -87,7 +87,7 @@ let
     end = [ music tray keyboardLayouts volume ];
     ironvar_defaults = {
       hyprlandSubmap = ''<span color="gray">global</span>'';
-      hyprscrollerMode = ''<span color="gray" font-weight="bold">row</span>'';
+      hyprscrollerMode = ''<span color="azure" size="12pt">⇄</span>'';
     };
   };
 

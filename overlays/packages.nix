@@ -17,15 +17,15 @@ inputs: f: p:
       ;
 
   satty =
-    let version = "0.18.0"; in
+    let version = "9b5fc3ddd4016efc768ff4a6830426a9df4777ff"; in
     p.satty.overrideAttrs
       (n: _: {
         inherit version;
         src = p.fetchFromGitHub {
           owner = "gabm";
           repo = "Satty";
-          rev = "v${version}";
-          hash = "sha256-qsehxmx+iQKG70Es2I+G8hs4G56e/PuPPenNeEQ4sGQ=";
+          rev = "${version}";
+          hash = "sha256-lgPqM/rdh3m3fRXzmO9uSGZMQmbAUFvDm4JovLRAR+M=";
         };
         cargoHash = "sha256-VQ8BwEeDM9Dll6GIwXH2wHWwRKJxk3gTrxZ95pFaH4c=";
         cargoDeps = p.rustPlatform.fetchCargoVendor {

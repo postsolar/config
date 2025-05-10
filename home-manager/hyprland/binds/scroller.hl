@@ -12,7 +12,7 @@ bind = SUPER, O, exec, copyq toggle
 
 bind = SUPER, N, exec, swaync-client --toggle-panel
 
-bind = SUPER, z, exec, sh $scripts/click.sh
+bind = SUPER, Z, exec, sh $scripts/click.sh
 
 # ~ workspaces
 
@@ -69,12 +69,22 @@ bind = SUPER ALT, Right, scroller:movewindow, right, nomode
 bind = SUPER ALT, Up, movetoworkspace, -1
 bind = SUPER ALT, Down, movetoworkspace, +1
 
+bind = SUPER CTRL, Left,  movewindowpixel, -20 0, active
+bind = SUPER CTRL, Right, movewindowpixel, 20 0, active
+bind = SUPER CTRL, Up,    movewindowpixel, 0 -20, active
+bind = SUPER CTRL, Down,  movewindowpixel, 0 20, active
+
 # ~ resize
 
 bind = SUPER, Comma, scroller:cyclewidth, -1
 bind = SUPER, Period, scroller:cyclewidth, +1
 bind = SUPER SHIFT, Comma, scroller:cycleheight, -1
 bind = SUPER SHIFT, Period, scroller:cycleheight, +1
+
+binde = SUPER CTRL ALT, Left,  resizewindowpixel, -20 0, active
+binde = SUPER CTRL ALT, Right, resizewindowpixel, 20 0, active
+binde = SUPER CTRL ALT, Up,    resizewindowpixel, 0 -20, active
+binde = SUPER CTRL ALT, Down,  resizewindowpixel, 0 20, active
 
 # ~ align + fit
 

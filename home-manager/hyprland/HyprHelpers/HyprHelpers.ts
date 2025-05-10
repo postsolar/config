@@ -34,8 +34,6 @@ const hyprget = (args : Array<string>): any =>
 // ironbar wrappers
 
 // update Ironbar variables on hyprland submap and hyprscroller mode change
-// this could actually be done within hyprland binds too, but it would be tedious to add it to every submap
-// TODO: still should try it that way too, though
 const updateIronvar = (var_: string, value: string): void => {
   exec(["ironbar", "var", "set", var_, value])
 }
@@ -136,10 +134,16 @@ const onCustomEvent = (line: string, eventName: string, callback: (args: any) =>
 }
 
 const handleToggleFocus: LineHandler = line =>
-  onCustomEvent(line, 'togglefocus', () => (toggleFocus(), true))
+  onCustomEvent(line, 'togglefocus', () => {
+    toggleFocus()
+    return true
+  })
 
 const handleMoveWindowOrGroup: LineHandler = line =>
-  onCustomEvent(line, 'movewindoworgroup', args => (moveWindowOrGroup(args)(), true))
+  onCustomEvent(line, 'movewindoworgroup', args => {
+    moveWindowOrGroup(args)()
+    return true
+  })
 
 const handleSubmapChange: LineHandler = line => {
   if (line.match(/^submap>>/)) {
