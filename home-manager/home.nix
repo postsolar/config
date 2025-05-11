@@ -37,6 +37,7 @@
     ./theme.nix
     ./wl-kbptr.nix
     ./xdg.nix
+    ./yazi.nix
   ];
 
   home = {

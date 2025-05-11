@@ -19,7 +19,7 @@ let
   # shave 10ms off startup time by not calling the bin each time
   carapaceInit = pkgs.runCommandLocal "fish carapace init" {}
     ''
-    ${lib.getExe pkgs.carapace} _carapace fish >$out
+    ${lib.getExe config.programs.carapace.package} _carapace fish >$out
     '';
 
 in

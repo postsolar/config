@@ -25,8 +25,9 @@ let
     "image/*"                   = image-viewers;
 
     # text
-    "application/x-*script"     = text-editors;
     "text/*"                    = text-editors;
+    "application/x-*script"     = text-editors;
+    "application/yaml"          = text-editors;
   };
 
 in

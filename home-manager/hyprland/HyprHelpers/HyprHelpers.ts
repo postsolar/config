@@ -173,10 +173,9 @@ const handleSubmapChange: LineHandler = line => {
 
 const handleHyprscrollerModeChange: LineHandler = line => {
   if (line.match(/^scroller>>mode, /)) {
-    const mode_ = line.match(/^scroller>>mode, (\w+)/)
-    const mode = mode_ === null ? "oops: shouldn't have happened" : mode_[1]
-    const modeDisplay = `<span color="azure" size="12pt">${mode === "row" ? "⇄" : "⇵"}</span>`
+    const mode = line.match(/^scroller>>mode, (\w+)/) ! [1]
     hyprscrollerMode = mode
+    const modeDisplay = `<span color="azure" size="12pt">${mode === "row" ? "⇄" : "⇵"}</span>`
     updateIronvar("hyprscrollerMode", modeDisplay)
     return true
   }
@@ -200,7 +199,7 @@ const handleLine = (line : string): void => {
   lineHandlers.some(h => h(line))
 }
 
-export const main = async () =>{
+export const main = async () => {
   Bun.connect({
     unix: `${process.env.XDG_RUNTIME_DIR}/hypr/${process.env.HYPRLAND_INSTANCE_SIGNATURE}/.socket2.sock`,
 
