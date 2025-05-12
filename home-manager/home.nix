@@ -191,7 +191,11 @@
         style             = "compact";
         inline_height     = 12;
         dialect           = "uk";
-        keys.scroll_exits = false;
+        keys = {
+          scroll_exits = false;
+          exit_past_line_start = false;
+          accept_past_line_end = false;
+        };
         history_filter    = [ "^\s+" ];
       };
     };

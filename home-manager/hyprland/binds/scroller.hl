@@ -11,6 +11,7 @@ bind = SUPER, Apostrophe, exec, smile
 bind = SUPER, O, exec, copyq toggle
 
 bind = SUPER, N, exec, swaync-client --toggle-panel
+bind = SUPER SHIFT, N, exec, swaync-client --hide-latest
 
 bind = SUPER, Z, exec, sh $scripts/click.sh
 
@@ -67,10 +68,10 @@ bind = SUPER ALT, Right, scroller:movewindow, right, nomode
 bind = SUPER ALT, Up, movetoworkspace, -1
 bind = SUPER ALT, Down, movetoworkspace, +1
 
-bind = SUPER CTRL, Left,  movewindowpixel, -20 0, active
-bind = SUPER CTRL, Right, movewindowpixel, 20 0, active
-bind = SUPER CTRL, Up,    movewindowpixel, 0 -20, active
-bind = SUPER CTRL, Down,  movewindowpixel, 0 20, active
+binde = SUPER CTRL, Left,  movewindowpixel, -20 0, active
+binde = SUPER CTRL, Right, movewindowpixel, 20 0, active
+binde = SUPER CTRL, Up,    movewindowpixel, 0 -20, active
+binde = SUPER CTRL, Down,  movewindowpixel, 0 20, active
 
 # ~ resize
 
@@ -84,6 +85,12 @@ binde = SUPER CTRL ALT, Right, resizewindowpixel, 20 0, active
 binde = SUPER CTRL ALT, Up,    resizewindowpixel, 0 -20, active
 binde = SUPER CTRL ALT, Down,  resizewindowpixel, 0 20, active
 
+# I guess this counts as resizing too
+binde = SUPER ALT, Minus, exec, $scripts/gaps.zsh inner -3
+binde = SUPER ALT, Equal, exec, $scripts/gaps.zsh inner 3
+binde = SUPER    , Minus, exec, $scripts/gaps.zsh outer -3
+binde = SUPER    , Equal, exec, $scripts/gaps.zsh outer 3
+
 # ~ align + fit
 
 # a note on submaps: `ir` flags make it exit on modded keys
@@ -94,9 +101,9 @@ submap = scroller_align
   bind = , Right, scroller:alignwindow, right
   bind = , Up,    scroller:alignwindow, up
   bind = , Down,  scroller:alignwindow, down
-  bind = , Return, scroller:alignwindow, middle
-  bind = , Space, scroller:alignwindow, center
-  bindir = , catchall, submap, reset
+  bind = , M,     scroller:alignwindow, middle
+  bind = , C,     scroller:alignwindow, center
+  bind = , catchall, submap, reset
 submap = reset
 
 bind = SUPER SHIFT, Slash, submap, scroller_fit

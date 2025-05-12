@@ -14,6 +14,8 @@ windowrulev2 = float, initialClass: xdg-desktop-portal-gtk
 windowrulev2 = float, initialClass: com\.github\.hluk\.copyq
 windowrulev2 = float, initialClass: it.mijorus.smile
 windowrulev2 = float, initialTitle: fzf-picker
+windowrulev2 = float, initialTitle: Pilt pildis
+windowrulev2 = float, initialClass: firefox, initialTitle: Pilt-pildis
 
 # browser pop ups
 # i guess no such windowrule would work for regular new window opening because a window would first open and then only set its title

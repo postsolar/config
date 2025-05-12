@@ -31,7 +31,11 @@ let package = pkgs.sherlock-launcher; in
       icon_paths =   [ "${config.xdg.configHome}/sherlock/icons" ]
 
       [behavior]
-      caching    =   true
+      # cache doesn't get invalidated upon desktop entry change, which for
+      # packages installed with Nix means outdated or missing paths in Exec= lines of desktop entries
+      # https://github.com/Skxxtz/sherlock/issues/65
+      caching    =   false
+      # daemonizing prevents stdin input from working
       # daemonize  =   true
 
       [binds]

@@ -102,7 +102,7 @@ let
 
   stylesheet = 
     let
-      style = pkgs.writeText "ironbar-theme.scss" <| import ./style.nix config.theme;
+      style = ./style.scss;
     in
       pkgs.runCommandLocal "ironbar-styles" {}
         ''

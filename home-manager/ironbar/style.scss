@@ -1,0 +1,206 @@
+// meant to be used with Phocus GTK theme or something similar
+
+$opacity: 0.7;
+
+$background: black;
+$background_transparent: rgba($background, $opacity);
+
+$text: white;
+
+$selection: hotpink;
+
+$border_radius: 10px;
+
+// ~ base styles
+
+* {
+  border: none;
+  border-radius: 0;
+}
+
+.background {
+  background: none;
+}
+
+box,
+menubar,
+button {
+  background-image: none;
+  box-shadow: none;
+}
+
+button,
+label {
+  color: $text;
+  font-size: 11px;
+  font-family: "sans";
+}
+
+scale {
+  trough {
+    min-width: 1px;
+    min-height: 2px;
+  }
+
+  contents trough highlight {
+    background-color: $background;
+  }
+
+  contents trough slider {
+    background: $background;
+  }
+
+}
+
+// ~ the bar
+
+#bar {
+  margin: 6px 6px 0px 6px;
+}
+
+// ~ start
+
+.workspaces {
+  background-color: $background_transparent;
+  border-radius: $border_radius;
+
+  .item:not(:hover) {
+    background: none;
+  }
+
+  .item.focused {
+    background-color: rgba($background, 0.2);
+    border-bottom: 3px solid ghostwhite;
+  }
+
+  .item.urgent {
+    border-bottom: 3px solid darkorange;
+  }
+
+  .item:first-child {
+    padding-left: 10px;
+    border-top-left-radius: $border_radius;
+    border-bottom-left-radius: $border_radius;
+  }
+
+  .item.focused:first-child {
+    border-top-left-radius: $border_radius;
+    border-bottom-left-radius: $border_radius;
+  }
+
+  .item:last-child {
+    padding-right: 10px;
+    border-top-right-radius: $border_radius;
+    border-bottom-right-radius: $border_radius;
+  }
+
+  .item.focused:last-child {
+    border-top-right-radius: $border_radius;
+    border-bottom-right-radius: $border_radius;
+  }
+
+}
+
+.hyprscroller-mode {
+  background-color: $background_transparent;
+  border-radius: $border_radius;
+}
+
+.hyprland-submap {
+  background-color: $background_transparent;
+  border-radius: $border_radius;
+}
+
+.hyprscroller-mode,
+.hyprland-submap {
+  margin-left: 8px;
+  padding: 0px 8px 0px 8px;
+}
+
+// ~ center
+
+box#center {
+  background-color: $background_transparent;
+  border-radius: $border_radius;
+}
+
+.clock {
+  padding: 0px 8px 0px 8px;
+}
+
+// ~ end
+
+box#end {
+  background-color: $background_transparent;
+  border-radius: $border_radius;
+
+  .widget:not(:hover) {
+    background-color: unset;
+  }
+}
+
+.music.widget {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.tray {
+  margin-left: 10px;
+}
+
+.keyboard .layout:not(:hover) {
+  background-color: unset;
+}
+
+.niri-keyboard {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+// ~ ~ popups
+
+.popup {
+  background-color: $background_transparent;
+  border-radius: $border_radius;
+  border: 2px solid $background;
+  padding: 10px;
+}
+
+// ~ music
+
+.popup-music {
+
+  .title .icon,
+  .title .label {
+    font-size: 14px;
+  }
+
+  .controls * {
+    margin: 0px 4px 0px 4px;
+  }
+
+  .volume .slider slider,
+  .progress .slider slider {
+    border-radius: 100%;
+  }
+}
+
+// ~ clock and calendar
+
+.popup-clock {
+  .calendar-clock {
+    color: $text;
+    font-size: 2.0em;
+    padding-bottom: 0.1em;
+  }
+
+  .calendar .header {
+    border-top: 1px solid $background;
+    font-size: 1.5em;
+  }
+
+  .popup-clock .calendar:selected {
+    background-color: $selection;
+  }
+
+}
