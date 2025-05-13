@@ -2,12 +2,24 @@
 
 let
 
+  # TODO: nwg-wrapper seems to be a good alternative
+  submapHintsTooltip = pkgs.writers.writeDash "hyprland-submap-hints"
+    ''
+    # get current submap, sadly hyprctl provides no such option so we get it from our ironvar
+    submap=$(ironbar var get hyprlandSubmap)
+    # select all binds for current submap, and format it
+    hyprland-binds-viewer | jq -r --arg submap "$submap" '.[] | select(.submap == $submap) | "\(.key): \(.dispatcher) \(.arg)"'
+    '';
+
   # ~ current hyprland submap
   hyprlandSubmap = {
     class = "hyprland-submap";
     on_click_left = "hyprctl keyword submap reset";
     type = "label";
     label = "#hyprlandSubmap";
+    show_if = "#hyprlandSubmapShow";
+    tooltip = "{{${submapHintsTooltip}}}";
+    transition_type = "crossfade";
   };
 
   # ~ current hyprscroller mode
@@ -86,8 +98,9 @@ let
     center = [ clock ];
     end = [ music tray keyboardLayouts volume ];
     ironvar_defaults = {
-      hyprlandSubmap = ''<span color="gray">global</span>'';
-      hyprscrollerMode = ''<span color="azure" size="12pt">⇄</span>'';
+      hyprlandSubmap = "";
+      hyprlandSubmapShow = "false";
+      hyprscrollerMode = ''<span color="azure" size="12pt">⇒</span>'';
     };
   };
 

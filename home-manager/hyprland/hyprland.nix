@@ -10,6 +10,8 @@ let
     buildInputs = [ hlPackage ] ++ hlPackage.buildInputs;
   });
 
+  # TODO: this is a useful program but it has to at least have a better name since all it does is some mapping on JSON
+  # really all we're interested in here is mapping modmask + key into human-readable key combos, everything else could be done inline downstream
   hyprland-binds-viewer = pkgs.writers.writeTSBin "hyprland-binds-viewer" {} (builtins.readFile ./scripts/binds-viewer.ts);
 
 in

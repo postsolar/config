@@ -10,6 +10,14 @@ function et -w eza; e -T $argv; end
 
 function bb -w btm; command btm $argv; end
 
+function hx -w hx
+  if not count $argv &>/dev/null
+    command hx .
+  else
+    command hx $argv
+  end
+end
+
 # ~ functions
 
 # change directory into one of child directories using fzf
@@ -64,7 +72,7 @@ function css-colors+
 end
 
 # output which files block home-manager
-function what-files-blocks-hm
+function what-files-block-hm
   set journalctlArgs --reverse --unit home-manager-alice.service --since '60m ago'
   set rgArgs --no-line-number --no-column --color never --no-multiline-dotall
   set re "existing file \'(?<f1>.+?)\' is in the way of \'(?<f2>.+?)\'(?:, )?(?<extra>.+)?"
@@ -109,7 +117,7 @@ end
 # write a commit message with aichat
 function aichat-commit
   set prompt "
-    write a commit message body (just the body, without a title, as the title is already present), based on this diff.
+    write a commit message body (just the body, without a title, because the title is already present), based on this diff.
     only output the message contents, and do not wrap it into a codeblock.
     "
   begin

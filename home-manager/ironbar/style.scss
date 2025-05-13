@@ -18,7 +18,7 @@ $border_radius: 10px;
   border-radius: 0;
 }
 
-.background {
+window.background {
   background: none;
 }
 
@@ -56,6 +56,15 @@ scale {
 
 #bar {
   margin: 6px 6px 0px 6px;
+}
+
+tooltip {
+  background-color: $background_transparent;
+  border-radius: $border_radius;
+
+  * {
+    font-size: 14px;
+  }
 }
 
 // ~ start
@@ -109,6 +118,8 @@ scale {
 .hyprland-submap {
   background-color: $background_transparent;
   border-radius: $border_radius;
+  font-weight: bold;
+  color: $selection;
 }
 
 .hyprscroller-mode,
@@ -199,7 +210,7 @@ box#end {
     font-size: 1.5em;
   }
 
-  .popup-clock .calendar:selected {
+  .calendar:selected {
     background-color: $selection;
   }
 

@@ -161,11 +161,14 @@ const handleMoveWindowOrGroup: LineHandler = line =>
 const handleSubmapChange: LineHandler = line => {
   if (line.match(/^submap>>/)) {
     const submap = line.replace(/^submap>>/, "")
-    const varValue =
-      submap === ""
-        ? '<span color="gray">global</span>'
-        : `<span color="hotpink" font-weight="bold">${submap}</span>`
-    updateIronvar("hyprlandSubmap", varValue)
+    const submapReset = submap === ""
+    if (submapReset) {
+      updateIronvar("hyprlandSubmapShow", "false")
+      updateIronvar("hyprlandSubmap", submap)
+    } else {
+      updateIronvar("hyprlandSubmap", submap)
+      updateIronvar("hyprlandSubmapShow", "true")
+    }
     return true
   }
   return false
@@ -175,7 +178,7 @@ const handleHyprscrollerModeChange: LineHandler = line => {
   if (line.match(/^scroller>>mode, /)) {
     const mode = line.match(/^scroller>>mode, (\w+)/) ! [1]
     hyprscrollerMode = mode
-    const modeDisplay = `<span color="azure" size="12pt">${mode === "row" ? "⇄" : "⇵"}</span>`
+    const modeDisplay = `<span color="azure" size="12pt">${mode === "row" ? "⇒" : "⇑"}</span>`
     updateIronvar("hyprscrollerMode", modeDisplay)
     return true
   }
