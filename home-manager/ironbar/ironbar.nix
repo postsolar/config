@@ -2,15 +2,6 @@
 
 let
 
-  # TODO: nwg-wrapper seems to be a good alternative
-  submapHintsTooltip = pkgs.writers.writeDash "hyprland-submap-hints"
-    ''
-    # get current submap, sadly hyprctl provides no such option so we get it from our ironvar
-    submap=$(ironbar var get hyprlandSubmap)
-    # select all binds for current submap, and format it
-    hyprland-binds-viewer | jq -r --arg submap "$submap" '.[] | select(.submap == $submap) | "\(.key): \(.dispatcher) \(.arg)"'
-    '';
-
   # ~ current hyprland submap
   hyprlandSubmap = {
     class = "hyprland-submap";
@@ -18,7 +9,6 @@ let
     type = "label";
     label = "#hyprlandSubmap";
     show_if = "#hyprlandSubmapShow";
-    tooltip = "{{${submapHintsTooltip}}}";
     transition_type = "crossfade";
   };
 

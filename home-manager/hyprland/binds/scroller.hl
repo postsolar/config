@@ -1,5 +1,3 @@
-# TODO: set up an events listener for resizing, moving and changing focus
-
 $submap = hyprctl dispatch submap
 $submapHints = bun $scripts/submap-hints.ts
 $submapReset = hyprctl dispatch submap reset && pkill --signal 31 nwg-wrapper

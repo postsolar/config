@@ -135,32 +135,35 @@ const toggleHyprscrollerMode = () => {
 
 // main
 
-const onCustomEvent = (line: string, eventName: string, callback: (args: any) => boolean): boolean => {
-  if (line.match(/^custom>>/)) {
-    const eventString = line.replace(/^custom>>/, "")
-    const event = JSON.parse(eventString)
-    if (event.name === eventName) {
-      return callback(event.args)
-    }
+const onEvent = (eventName: string, line: string, callback: (args: string) => boolean): boolean => {
+  const r = new RegExp(`^${eventName}>>`)
+  if (line.match(r)) {
+    const args = line.replace(r, "")
+    return callback(args)
   }
   return false
 }
 
+const onCustomEvent = (eventName: string, line: string, callback: (args: any) => boolean): boolean =>
+  onEvent('custom', line, args => {
+    const event = JSON.parse(args)
+    return event.name === eventName && callback(event.args)
+  })
+
 const handleToggleFocus: LineHandler = line =>
-  onCustomEvent(line, 'togglefocus', () => {
+  onCustomEvent('togglefocus', line, () => {
     toggleFocus()
     return true
   })
 
 const handleMoveWindowOrGroup: LineHandler = line =>
-  onCustomEvent(line, 'movewindoworgroup', args => {
+  onCustomEvent('movewindoworgroup', line, args => {
     moveWindowOrGroup(args)()
     return true
   })
 
-const handleSubmapChange: LineHandler = line => {
-  if (line.match(/^submap>>/)) {
-    const submap = line.replace(/^submap>>/, "")
+const handleSubmapChange: LineHandler = line =>
+  onEvent('submap', line, submap => {
     const submapReset = submap === ""
     if (submapReset) {
       updateIronvar("hyprlandSubmapShow", "false")
@@ -170,15 +173,13 @@ const handleSubmapChange: LineHandler = line => {
       updateIronvar("hyprlandSubmapShow", "true")
     }
     return true
-  }
-  return false
-}
+  })
 
 const handleHyprscrollerModeChange: LineHandler = line => {
   if (line.match(/^scroller>>mode, /)) {
     const mode = line.match(/^scroller>>mode, (\w+)/) ! [1]
     hyprscrollerMode = mode
-    const modeDisplay = `<span color="azure" size="12pt">${mode === "row" ? "⇒" : "⇑"}</span>`
+    const modeDisplay = `<span color="azure" size="12pt">${mode === "row" ? "⇒" : "⇓"}</span>`
     updateIronvar("hyprscrollerMode", modeDisplay)
     return true
   }
@@ -186,7 +187,7 @@ const handleHyprscrollerModeChange: LineHandler = line => {
 }
 
 const handleToggleHyprscrollerMode: LineHandler = line =>
-  onCustomEvent(line, 'toggleHyprscrollerMode', () => {
+  onCustomEvent('toggleHyprscrollerMode', line, () => {
     toggleHyprscrollerMode()
     return true
   })
