@@ -1,5 +1,8 @@
 # TODO: set up an events listener for resizing, moving and changing focus
-# TODO: use OSDs for submap hints? https://github.com/hyprland-community/awesome-hyprland?tab=readme-ov-file#osd
+
+$submap = hyprctl dispatch submap
+$submapHints = bun $scripts/submap-hints.ts
+$submapReset = hyprctl dispatch submap reset && pkill --signal 31 nwg-wrapper
 
 # ~ programs
 
@@ -20,7 +23,7 @@ bind = SUPER, Z, exec, sh $scripts/click.sh
 bind = SUPER,       Tab, workspace, +1
 bind = SUPER SHIFT, Tab, workspace, -1
 
-bind = SUPER ALT, W, submap, workspace
+bind = SUPER ALT, W, exec, $submap workspace && $submapHints workspace
 submap = workspace
   bind = , 1, workspace, 1
   bind = , 2, workspace, 2
@@ -32,7 +35,7 @@ submap = workspace
   bind = , 8, workspace, 8
   bind = , 9, workspace, 9
   bind = , 0, workspace, 10
-  bind = , catchall, submap, reset
+  bind = , catchall, exec, $submapReset
 submap = reset
 
 bind = SUPER, BackSpace, workspace, previous
@@ -95,7 +98,7 @@ binde = SUPER    , Equal, exec, $scripts/gaps.zsh outer 3
 
 # a note on submaps: `ir` flags make it exit on modded keys
 
-bind = SUPER, Slash, submap, scroller_align
+bind = SUPER, Slash, exec, $submap scroller_align && $submapHints scroller_align
 submap = scroller_align
   bind = , Left,  scroller:alignwindow, left
   bind = , Right, scroller:alignwindow, right
@@ -103,10 +106,10 @@ submap = scroller_align
   bind = , Down,  scroller:alignwindow, down
   bind = , M,     scroller:alignwindow, middle
   bind = , C,     scroller:alignwindow, center
-  bind = , catchall, submap, reset
+  bind = , catchall, exec, $submapReset
 submap = reset
 
-bind = SUPER SHIFT, Slash, submap, scroller_fit
+bind = SUPER SHIFT, Slash, exec, $submap scroller_fit && $submapHints scroller_fit
 submap = scroller_fit
   bind = ,      A, scroller:fitsize,   active
   bind = ,      V, scroller:fitsize,   visible
@@ -123,7 +126,7 @@ submap = scroller_fit
   bind = ALT,   L, scroller:fitheight, all
   bind = ALT,   E, scroller:fitheight, toend
   bind = ALT,   B, scroller:fitheight, tobeginning
-  bindir = , catchall, submap, reset
+  bindir = , catchall, exec, $submapReset
 submap = reset
 
 # reset width/height
@@ -147,13 +150,13 @@ bind = SUPER SHIFT, P, pin
 
 bind = SUPER, F, scroller:selectiontoggle
 
-bind = SUPER SHIFT, F, submap, scroller_select
+bind = SUPER SHIFT, F, exec, $submap scroller_select && $submapHints scroller_select
 submap = scroller_select
   bind = , W, scroller:selectionworkspace
   bind = , R, scroller:selectionreset
   bind = , Left, scroller:selectionmove, left
   bind = , Right, scroller:selectionmove, right
-  bindr = , catchall, submap, reset
+  bindr = , catchall, exec, $submapReset
 submap = reset
 
 # ~ jump

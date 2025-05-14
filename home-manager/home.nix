@@ -89,7 +89,6 @@
       # needed because the latter will be ignored on `nixos-rebuild`
       (lib.lowPrio pkgs.home-manager)
 
-      # media
       (pkgs.google-chrome.override {
         commandLineArgs = [
           "--new-window"
@@ -99,79 +98,72 @@
           "--ozone-platform-hint=auto"
         ]; })
       (pkgs.hyprshot.override { hyprland = config.wayland.windowManager.hyprland.package; })
-      pkgs.brave
-      pkgs.firefox
-      pkgs.foliate
-      pkgs.glib
-      pkgs.kooha
-      pkgs.nemo-fileroller
-      pkgs.nemo-preview
-      pkgs.nemo-with-extensions
-      pkgs.obsidian
-      pkgs.overskride
-      pkgs.pulseaudio
-      pkgs.pwvucontrol
-      pkgs.smile
-      pkgs.telegram-desktop
-      pkgs.waypaper
-      pkgs.wf-recorder
-
-      # cli media utils
-      pkgs.ffmpeg-full
-      pkgs.hyprpicker
-      pkgs.pandoc
-      pkgs.scdl
-      pkgs.streamrip
-      pkgs.wl-kbptr
-      pkgs.yt-dlp
-
-      # services
-      pkgs.dconf
-      pkgs.devenv
-      pkgs.distrobox
-      pkgs.libnotify
-      pkgs.pamixer
-      pkgs.playerctl
-
-      # programming
-      pkgs.gh
-      pkgs.hyprls
-      pkgs.just
-      pkgs.lsp-ai
-      pkgs.nixd
-      pkgs.typescript-language-server
-
-      # cli
       pkgs.aichat
       pkgs.bemoji
+      pkgs.brave
       pkgs.chafa
       pkgs.choose
       pkgs.dash
+      pkgs.dconf
+      pkgs.devenv
+      pkgs.distrobox
       pkgs.du-dust
       pkgs.expect
+      pkgs.ffmpeg-full
       pkgs.file
+      pkgs.firefox
+      pkgs.foliate
       pkgs.fx
+      pkgs.gh
+      pkgs.glib
       pkgs.glow
       pkgs.gowall
       pkgs.gum
       pkgs.huniq
       pkgs.hyperfine
-      pkgs.jtbl
+      pkgs.hyprls
+      pkgs.hyprpicker
       pkgs.jq
+      pkgs.jtbl
+      pkgs.just
       pkgs.killall
+      pkgs.kooha
       pkgs.lazygit
       pkgs.libinput
       pkgs.libinput-gestures
+      pkgs.libnotify
       pkgs.libxkbcommon
+      pkgs.lsp-ai
       pkgs.moar
+      pkgs.nemo-fileroller
+      pkgs.nemo-preview
+      pkgs.nemo-with-extensions
+      pkgs.nixd
+      pkgs.nwg-wrapper
+      pkgs.obsidian
       pkgs.ouch
+      pkgs.overskride
+      pkgs.pamixer
+      pkgs.pandoc
       pkgs.pastel
+      pkgs.playerctl
+      pkgs.pulseaudio
+      pkgs.pwvucontrol
+      pkgs.scdl
       pkgs.sd
+      pkgs.smile
       pkgs.socat
+      pkgs.streamrip
+      pkgs.telegram-desktop
+      pkgs.typescript-language-server
       pkgs.uni
       pkgs.urlencode
       pkgs.watchexec
+      pkgs.waypaper
+      pkgs.wf-recorder
+      pkgs.wl-kbptr
       pkgs.yj
+      pkgs.yt-dlp
     ];
   };
 

@@ -90,6 +90,7 @@ in
     animation = windowsOut, 1, 14, default, gnomed
     animation = windowsMove, 1, 10, default, slide
 
+    animation = layers, 1, 14, default, slide
     '';
 
 }

@@ -10,20 +10,12 @@ let
     buildInputs = [ hlPackage ] ++ hlPackage.buildInputs;
   });
 
-  # TODO: this is a useful program but it has to at least have a better name since all it does is some mapping on JSON
-  # really all we're interested in here is mapping modmask + key into human-readable key combos, everything else could be done inline downstream
-  hyprland-binds-viewer = pkgs.writers.writeTSBin "hyprland-binds-viewer" {} (builtins.readFile ./scripts/binds-viewer.ts);
-
 in
 
 {
   imports = [
     ./services.nix
     ./theme.nix
-  ];
-
-  home.packages = [
-    hyprland-binds-viewer
   ];
 
   xdg.configFile = {
@@ -33,6 +25,7 @@ in
     "hypr/binds/dwindle.hl".source  = ./binds/dwindle.hl;
     "hypr/scroller.hl".source       = ./scroller.hl;
     "hypr/binds/scroller.hl".source = ./binds/scroller.hl;
+    "hypr/scripts".source           = ./scripts;
   };
 
   wayland.windowManager.hyprland = {
@@ -51,7 +44,7 @@ in
       ''
       # config variables
 
-      $scripts = ${./scripts}
+      $scripts = ${config.xdg.configHome}/hypr/scripts
       $conf = ${config.xdg.configHome}/hypr
 
       # environment
