@@ -83,7 +83,7 @@ in
       input {
         # ref: /nix/store/<hash>-xkeyboard-config-2.43/share/X11/xkb/{symbols,rules}/
         # ref: https://nixos.org/manual/nixos/stable/#custom-xkb-layouts
-        kb_layout = colemak-dh-iso-fix-z,carpalx-qwyrfm,ru
+        kb_layout = carpalx-qwyrfm,colemak-dh-iso-fix-z,ru
         kb_variant = ,,ruu
         kb_options = compose:rctrl,grp:win_space_toggle,caps:escape
         # kb_rules
