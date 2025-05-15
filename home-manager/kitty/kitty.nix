@@ -1,10 +1,4 @@
-{ pkgs, config, ... }:
-
-let
-
-  inherit (config.theme) colors;
-
-in
+{ pkgs, ... }:
 
 {
 
@@ -68,29 +62,29 @@ in
       # url_color #FFD700
 
       # black
-      color0 ${colors.terminalRegular0}
-      color8 ${colors.terminalBright0}
+      color0 #2b2b2b
+      color8 #666666
       # red
-      color1 ${colors.terminalRegular1}
-      color9 ${colors.terminalBright1}
+      color1 #d36265
+      color9 #ef8171
       # green
-      color2  ${colors.terminalRegular2}
-      color10 ${colors.terminalBright2}
+      color2  #aece91
+      color10 #cfefb3
       # yellow
-      color3  ${colors.terminalRegular3}
-      color11 ${colors.terminalBright3}
+      color3  #e7e18c
+      color11 #fff796
       # blue
-      color4  ${colors.terminalRegular4}
-      color12 ${colors.terminalBright4}
+      color4  #5297cf
+      color12 #74b8ef
       # magenta
-      color5  ${colors.terminalRegular5}
-      color13 ${colors.terminalBright5}
+      color5  #963c59
+      color13 #b85e7b
       # cyan
-      color6  ${colors.terminalRegular6}
-      color14 ${colors.terminalBright6}
+      color6  #5e7175
+      color14 #a3babf
       # white
-      color7  ${colors.terminalRegular7}
-      color15 ${colors.terminalBright7}
+      color7  #bebebe
+      color15 #ffffff
 
       # ~ keybinds
 
@@ -120,7 +114,7 @@ in
 
       # [h]ints
       # idk why but xdg-open behaves weird here specifically
-      # many of these are ultimately opened via kitty +open, which is itself configured via launch-action.conf
+      # many of these are ultimately opened via kitty +open, which is itself configured via open-actions.conf
       map kitty_mod+h>u       open_url_with_hints
       map kitty_mod+h>y       kitten hints --type hyperlink --program "handlr open"
       map kitty_mod+h>shift+y kitten hints --type hyperlink --program -

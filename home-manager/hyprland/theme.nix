@@ -1,8 +1,6 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 let
-  unhash = lib.strings.removePrefix "#";
-  colors = lib.mapAttrs (lib.const unhash) config.theme.colors;
 
   dynamic-colors = pkgs.writers.writeTSBin
     "hyprland-dynamic-color-changer"
@@ -21,7 +19,7 @@ in
     ''
     $active = ff69b4 # hotpink
     $inactive = ffc0cb # pink
-    $locked = ${colors.terminalBright5}
+    $locked = ff8c00 # darkorange
 
     general {
       border_size = 4

@@ -1,3 +1,5 @@
+# todo refactor, add qol stuff
+
 # Ignore maximize requests from apps
 windowrulev2 = suppressevent maximize, class:.*
 

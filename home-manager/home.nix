@@ -112,7 +112,6 @@
       pkgs.ffmpeg-full
       pkgs.file
       pkgs.firefox
-      pkgs.foliate
       pkgs.fx
       pkgs.gh
       pkgs.glib
@@ -217,6 +216,7 @@
         ${lib.getExe pkgs.fd} --follow --hidden --color=always --hyperlink=always "$@"
         '';
     };
+    foliate.enable = true;
     fzf = {
       enable = true;
       defaultOptions = [

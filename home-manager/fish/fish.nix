@@ -46,8 +46,9 @@ in
       ''
       source ${starshipInit}
       source ${atuinInit}
-      set -x CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
-      source ${carapaceInit}
+      # carapace seems to break too much; more than it adds
+      # set -x CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
+      # source ${carapaceInit}
 
       source ${./functions.fish}
       '';

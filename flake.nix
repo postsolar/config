@@ -37,7 +37,6 @@
         };
 
         homeManagerModules = {
-          theme = ./modules/home-manager/theme.nix;
         };
 
         nixosConfigurations.nixos =

@@ -1,9 +1,6 @@
-{ lib, config, ... }:
+{ ... }:
 
 let
-  inherit (config) theme;
-  unhash = lib.strings.removePrefix "#";
-
   main = {
     font = "monospace:size=11";
     pad = "0x0 center";
@@ -19,25 +16,28 @@ let
     label-letters = "qwfarsxcd";
   };
 
-  colors = builtins.mapAttrs (_: v: if builtins.isString v then unhash v else v) {
-    foreground = theme.colors.terminalForeground;
-    background = theme.colors.terminalBackground;
-    regular0   = theme.colors.terminalRegular0;
-    regular1   = theme.colors.terminalRegular1;
-    regular2   = theme.colors.terminalRegular2;
-    regular3   = theme.colors.terminalRegular3;
-    regular4   = theme.colors.terminalRegular4;
-    regular5   = theme.colors.terminalRegular5;
-    regular6   = theme.colors.terminalRegular6;
-    regular7   = theme.colors.terminalRegular7;
-    bright0    = theme.colors.terminalBright0;
-    bright1    = theme.colors.terminalBright1;
-    bright2    = theme.colors.terminalBright2;
-    bright3    = theme.colors.terminalBright3;
-    bright4    = theme.colors.terminalBright4;
-    bright5    = theme.colors.terminalBright5;
-    bright6    = theme.colors.terminalBright6;
-    bright7    = theme.colors.terminalBright7;
+  colors = {
+    foreground = "ffffff";
+    background = "000000";
+
+    regular0   = "2b2b2b";
+    regular1   = "d36265";
+    regular2   = "aece91";
+    regular3   = "e7e18c";
+    regular4   = "5297cf";
+    regular5   = "963c59";
+    regular6   = "5e7175";
+    regular7   = "bebebe";
+
+    bright0    = "666666";
+    bright1    = "ef8171";
+    bright2    = "cfefb3";
+    bright3    = "fff796";
+    bright4    = "74b8ef";
+    bright5    = "b85e7b";
+    bright6    = "a3babf";
+    bright7    = "ffffff";
+
     alpha = 0.9;
     # selection-foreground
     # selection-background

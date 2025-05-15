@@ -1,67 +1,34 @@
-{ lib, pkgs, config, ... }:
+{ config, pkgs, ... }:
 
 let
-  phocus-colors = with config.theme.colors; {
-    primary = terminalBright6;
-    secondary = terminalBright6;
-    purple-light = terminalBright6;
-    purple-normal = terminalBright6;
+  gtk-phocus = pkgs.callPackage ../packages/phocus-gtk/phocus-gtk.nix {
+    colors = {
+      primary = "hotpink";
+      secondary = "darkorange";
+      purple-light = "powderblue";
+      purple-normal = "hotpink";
+    };
   };
-  gtk-phocus = pkgs.callPackage ../packages/phocus-gtk/phocus-gtk.nix { colors = phocus-colors; };
 in
 
 {
 
-  theme = {
-    fonts.monospace = [ "MonoLisa" ];
-    fonts.sansSerif = [ "SF Pro" ];
-    fonts.serif = [ "SF Pro" ];
-    fonts.emoji = [ "Apple Color Emoji" ];
-
-    exportJSON.enable = true;
-    exportJSON.paths = [ (lib.strings.removePrefix config.home.homeDirectory config.xdg.dataHome + "/theme.json") ];
-
-    colors = {
-      background = "#090609";
-      text = "#f0eff0";
-      selection = "#5a435c";
-      border = "#4a404b";
-      border2 = "#292c31";
-
-      terminalForeground = "#ffffff";
-      terminalBackground = "#000000";
-      terminalRegular0 = "#2b2b2b";
-      terminalRegular1 = "#d36265";
-      terminalRegular2 = "#aece91";
-      terminalRegular3 = "#e7e18c";
-      terminalRegular4 = "#5297cf";
-      terminalRegular5 = "#963c59";
-      terminalRegular6 = "#5e7175";
-      terminalRegular7 = "#bebebe";
-      terminalBright0 = "#666666";
-      terminalBright1 = "#ef8171";
-      terminalBright2 = "#cfefb3";
-      terminalBright3 = "#fff796";
-      terminalBright4 = "#74b8ef";
-      terminalBright5 = "#b85e7b";
-      terminalBright6 = "#a3babf";
-      terminalBright7 = "#ffffff";
-    };
-  };
-
-  # default / prefer-dark / prefer-light
+  # default | prefer-dark | prefer-light
   dconf.settings."org/gnome/desktop/interface".color-scheme = "default";
 
-  fonts = {
-    fontconfig.enable = true;
-    fontconfig.defaultFonts = config.theme.fonts;
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts.monospace = [ "MonoLisa" ];
+    defaultFonts.sansSerif = [ "SF Pro" ];
+    defaultFonts.serif = [ "SF Pro" ];
+    defaultFonts.emoji = [ "Apple Color Emoji" ];
   };
 
   gtk = {
     enable = true;
     theme.name = "phocus";
     theme.package = gtk-phocus;
-    font.name = "SF Pro";
+    font.name = builtins.head config.fonts.fontconfig.defaultFonts.sansSerif;
     iconTheme.package = pkgs.vimix-icon-theme;
     iconTheme.name = "Vimix-black";
   };
@@ -69,7 +36,8 @@ in
   # TODO adjust
   xdg.configFile."gtk-4.0/gtk.css".text =
     # From: https://github.com/phisch/dotfiles/blob/b83d92c3dd0bd67075de22d0faeb62deb9cfe6ee/.config/gtk-4.0/gtk.css
-    /* css */ ''
+    # css
+    ''
     @define-color surface-strongest rgb(10, 10, 10);
     @define-color surface-strong rgb(20, 20, 20);
     @define-color surface-moderate rgb(28, 28, 28);
@@ -162,8 +130,8 @@ in
 
     /*
     window contents {
-        background: @surface-strongest;
-        box-shadow: none;
+      background: @surface-strongest;
+      box-shadow: none;
     }
     */
 
@@ -176,8 +144,8 @@ in
     }
 
     headerbar {
-        padding: 0.3em;
-        padding-top: calc(0.3em + 3px);
+      padding: 0.3em;
+      padding-top: calc(0.3em + 3px);
     }
     '';
 
