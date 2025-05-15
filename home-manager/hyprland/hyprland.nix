@@ -120,7 +120,6 @@ in
       cursor {
         inactive_timeout = 3
       }
-
     '';
   };
 }

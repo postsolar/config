@@ -102,10 +102,6 @@
           key <AB09> { [       period,      greater,   dead_abovedot,       asciitilde ] };
           key <AB10> { [        slash,     question,    questiondown,       asciitilde ] };
 
-          key <CAPS> { [    BackSpace,    BackSpace,       BackSpace,        BackSpace ] };
-          key <LSGT> { [        minus,   underscore,          endash,           emdash ] };
-          key <SPCE> { [        space,        space,           space,     nobreakspace ] };
-
           include "level3(ralt_switch)"
         };
         ''

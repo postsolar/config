@@ -3,6 +3,8 @@
 let
 
   # ~ current hyprland submap
+  # there's a `bindmode` module in Ironbar, but no CSS selector to
+  # hide it when the submap is the global one
   hyprlandSubmap = {
     class = "hyprland-submap";
     on_click_left = "hyprctl keyword submap reset";
@@ -59,7 +61,8 @@ let
     show_num = false;
     show_scroll = false;
     icons.layout_map = {
-      "English*"  = "🇺🇸";
+      "English*"  = "🇺🇸 (Colemak)";
+      "Carpalx*"  = "🇺🇸 (Carpalx)";
       "Estonian*" = "🇪🇪";
       "Russian*"  = "🇷🇺";
     };
