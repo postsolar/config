@@ -12,7 +12,9 @@
         };
 
         main = {
-          capslock     = "overload(control, esc)";
+          # xkb config for this works better and i don't use caps as ctrl anyways
+          # https://github.com/rvaiya/keyd/issues/940
+          # capslock     = "overload(control, esc)";
           leftcontrol  = "oneshot(control)";
           alt          = "oneshot(alt)";
           meta         = "oneshot(meta)";

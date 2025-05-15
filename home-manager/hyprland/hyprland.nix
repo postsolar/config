@@ -85,7 +85,7 @@ in
         # ref: https://nixos.org/manual/nixos/stable/#custom-xkb-layouts
         kb_layout = colemak-dh-iso-fix-z,carpalx-qwyrfm,ru
         kb_variant = ,,ruu
-        kb_options = compose:rctrl,grp:win_space_toggle
+        kb_options = compose:rctrl,grp:win_space_toggle,caps:escape
         # kb_rules
         # kb_file
         numlock_by_default = yes

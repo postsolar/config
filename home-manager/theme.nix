@@ -76,7 +76,7 @@ in
     @define-color pink-normal rgb(213, 108, 195);
     @define-color pink-light rgb(223, 129, 207);
 
-    @define-color accent_color @purple-light;
+    @define-color accent_color hotpink;
     @define-color accent_bg_color @purple-normal;
     @define-color accent_fg_color @white-strong;
 
