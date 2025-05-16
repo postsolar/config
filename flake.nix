@@ -29,7 +29,6 @@
           (import ./overlays/lib.nix)
           (import ./overlays/packages.nix inputs)
           inputs.niri-flake.overlays.niri
-          inputs.hyprpicker.overlays.hyprpicker
         ];
 
         nixosModules = {
