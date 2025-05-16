@@ -69,6 +69,7 @@
     bind alt-up "builtin cd ..; commandline -f repaint"
     bind alt-down fzf-cd-widget
     bind alt-space 'lfcd; commandline -f repaint'
+    bind alt-a hx
     '';
 }
 
