@@ -142,7 +142,7 @@ const onCustomEvent = (json: string): void => {
     togglefocus: toggleFocus,
   }
 
-  customEventsMap[event.name] !== undefined && customEventsMap[event.name](event.args)
+  event.name in customEventsMap && customEventsMap[event.name](event.args)
 }
 
 const onSubmapChange = (submap: string): void => {
@@ -167,7 +167,7 @@ const onScrollerChange = (change: string): void => {
     },
   }
 
-  eventMap[event] !== undefined && eventMap[event](args)
+  event in eventMap && eventMap[event](args)
 }
 
 const handleLine = (line: string): void => {
@@ -180,7 +180,7 @@ const handleLine = (line: string): void => {
     scroller: onScrollerChange,
   }
 
-  eventMap[event] !== undefined && eventMap[event](rest)
+  event in eventMap && eventMap[event](rest)
 }
 
 export const main = async () => {
