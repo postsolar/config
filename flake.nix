@@ -110,8 +110,7 @@
     };
 
     ironbar = {
-      # TODO: move to upstream if/when my PR #949 gets merged
-      url = "github:postsolar/ironbar/kb-icon-globs";
+      url = "github:postsolar/ironbar/personal";
       # put here temporarily to avoid narHashMismatch (idk why i'm getting it)
       inputs.nixpkgs.follows = "nixpkgs";
     };

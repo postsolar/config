@@ -113,9 +113,10 @@ tooltip {
 .hyprscroller-mode {
   background-color: $background_transparent;
   border-radius: $border_radius;
+  font-size: 14px;
 }
 
-.hyprland-submap {
+.bindmode {
   background-color: $background_transparent;
   border-radius: $border_radius;
   font-weight: bold;
@@ -123,7 +124,7 @@ tooltip {
 }
 
 .hyprscroller-mode,
-.hyprland-submap {
+.bindmode {
   margin-left: 8px;
   padding: 0px 8px 0px 8px;
 }

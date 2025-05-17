@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
 
@@ -6,12 +6,22 @@
     pkgs.kitty
   ];
 
+  systemd.user.services.kitty-headless = {
+    Unit = {
+      Description = "Kitty headless";
+      PartOf = [ "graphical-session.target" ];
+    };
+    Install.WantedBy = [ "graphical-session.target" ];
+    Service = {
+      ExecStart = "${lib.getExe pkgs.kitty} --start-as=hidden";
+      Restart = "on-failure";
+    };
+  };
+
   xdg.configFile = {
     "kitty/kitty.conf".text =
       # bash
       ''
-      source ~/.config/kitty/ovverides.conf
-
       # ~ fonts
 
       font_size 10.0
@@ -164,20 +174,24 @@
 
       map kitty_mod+u        kitten unicode_input
       map kitty_mod+escape   kitty_shell window
+
+      # ~ extra dynamic configuration
+
+      source ~/.config/kitty/overrides.conf
       '';
 
-    "kitty/open-actions.conf".text =
-      ''
-      # Open any image in the full kitty window by clicking on it
-      protocol file
-      mime image/*
-      action launch --type=overlay kitten icat --hold -- ''${FILE_PATH}
+    # "kitty/open-actions.conf".text =
+    #   ''
+    #   # Open any image in the full kitty window by clicking on it
+    #   protocol file
+    #   mime image/*
+    #   action launch --type=overlay kitten icat --hold -- ''${FILE_PATH}
 
-      # Open directories in lf
-      protocol file
-      mime inode/directory
-      action launch --type=os-window lf -- ''${FILE_PATH}
-      '';
+    #   # Open directories in lf
+    #   protocol file
+    #   mime inode/directory
+    #   action launch --type=os-window lf -- ''${FILE_PATH}
+    #   '';
   };
 }
 

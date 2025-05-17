@@ -1,5 +1,20 @@
 # todo refactor, add qol stuff
 
+# ~ layers
+
+# wl-kbptr
+layerrule = noanim, selection
+
+# SwayNC
+layerrule = blur, swaync-control-center
+layerrule = blur, swaync-notification-window
+layerrule = ignorezero, swaync-control-center
+layerrule = ignorezero, swaync-notification-window
+# layerrule = ignorealpha 0.5, swaync-control-center
+# layerrule = ignorealpha 0.5, swaync-notification-window
+
+# ~ windows
+
 # Ignore maximize requests from apps
 windowrulev2 = suppressevent maximize, class:.*
 
@@ -33,14 +48,6 @@ windowrulev2 = noblur, initialClass: swayimg
 # Add some opacity to terminals
 windowrulev2 = opacity 0.95 0.92 0.95, initialTitle: foot
 windowrulev2 = opacity 0.95 0.92 0.95, initialTitle: kitty
-
-# SwayNC layer rules
-layerrule = blur, swaync-control-center
-layerrule = blur, swaync-notification-window
-layerrule = ignorezero, swaync-control-center
-layerrule = ignorezero, swaync-notification-window
-# layerrule = ignorealpha 0.5, swaync-control-center
-# layerrule = ignorealpha 0.5, swaync-notification-window
 
 # ~ class-based rules controllers
 #

@@ -3,14 +3,8 @@
 let
 
   # ~ current hyprland submap
-  # there's a `bindmode` module in Ironbar, but no CSS selector to
-  # hide it when the submap is the global one
-  hyprlandSubmap = {
-    class = "hyprland-submap";
-    on_click_left = "hyprctl keyword submap reset";
-    type = "label";
-    label = "#hyprlandSubmap";
-    show_if = "#hyprlandSubmapShow";
+  bindmode = {
+    type = "bindmode";
     transition_type = "crossfade";
   };
 
@@ -87,13 +81,11 @@ let
     name = "hyprbar";
     position = "top";
     height = 30;
-    start = [ workspaces hyprscrollerMode hyprlandSubmap ];
+    start = [ workspaces hyprscrollerMode bindmode ];
     center = [ clock ];
     end = [ music tray keyboardLayouts volume ];
     ironvar_defaults = {
-      hyprlandSubmap = "";
-      hyprlandSubmapShow = "false";
-      hyprscrollerMode = ''<span color="azure" size="12pt">⇒</span>'';
+      hyprscrollerMode = "⇒";
     };
   };
 

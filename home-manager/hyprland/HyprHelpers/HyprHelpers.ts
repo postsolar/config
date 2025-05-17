@@ -37,7 +37,7 @@ const hyprget = (args : Array<string>): any =>
 
 // ironbar wrappers
 
-// update Ironbar variables on hyprland submap and hyprscroller mode change
+// update Ironbar variables on hyprscroller mode change
 const updateIronvar = (var_: string, value: string): void => {
   exec(["ironbar", "var", "set", var_, value])
 }
@@ -145,17 +145,6 @@ const onCustomEvent = (json: string): void => {
   event.name in customEventsMap && customEventsMap[event.name](event.args)
 }
 
-const onSubmapChange = (submap: string): void => {
-  const submapReset = submap === ""
-  if (submapReset) {
-    updateIronvar("hyprlandSubmapShow", "false")
-    updateIronvar("hyprlandSubmap", submap)
-  } else {
-    updateIronvar("hyprlandSubmap", submap)
-    updateIronvar("hyprlandSubmapShow", "true")
-  }
-}
-
 const onScrollerChange = (change: string): void => {
   const [ event, ...args ] = change.split(/, /)
   const eventMap = {
@@ -176,7 +165,6 @@ const handleLine = (line: string): void => {
 
   const eventMap: Record<string, ((args: string) => void)> = {
     custom: onCustomEvent,
-    submap: onSubmapChange,
     scroller: onScrollerChange,
   }
 

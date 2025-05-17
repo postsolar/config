@@ -21,11 +21,13 @@ in
   xdg.configFile = {
     "hypr/rules.hl".source          = ./rules.hl;
     "hypr/binds/core.hl".source     = ./binds/core.hl;
+    "hypr/scripts".source           = ./scripts;
+
     "hypr/dwindle.hl".source        = ./dwindle.hl;
     "hypr/binds/dwindle.hl".source  = ./binds/dwindle.hl;
+
     "hypr/scroller.hl".source       = ./scroller.hl;
     "hypr/binds/scroller.hl".source = ./binds/scroller.hl;
-    "hypr/scripts".source           = ./scripts;
   };
 
   wayland.windowManager.hyprland = {
