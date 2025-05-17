@@ -30,6 +30,7 @@
     ./niri/niri.nix
     ./ocr.nix
     ./satty.nix
+    ./scdl+tgup.nix
     ./sherlock.nix
     ./starship.nix
     ./swayimg.nix
@@ -153,6 +154,7 @@
       pkgs.smile
       pkgs.socat
       pkgs.streamrip
+      pkgs.tdl
       pkgs.telegram-desktop
       pkgs.typescript-language-server
       pkgs.uni
