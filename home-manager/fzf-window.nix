@@ -6,7 +6,7 @@ let
 
   fzf = lib.getExe config.programs.fzf.package;
 
-  terminal = "foot --title 'fzf-picker'";
+  terminal = "kitty -1 --title 'fzf-picker'";
 
   # this can be done without fifos, directly with a neat single-line `>/proc/$$/fd/1`,
   # but fifos allow for the terminal command to return immediately (e.g. `kitty -1`).

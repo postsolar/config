@@ -16,12 +16,6 @@ let
     ${lib.getExe config.programs.starship.package} init fish --print-full-init >$out 2>/dev/null
     '';
 
-  # shave 10ms off startup time by not calling the bin each time
-  carapaceInit = pkgs.runCommandLocal "fish carapace init" {}
-    ''
-    ${lib.getExe config.programs.carapace.package} _carapace fish >$out
-    '';
-
 in
 
 {
@@ -46,9 +40,6 @@ in
       ''
       source ${starshipInit}
       source ${atuinInit}
-      # carapace seems to break too much; more than it adds
-      # set -x CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
-      # source ${carapaceInit}
 
       source ${./functions.fish}
       '';

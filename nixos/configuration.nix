@@ -13,7 +13,7 @@
 
   # ~ keyboard
 
-  console.keyMap = "mod-dh-iso-us";
+  console.useXkbConfig = true;
 
   services.dotool.enable = true;
 

@@ -137,3 +137,25 @@ function hyprevents
   socat -U - UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock
 end
 
+# download soundcloud tracks and upload them to a telegram channel
+function scdl-tgup
+  set chat 2437712025
+  set links $argv
+  set tmp (mktemp --tmpdir --directory scdl-tgup.XXXX)
+
+  for l in $links
+    scdl --addtofile \
+         --onlymp3 \
+         --overwrite \
+         --path $tmp \
+         -l $l \
+      || exit 1
+  end
+
+  set tdlArgs
+  for f in $tmp/*
+    set tdlArgs $tdlArgs -p $f
+  end
+
+  tdl up -c $chat $tdlArgs
+end

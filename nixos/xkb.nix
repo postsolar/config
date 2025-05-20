@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ ... }:
 
 {
   services.xserver.xkb.extraLayouts = {
@@ -8,11 +8,8 @@
       symbolsFile = builtins.toFile "xkbconf-carpalx-qwyrfm"
         ''
         xkb_symbols "carpalx-qwyrfm" {
-          include "us(intl)"
+          include "us(altgr-intl)"
           name[Group1] = "Carpalx partial layout (10 key swaps, QWYRFM)";
-
-          // fix tilde (based on colemak)
-          key <TLDE> { [ grave, asciitilde,  dead_tilde,       asciitilde ] };
 
           key <AD03> { [     y,          Y,    udiaeresis,       Udiaeresis ] };
           key <AD05> { [     f,          F,    ediaeresis,       Ediaeresis ] };

@@ -2,26 +2,22 @@
 
 let
 
-  # ~ current hyprland submap
   bindmode = {
     type = "bindmode";
     transition_type = "crossfade";
   };
 
-  # ~ current hyprscroller mode
   hyprscrollerMode = {
     class = "hyprscroller-mode";
     type = "label";
     label = "#hyprscrollerMode";
   };
 
-  # ~ clock
   clock = {
     type = "clock";
     format = "%R";
   };
 
-  # ~ volume
   volume = {
     type = "volume";
     format = "{icon} {percentage}%";
@@ -34,12 +30,10 @@ let
     };
   };
 
-  # ~ tray
   tray = {
     type = "tray";
   };
 
-  # ~ music
   music = {
     type = "music";
     truncate = {
@@ -48,7 +42,6 @@ let
     };
   };
 
-  # ~ keyboard layouts
   keyboardLayouts = {
     type = "keyboard";
     show_caps = false;
@@ -62,7 +55,6 @@ let
     };
   };
 
-  # ~ niri keyboard layouts
   keyboardLayoutsNiri = {
     type = "script";
     cmd = "${lib.getExe pkgs.bun} ${./niri-layout-stream.ts}";
@@ -71,10 +63,9 @@ let
     class = "keyboard niri-keyboard";
   };
 
-  # ~ workspaces
   workspaces = {
     type = "workspaces";
-    hidden = [ "special:magic" ];
+    hidden = [ "special:magic" "special:special" ];
   };
 
   hyprbarConf = {

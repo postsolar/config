@@ -82,12 +82,6 @@ in
       ''
       # ~ lsps
 
-      [language-server.lsp-ai]
-      command = "lsp-ai"
-      # don't worry about the typo: https://github.com/SilasMarvin/lsp-ai/blob/1e910a8cf0048406eb227bf2064743010a9ff3a9/crates/lsp-ai/src/main.rs#L89
-      # the file is ~/.cache/lsp-ai/lsp-ai.log , only written to with LSP_AI_LOG=DEBUG
-      args = ["--config", "${ import ./lsp-ai-config.nix |> builtins.toJSON |> pkgs.writeText "lsp-ai config.json" }", "--use-seperate-log-file"]
-
       # ~ languages
 
       [[language]]

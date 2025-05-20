@@ -4,7 +4,7 @@ let
   gtk-phocus = pkgs.callPackage ../packages/phocus-gtk/phocus-gtk.nix {
     colors = {
       primary = "hotpink";
-      secondary = "darkorange";
+      secondary = "crimson";
       purple-light = "powderblue";
       purple-normal = "hotpink";
     };

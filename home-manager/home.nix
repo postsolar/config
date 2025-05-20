@@ -18,7 +18,6 @@
     ./broot.nix
     ./clipboard.nix
     ./fish/fish.nix
-    ./foot.nix
     ./fzf-window.nix
     ./helix/helix.nix
     ./hypridle.nix
@@ -30,7 +29,6 @@
     ./niri/niri.nix
     ./ocr.nix
     ./satty.nix
-    ./scdl+tgup.nix
     ./sherlock.nix
     ./starship.nix
     ./swayimg.nix
