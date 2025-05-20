@@ -67,7 +67,7 @@ let package = pkgs.sherlock-launcher; in
               "calc.units"
             ]
           },
-          "priority": 1
+          "priority": 3
         }
       ]
       '';

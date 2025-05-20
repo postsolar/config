@@ -5,10 +5,28 @@ let
   hlPackage = inputs.hyprland.packages.${system}.hyprland;
   hlPortalPackage = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
 
-  hyprscroller = pkgs.hyprlandPlugins.hyprscroller.overrideAttrs (_: _: {
+  # TODO: temporary fix for pkgs.hyprlandPlugins.hyprscroller getting deprecated
+  # need to now organize it more cleanly
+  # hyprscroller = pkgs.hyprlandPlugins.hyprscroller.overrideAttrs (_: _: {
+  #   src = inputs.hyprscroller;
+  #   buildInputs = [ hlPackage ] ++ hlPackage.buildInputs;
+  # });
+  hyprscroller = pkgs.stdenv.mkDerivation {
+    pname = "hyprscroller";
+    version = inputs.hyprscroller.shortRev or "";
     src = inputs.hyprscroller;
     buildInputs = [ hlPackage ] ++ hlPackage.buildInputs;
-  });
+    nativeBuildInputs = [ pkgs.pkg-config pkgs.cmake ];
+    installPhase =
+      ''
+      runHook preInstall
+
+      mkdir -p $out/lib
+      mv hyprscroller.so $out/lib/libhyprscroller.so
+
+      runHook postInstall
+      '';
+  };
 
 in
 

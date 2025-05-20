@@ -23,5 +23,5 @@ let
 in
 
 {
-  home.packages = [ scdl-tgup ];
+  home.packages = [ scdl-tgup pkgs.streamrip pkgs.tdl ];
 }
