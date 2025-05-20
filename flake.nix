@@ -110,7 +110,7 @@
     };
 
     ironbar = {
-      url = "github:postsolar/ironbar/personal";
+      url = "github:postsolar/ironbar/kb-icon-globs";
       # put here temporarily to avoid narHashMismatch (idk why i'm getting it)
       inputs.nixpkgs.follows = "nixpkgs";
     };

@@ -19,7 +19,6 @@ let
   clock = {
     type = "clock";
     format = "%R";
-    format_popup = "%c";
   };
 
   # ~ volume

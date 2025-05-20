@@ -647,16 +647,16 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1747470722,
-        "narHash": "sha256-Sa/sxmdqini6d0o42qSJSowBJsUZar8odz9DsmtmvBQ=",
+        "lastModified": 1747757685,
+        "narHash": "sha256-oGYiiIsUarumBX8hr5B46WnTrfisnpDJ0A3eY0OR9dk=",
         "owner": "postsolar",
         "repo": "ironbar",
-        "rev": "bb12f827c91eb03a4d6d0ff9d4a2847728cb3995",
+        "rev": "b674d9b44bedc67b189ef04a74577240dc885309",
         "type": "github"
       },
       "original": {
         "owner": "postsolar",
-        "ref": "personal",
+        "ref": "kb-icon-globs",
         "repo": "ironbar",
         "type": "github"
       }
