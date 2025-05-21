@@ -11,7 +11,7 @@ function et -w eza; e -T $argv; end
 function bb -w btm; command btm $argv; end
 
 function hx -w hx
-  if not count $argv &>/dev/null
+  if not count $argv &>/dev/null && not isatty stdin
     command hx .
   else
     command hx $argv
@@ -137,19 +137,27 @@ function hyprevents
   socat -U - UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock
 end
 
-# download soundcloud tracks and upload them to a telegram channel
+# download soundcloud/youtube tracks and upload them to a telegram channel
+# TODO not good at doing SC playlists : filenames aren't numbered and tdl uploads them 1 per message, in random order
+# also tdl fucks up telegram-desktop connection
+# need to polish it a lot
 function scdl-tgup
   set chat 2437712025
   set links $argv
   set tmp (mktemp --tmpdir --directory scdl-tgup.XXXX)
 
   for l in $links
-    scdl --addtofile \
-         --onlymp3 \
-         --overwrite \
-         --path $tmp \
-         -l $l \
-      || exit 1
+    if string match -rq 'youtu\.?be' $l
+      # ytmdl --output-dir $tmp --url $l || return 1
+      yt-dlp -t mp3 -P $tmp $l
+    else
+      scdl --addtofile \
+           --onlymp3 \
+           --overwrite \
+           --path $tmp \
+           -l $l \
+        || return 1
+    end
   end
 
   set tdlArgs

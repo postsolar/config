@@ -113,6 +113,7 @@
       pkgs.firefox
       pkgs.fx
       pkgs.gh
+      pkgs.gimp3
       pkgs.glib
       pkgs.glow
       pkgs.gowall
@@ -133,6 +134,7 @@
       pkgs.libxkbcommon
       pkgs.lsp-ai
       pkgs.moar
+      pkgs.mutagen
       pkgs.nemo-fileroller
       pkgs.nemo-preview
       pkgs.nemo-with-extensions
@@ -163,6 +165,7 @@
       pkgs.wl-kbptr
       pkgs.yj
       pkgs.yt-dlp
+      pkgs.ytmdl
     ];
   };
 

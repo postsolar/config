@@ -5,7 +5,7 @@ let
     colors = {
       primary = "hotpink";
       secondary = "crimson";
-      purple-light = "powderblue";
+      purple-light = "crimson";
       purple-normal = "hotpink";
     };
   };

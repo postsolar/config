@@ -1,13 +1,13 @@
 // meant to be used with Phocus GTK theme or something similar
 
-$opacity: 0.7;
+$opacity: 0.6;
 
 $background: black;
 $background_transparent: rgba($background, $opacity);
 
 $text: white;
 
-$selection: hotpink;
+$accent: crimson;
 
 $border_radius: 10px;
 
@@ -47,9 +47,12 @@ scale {
   }
 
   contents trough slider {
-    background: $background;
+    background: $accent;
   }
+}
 
+.slider slider {
+  border-radius: 100%;
 }
 
 // ~ the bar
@@ -120,7 +123,7 @@ tooltip {
   background-color: $background_transparent;
   border-radius: $border_radius;
   font-weight: bold;
-  color: $selection;
+  color: $accent;
 }
 
 .hyprscroller-mode,
@@ -181,7 +184,6 @@ box#end {
 // ~ music
 
 .popup-music {
-
   .title .icon,
   .title .label {
     font-size: 14px;
@@ -189,11 +191,6 @@ box#end {
 
   .controls * {
     margin: 0px 4px 0px 4px;
-  }
-
-  .volume .slider slider,
-  .progress .slider slider {
-    border-radius: 100%;
   }
 }
 
@@ -212,7 +209,6 @@ box#end {
   }
 
   .calendar:selected {
-    background-color: $selection;
+    background-color: $accent;
   }
-
 }

@@ -1,5 +1,8 @@
 { inputs, system, config, pkgs, lib, ... }:
 
+# to debug mpris:
+# set IRONBAR_FILE_LOG and IRONBAR_LOG=info,ironbar::clients::mpris=trace
+
 let
 
   bindmode = {
