@@ -1,0 +1,41 @@
+$bg: black;
+
+* {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+button, switch {
+  background: $bg;
+}
+
+.notification {
+  background: $bg;
+}
+
+.widget-volume, .widget-dnd, .widget-title {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.control-center-list {
+  background: none;
+}
+
+.notification-group {
+  background: none;
+}
+
+.notification-row {
+  background: none;
+}
+
+.widget-volume {
+  background: $bg;
+
+  box label {
+    margin-left: 10px;
+  }
+}
+

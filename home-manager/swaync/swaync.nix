@@ -1,6 +1,12 @@
 { lib, pkgs, ... }:
 
 {
+
+  xdg.configFile."swaync/style.css".source =
+    pkgs.runCommandLocal "swaync-styles" {}
+      ''${lib.getExe' pkgs.nodePackages.sass "sass"} ${./style.scss} $out''
+      ;
+
   services.swaync = {
     enable = true;
     # INFO: ref: https://github.com/ErikReider/SwayNotificationCenter/raw/refs/heads/main/src/configSchema.json

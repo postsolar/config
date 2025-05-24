@@ -113,8 +113,8 @@ in
         animate_manual_resizes = yes
         animate_mouse_windowdragging = yes
         new_window_takes_over_fullscreen = 1
-        focus_on_activate = true
-        anr_missed_pings = 3
+        focus_on_activate = yes
+        enable_anr_dialog = no
       }
 
       binds {

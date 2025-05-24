@@ -11,10 +11,12 @@ function et -w eza; e -T $argv; end
 function bb -w btm; command btm $argv; end
 
 function hx -w hx
-  if not count $argv &>/dev/null && not isatty stdin
-    command hx .
-  else
+  if count $argv &>/dev/null
     command hx $argv
+  else if not isatty stdin
+    command hx $argv
+  else
+    command hx .
   end
 end
 
