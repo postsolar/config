@@ -17,7 +17,7 @@ inputs: f: p:
       ;
 
   satty =
-    let version = "45741b69a8efc60bb735ec256df3c9d90d8edda6"; in
+    let version = "a1bcb1f30926c40436e570c6b98549585290e536"; in
     p.satty.overrideAttrs
       (n: _: {
         inherit version;
@@ -25,7 +25,7 @@ inputs: f: p:
           owner = "gabm";
           repo = "Satty";
           rev = "${version}";
-          hash = "sha256-58NlOuOYEnHqwVPoDx086mw8cj5cSGVax2lRd0we9qs=";
+          hash = "sha256-t66ygjhzFhS6FlerpXuNtguNdQB/L0nAj6KcIXyRGXE=";
         };
         cargoHash = "sha256-hvJOjWD5TRXlDr5KfpFlzAi44Xd6VuaFexXziXgDLCk=";
         cargoDeps = p.rustPlatform.fetchCargoVendor {
