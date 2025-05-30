@@ -141,6 +141,7 @@
       pkgs.nemo-preview
       pkgs.nemo-with-extensions
       pkgs.nixd
+      pkgs.nodePackages.sass
       pkgs.nwg-wrapper
       pkgs.obsidian
       pkgs.ouch
@@ -161,6 +162,7 @@
       pkgs.typescript-language-server
       pkgs.uni
       pkgs.urlencode
+      pkgs.vscode-langservers-extracted
       pkgs.watchexec
       pkgs.waypaper
       pkgs.wf-recorder

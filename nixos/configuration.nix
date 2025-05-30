@@ -9,13 +9,13 @@
       ./hardware-configuration.nix
       ./keyd.nix
       ./xkb.nix
+      ./dotool.nix
     ];
 
   # ~ keyboard
 
+  # todo: test if it actually works
   console.useXkbConfig = true;
-
-  services.dotool.enable = true;
 
   # https://nixpk.gs/pr-tracker.html?pr=399949
   # https://nixpk.gs/pr-tracker.html?pr=384689

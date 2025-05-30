@@ -210,7 +210,7 @@
     history = true
     generic_entry = false
     refresh = true
-    use_fd = false
+    use_fd = true
 
     [builtins.ssh]
     weight = 5

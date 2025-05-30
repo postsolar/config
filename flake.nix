@@ -32,7 +32,7 @@
         ];
 
         nixosModules = {
-          dotool = ./modules/nixos/dotool.nix;
+          # example = ./modules/nixos/example.nix
         };
 
         homeManagerModules = {

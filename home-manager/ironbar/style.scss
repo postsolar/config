@@ -1,68 +1,31 @@
 // meant to be used with Phocus GTK theme or something similar
 
-$opacity: 0.6;
-
-$background: black;
-$background_transparent: rgba($background, $opacity);
-
-$text: white;
-
-$accent: crimson;
-
 $border_radius: 10px;
 
-// ~ base styles
 
-* {
-  border: none;
-  border-radius: 0;
-}
+// ~ some base styles
 
 window.background {
   background: none;
 }
 
-box,
-menubar,
-button {
-  background-image: none;
-  box-shadow: none;
+#bar {
+  background: black;
+  border-radius: $border_radius;
+  // TODO try handle it via ironbar config
+  margin: 8px 12px 6px 12px;
+  box-shadow: 0px 0px 3px 1px black;
 }
 
 button,
 label {
-  color: $text;
+  color: white;
   font-size: 11px;
   font-family: "sans";
 }
 
-scale {
-  trough {
-    min-width: 1px;
-    min-height: 2px;
-  }
-
-  contents trough highlight {
-    background-color: $background;
-  }
-
-  contents trough slider {
-    background: $accent;
-  }
-}
-
-.slider slider {
-  border-radius: 100%;
-}
-
-// ~ the bar
-
-#bar {
-  margin: 6px 6px 0px 6px;
-}
-
 tooltip {
-  background-color: $background_transparent;
+  background-color: black;
   border-radius: $border_radius;
 
   * {
@@ -70,120 +33,88 @@ tooltip {
   }
 }
 
+scale {
+  contents trough highlight {
+    background: white;
+  }
+
+  contents trough slider {}
+}
+
+.slider slider {
+  background: black;
+  box-shadow: 0px 0px 1px 2px white;
+}
+
+// ~ ~ the bar
+
 // ~ start
 
+box#start {
+  margin-left: 5px;
+}
+
 .workspaces {
-  background-color: $background_transparent;
-  border-radius: $border_radius;
 
-  .item:not(:hover) {
-    background: none;
+  .item>label {
+    padding: 0px 3px 0px 3px;
+    border-radius: 100%;
+    font-weight: bold;
   }
 
-  .item.focused {
-    background-color: rgba($background, 0.2);
-    border-bottom: 3px solid ghostwhite;
+  .item:not(.focused):not(.urgent):hover>label {
+    box-shadow: 0px 0px 0px 3px rgba(pink, 0.8);
   }
 
-  .item.urgent {
-    border-bottom: 3px solid darkorange;
+  .item.focused>label {
+    box-shadow: 0px 0px 0px 3px rgba(hotpink, 0.8);
   }
 
-  .item:first-child {
-    padding-left: 10px;
-    border-top-left-radius: $border_radius;
-    border-bottom-left-radius: $border_radius;
-  }
-
-  .item.focused:first-child {
-    border-top-left-radius: $border_radius;
-    border-bottom-left-radius: $border_radius;
-  }
-
-  .item:last-child {
-    padding-right: 10px;
-    border-top-right-radius: $border_radius;
-    border-bottom-right-radius: $border_radius;
-  }
-
-  .item.focused:last-child {
-    border-top-right-radius: $border_radius;
-    border-bottom-right-radius: $border_radius;
+  .item.urgent>label {
+    box-shadow: 0px 0px 0px 3px rgba(orange, 0.8);
   }
 
 }
 
 .hyprscroller-mode {
-  background-color: $background_transparent;
-  border-radius: $border_radius;
   font-size: 14px;
 }
 
 .bindmode {
-  background-color: $background_transparent;
-  border-radius: $border_radius;
   font-weight: bold;
-  color: $accent;
+  color: hotpink;
+  margin-bottom: 1px;
 }
 
 .hyprscroller-mode,
 .bindmode {
-  margin-left: 8px;
-  padding: 0px 8px 0px 8px;
+  margin-left: 3px;
+  padding: 0px 3px 0px 3px;
 }
 
 // ~ center
 
-box#center {
-  background-color: $background_transparent;
-  border-radius: $border_radius;
-}
-
-.clock {
-  padding: 0px 8px 0px 8px;
-}
-
 // ~ end
 
 box#end {
-  background-color: $background_transparent;
-  border-radius: $border_radius;
-
-  .widget:not(:hover) {
-    background-color: unset;
-  }
-}
-
-.music.widget {
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
-.tray {
-  margin-left: 10px;
-}
-
-.keyboard .layout:not(:hover) {
-  background-color: unset;
-}
-
-.niri-keyboard {
-  margin-left: 10px;
   margin-right: 5px;
 }
 
 // ~ ~ popups
 
 .popup {
-  background-color: $background_transparent;
+  background-color: black;
   border-radius: $border_radius;
-  border: 2px solid $background;
   padding: 10px;
+
+  margin: 6px 6px 6px 6px;
+  box-shadow: 0px 0px 3px 2px black;
 }
 
 // ~ music
 
 .popup-music {
+
   .title .icon,
   .title .label {
     font-size: 14px;
@@ -198,17 +129,16 @@ box#end {
 
 .popup-clock {
   .calendar-clock {
-    color: $text;
     font-size: 2.0em;
     padding-bottom: 0.1em;
   }
 
   .calendar .header {
-    border-top: 1px solid $background;
+    border-top: 1px solid rgba(white, 0.1);
     font-size: 1.5em;
   }
 
   .calendar:selected {
-    background-color: $accent;
+    background-color: hotpink;
   }
 }

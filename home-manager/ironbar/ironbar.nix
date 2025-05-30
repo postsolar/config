@@ -39,10 +39,10 @@ let
 
   music = {
     type = "music";
-    truncate = {
-      mode = "start";
-      max_length = 60;
-    };
+    # truncate = {
+    #   mode = "start";
+    #   max_length = 60;
+    # };
   };
 
   keyboardLayouts = {
@@ -51,8 +51,7 @@ let
     show_num = false;
     show_scroll = false;
     icons.layout_map = {
-      "English*"  = "🇺🇸 (Colemak)";
-      "Carpalx*"  = "🇺🇸 (Carpalx)";
+      "Carpalx*"  = "🇺🇸";
       "Estonian*" = "🇪🇪";
       "Russian*"  = "🇷🇺";
     };
@@ -76,8 +75,8 @@ let
     position = "top";
     height = 30;
     start = [ workspaces hyprscrollerMode bindmode ];
-    center = [ clock ];
-    end = [ music tray keyboardLayouts volume ];
+    center = [ music ];
+    end = [ tray keyboardLayouts volume clock ];
     ironvar_defaults = {
       hyprscrollerMode = "⇒";
     };
@@ -93,13 +92,10 @@ let
   };
 
   stylesheet = 
-    let
-      style = ./style.scss;
-    in
-      pkgs.runCommandLocal "ironbar-styles" {}
-        ''
-        ${lib.getExe' pkgs.nodePackages.sass "sass"} ${style} $out
-        '';
+    pkgs.runCommandLocal "ironbar-styles" {}
+      ''
+      ${lib.getExe' pkgs.nodePackages.sass "sass"} ${./style.scss} $out
+      '';
 
   mkIronbarSystemdService = name: conf: targets:
     {
