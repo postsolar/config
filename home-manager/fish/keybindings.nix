@@ -35,7 +35,8 @@
 
     bind right forward-char
     bind shift-right forward-token
-    bind alt-right forward-word
+    # bind alt-right forward-word
+    bind alt-right forward-word forward-single-char
     bind alt-shift-right forward-bigword
     bind end end-of-line
     bind alt-\> end-of-buffer

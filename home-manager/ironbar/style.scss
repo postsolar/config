@@ -62,15 +62,19 @@ box#start {
     font-weight: bold;
   }
 
+  .item:hover>label {
+    background-color: rgb(55, 55, 55);
+  }
+
   .item:not(.focused):not(.urgent):hover>label {
-    box-shadow: 0px 0px 0px 3px rgba(pink, 0.8);
+    box-shadow: 0px 0px 0px 3px rgb(55, 55, 55);
   }
 
   .item.focused>label {
     box-shadow: 0px 0px 0px 3px rgba(hotpink, 0.8);
   }
 
-  .item.urgent>label {
+  .item.urgent:not(.focused)>label {
     box-shadow: 0px 0px 0px 3px rgba(orange, 0.8);
   }
 

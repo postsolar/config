@@ -84,7 +84,6 @@
       [[ -v oldGenPath ]] && ${pkgs.nvd}/bin/nvd diff $oldGenPath $newGenPath
       '';
 
-
     packages = [
       # lowPrio for it to not conflict with `programs.home-manager.enable = true`
       # needed because the latter will be ignored on `nixos-rebuild`
@@ -97,11 +96,17 @@
           "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder,WaylandWindowDecorations,TouchpadOverscrollHistoryNavigation"
           "--enable-wayland-ime=true"
           "--ozone-platform-hint=auto"
-        ]; })
+        ];
+      })
       (pkgs.hyprshot.override { hyprland = config.wayland.windowManager.hyprland.package; })
       pkgs.aichat
       pkgs.bemoji
-      pkgs.brave
+      (pkgs.brave.override {
+        commandLineArgs = [
+          "--enable-features=TouchpadOverscrollHistoryNavigation"
+          "--enable-wayland-ime=true"
+        ];
+      })
       pkgs.chafa
       pkgs.choose
       pkgs.dash
@@ -162,6 +167,7 @@
       pkgs.typescript-language-server
       pkgs.uni
       pkgs.urlencode
+      pkgs.vivaldi
       pkgs.vscode-langservers-extracted
       pkgs.watchexec
       pkgs.waypaper
