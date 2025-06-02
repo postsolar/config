@@ -7,6 +7,7 @@ $submapReset = hyprctl dispatch submap reset && pkill --signal 31 nwg-wrapper
 bind = SUPER SHIFT, Return, exec, kitty -1 --class 'kitty -float'
 
 bind = SUPER, S, exec, walker
+bind = SUPER ALT, S, exec, sherlock
 
 bind = SUPER, Apostrophe, exec, smile
 bind = SUPER, O, exec, copyq toggle

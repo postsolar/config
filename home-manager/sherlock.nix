@@ -1,5 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+# TODO: update
 let package = pkgs.sherlock-launcher; in
 
 {
@@ -8,17 +9,17 @@ let package = pkgs.sherlock-launcher; in
     package
   ];
 
-  # daemonizing currently doesn't work with stdin input, disable it for now
-  # systemd.user.services.sherlock-daemon = {
-  #   Unit = {
-  #     Description = "Sherlock: a versatile application/command launcher for Wayland";
-  #     Documentation = "https://github.com/Skxxtz/sherlock/tree/main/docs";
-  #   };
-  #   Install.WantedBy = [ "graphical-session.target" ];
-  #   Service = {
-  #     ExecStart = "${lib.getExe package}";
-  #   };
-  # };
+  # stdin input works with daemonized mode in v0.1.13
+  systemd.user.services.sherlock-daemon = {
+    Unit = {
+      Description = "Sherlock: a versatile application/command launcher for Wayland";
+      Documentation = "https://github.com/Skxxtz/sherlock/tree/main/docs";
+    };
+    Install.WantedBy = [ "graphical-session.target" ];
+    Service = {
+      ExecStart = "${lib.getExe package}";
+    };
+  };
 
   xdg.configFile = {
     "sherlock/config.toml".text = # toml
@@ -31,12 +32,10 @@ let package = pkgs.sherlock-launcher; in
       icon_paths =   [ "${config.xdg.configHome}/sherlock/icons" ]
 
       [behavior]
-      # cache doesn't get invalidated upon desktop entry change, which for
-      # packages installed with Nix means outdated or missing paths in Exec= lines of desktop entries
+      # cache will get invalidated upon desktop entry change in v0.1.13
       # https://github.com/Skxxtz/sherlock/issues/65
-      caching    =   false
-      # daemonizing prevents stdin input from working
-      # daemonize  =   true
+      caching    =   true
+      daemonize  =   true
 
       [binds]
       prev       =   "None"
