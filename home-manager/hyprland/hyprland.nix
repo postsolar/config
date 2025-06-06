@@ -125,6 +125,7 @@ in
 
       cursor {
         inactive_timeout = 3
+        persistent_warps = yes
       }
     '';
   };

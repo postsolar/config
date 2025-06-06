@@ -1,6 +1,7 @@
-{ ... }:
+{ pkgs, lib, config, ... }:
 
 {
+
   services.keyd = {
     enable = true;
 
@@ -23,5 +24,12 @@
       };
     };
   };
+
+  # why on earth is this not done in the nixpkgs module?
+  environment.systemPackages = lib.mkIf config.services.keyd.enable [
+    # no config.services.keyd.package either
+    pkgs.keyd
+  ];
+
 }
 
