@@ -27,6 +27,10 @@ in
   # todo: test if it actually works
   console.useXkbConfig = true;
 
+  # the module basically hardcodes the pkgs.ibus so we just rip module conf into here
+  # module will be ready to use when pkgs.ibus version is ≥1.5.32
+  # but ibus is basically unusable with hyprland atm anyways, so disabling it for now
+  # 
   # https://nixpk.gs/pr-tracker.html?pr=399949
   # https://nixpk.gs/pr-tracker.html?pr=384689
   # i18n.inputMethod = {
@@ -38,22 +42,19 @@ in
   #   ];
   # };
   #
-  # the module basically hardcodes the pkgs.ibus so we just rip module conf into here
-  # module will be ready to use when pkgs.ibus version is ≥1.5.32
-  #
   # environment.systemPackages = [
   #   ibusAutostart
   # ];
   # Without dconf enabled it is impossible to use IBus
-  programs.dconf.enable = true;
-  programs.dconf.packages = [ ibusPackage ];
-  services.dbus.packages = [ ibusPackage ];
-  environment.variables = {
-    GTK_IM_MODULE = "ibus";
-    QT_IM_MODULE = "ibus";
-    XMODIFIERS = "@im=ibus";
-  };
-  xdg.portal.extraPortals = lib.mkIf config.xdg.portal.enable [ ibusPackage ];
+  # programs.dconf.enable = true;
+  # programs.dconf.packages = [ ibusPackage ];
+  # services.dbus.packages = [ ibusPackage ];
+  # environment.variables = {
+  #   GTK_IM_MODULE = "ibus";
+  #   QT_IM_MODULE = "ibus";
+  #   XMODIFIERS = "@im=ibus";
+  # };
+  # xdg.portal.extraPortals = lib.mkIf config.xdg.portal.enable [ ibusPackage ];
 
   # ~ wayland
 

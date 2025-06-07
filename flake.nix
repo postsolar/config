@@ -90,6 +90,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # im-emoji-picker-fcitx = {
+    #   url = "git+file:///home/alice/git/im-emoji-picker";
+    # };
+
     helix-ext = {
       url = "github:omentic/helix-ext";
     };

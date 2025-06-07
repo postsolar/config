@@ -68,7 +68,7 @@
 
     [search]
     argument_delimiter = "#"
-    placeholder = "Search..."
+    placeholder = "Search…"
     delay = 0
     resume_last_query = false
 
