@@ -17,6 +17,8 @@ bind = SUPER SHIFT, N, exec, swaync-client --hide-latest
 
 bind = SUPER, Z, exec, sh $scripts/click.sh
 
+bind = SUPER, B, exec, ironbar bar hyprbar toggle-visible
+
 # ~ workspaces
 
 bind = SUPER,       Tab, workspace, +1
@@ -88,10 +90,10 @@ binde = SUPER CTRL ALT, Up,    resizewindowpixel, 0 -20, active
 binde = SUPER CTRL ALT, Down,  resizewindowpixel, 0 20, active
 
 # I guess this counts as resizing too
-binde = SUPER ALT, Minus, exec, $scripts/gaps.zsh inner -3
-binde = SUPER ALT, Equal, exec, $scripts/gaps.zsh inner 3
-binde = SUPER    , Minus, exec, $scripts/gaps.zsh outer -3
-binde = SUPER    , Equal, exec, $scripts/gaps.zsh outer 3
+binde = SUPER ALT, Minus, exec, bun $scripts/gaps.ts inner -3
+binde = SUPER ALT, Equal, exec, bun $scripts/gaps.ts inner 3
+binde = SUPER    , Minus, exec, bun $scripts/gaps.ts outer -3
+binde = SUPER    , Equal, exec, bun $scripts/gaps.ts outer 3
 
 # ~ align + fit
 

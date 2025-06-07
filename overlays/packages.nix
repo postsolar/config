@@ -12,12 +12,12 @@ inputs: f: p:
     p.wl-kbptr.overrideAttrs
       (_: _: {
         src = inputs.wl-kbptr;
-        version = inputs.wl-kbptr.rev;
+        version = inputs.wl-kbptr.shortRev;
       })
       ;
 
   satty =
-    let version = "a1bcb1f30926c40436e570c6b98549585290e536"; in
+    let version = "576861832b040b380a176979355f210b3caf6be6"; in
     p.satty.overrideAttrs
       (n: _: {
         inherit version;
@@ -25,9 +25,9 @@ inputs: f: p:
           owner = "gabm";
           repo = "Satty";
           rev = "${version}";
-          hash = "sha256-t66ygjhzFhS6FlerpXuNtguNdQB/L0nAj6KcIXyRGXE=";
+          hash = "sha256-xLsWBXMIeNmY62vi3Yt88fcGX63l7gpVp9Ox5Fmm4mw=";
         };
-        cargoHash = "sha256-hvJOjWD5TRXlDr5KfpFlzAi44Xd6VuaFexXziXgDLCk=";
+        cargoHash = "sha256-zvE8kaju+4OOPlerg6laiBv885flT1uQwqUngm0ZiT8=";
         cargoDeps = p.rustPlatform.fetchCargoVendor {
           inherit (n) pname src version;
           hash = n.cargoHash;

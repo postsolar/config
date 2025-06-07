@@ -1,5 +1,25 @@
 #! /usr/bin/env bun
 
+// types
+
+type HyWindow = {
+  at: [ number, number ]
+  size: [ number, number ]
+  address: string
+  focusHistoryID: number
+  workspace: { id: number }
+  floating: boolean
+  fullscreen: number
+  grouped: Array<string>
+}
+
+type MoveDirection = "left" | "right" | "up" | "down"
+
+type MoveWindowOrGroupArgs = {
+  direction: MoveDirection
+  Δ: number
+}
+
 // state
 
 let hyprscrollerMode = 'row'
@@ -35,27 +55,15 @@ const hyprdo = (args : Array<string>): void => {
 const hyprget = (args : Array<string>): any =>
   JSON.parse(exec(["hyprctl", "-j", ...args]))
 
+const hyprset = (args : Array<string>): void =>
+  log(exec(["hyprctl", "keyword", ...args]))
+
 // ironbar wrappers
 
 // update Ironbar variables on hyprscroller mode change
 const updateIronvar = (var_: string, value: string): void => {
   exec(["ironbar", "var", "set", var_, value])
 }
-
-// types
-
-type HyWindow = {
-  at: [ number, number ]
-  size: [ number, number ]
-  address: string
-  focusHistoryID: number
-  workspace: { id: number }
-  floating: boolean
-  fullscreen: number
-  grouped: Array<string>
-}
-
-type MoveDirection = "left" | "right" | "up" | "down"
 
 // intra-workspace window moving
 
@@ -94,11 +102,6 @@ const moveTiled = (direction : MoveDirection, address : string, group : Array<st
       : `movewindoworgroup ${moveDirectionToHyDirection(direction)}`
 
   hyprdo([command])
-}
-
-type MoveWindowOrGroupArgs = {
-  direction: MoveDirection
-  Δ: number
 }
 
 const moveWindowOrGroup = (args: MoveWindowOrGroupArgs): (() => void) => () => {

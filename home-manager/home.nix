@@ -101,6 +101,7 @@
       (pkgs.hyprshot.override { hyprland = config.wayland.windowManager.hyprland.package; })
       pkgs.aichat
       pkgs.bemoji
+      pkgs.better-control
       (pkgs.brave.override {
         commandLineArgs = [
           "--enable-features=TouchpadOverscrollHistoryNavigation"
