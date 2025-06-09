@@ -118,9 +118,9 @@
     };
 
     ironbar = {
-      url = "github:postsolar/ironbar/kb-icon-globs";
+      url = "github:postsolar/ironbar/personal";
       # put here temporarily to avoid narHashMismatch (idk why i'm getting it)
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     apple-color-emoji-src = {

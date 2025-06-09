@@ -173,6 +173,7 @@
       pkgs.watchexec
       pkgs.waypaper
       pkgs.wf-recorder
+      pkgs.wlinhibit
       pkgs.wl-kbptr
       pkgs.yj
       pkgs.yt-dlp

@@ -80,7 +80,12 @@ function what-files-block-hm
   set re "existing file \'(?<f1>.+?)\' is in the way of \'(?<f2>.+?)\'(?:, )?(?<extra>.+)?"
   set replace "$(set_color blue)\$f1$(set_color reset) -> $(set_color red)\$f2$(set_color reset) $(set_color -di)// \$extra$(set_color reset)"
 
-  journalctl $journalctlArgs | rg $rgArgs $re -or $replace
+  # i think they changed the format recently
+  set re2 "Existing file \'(?<existing>.*)\' would be clobbered by backing up \'(?<new>)\'"
+  set replace2 "$(set_color blue)\$existing$(set_color reset) -> $(set_color red)\$new$(set_color reset)"
+
+  journalctl $journalctlArgs | rg $rgArgs $re -or $replace \
+  || journalctl $journalctlArgs | rg $rgArgs $re2 -or $replace2
 end
 
 # create output with `hx`

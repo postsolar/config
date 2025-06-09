@@ -1,8 +1,12 @@
 { inputs, lib, pkgs, system, ... }:
 
+let
+  walker = inputs.walker.packages.${system}.walker;
+in
+
 {
   home.packages = [
-    inputs.walker.packages.${system}.walker
+    walker
     # for `calc` module
     pkgs.libqalculate
   ];
@@ -11,7 +15,7 @@
     Unit.Description = "Walker multi-purpose launcher gapplication service";
     Unit.PartOf = [ "graphical-session.target" ];
     Install.WantedBy = [ "graphical-session.target" ];
-    Service.ExecStart = "walker --gapplication-service";
+    Service.ExecStart = "${lib.getExe walker} --gapplication-service";
     # https://github.com/abenz1267/walker/issues/258
     Service.Environment = [ "GTK_IM_MODULE=fcitx" ];
   };
