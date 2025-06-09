@@ -5,43 +5,6 @@
 
 let
 
-  wlinhibit = {
-    type = "label";
-    label =
-      let
-        script = # sh
-          ''
-          label=
-          active='<span color="white">'$label'</span>'
-          inactive='<span color="gray">'$label'</span>'
-
-          while true; do
-            sleep 0.5
-            if pgrep wlinhibit; then
-              ironbar var set wlinhibit "$active"
-              pidwait wlinhibit
-            else
-              ironbar var set wlinhibit "$inactive"
-            fi
-          done >/dev/null 2>&1
-          '';
-      in
-        ''{{watch:${script}}}#wlinhibit'';
-    class = "wlinhibit";
-    on_click_left = # sh
-      ''
-      # use a systemctl service for wlinhibit because otherwise it'd be killed by ironbar exiting
-      # this could be addressed in other ways too, but this one is relatively clean and simple
-      if pgrep wlinhibit; then
-        systemctl --user stop wlinhibit.service
-        notify-send -u low -i system 'sleep inhibition off'
-      else
-        systemctl --user start wlinhibit.service
-        notify-send -u low -i system 'sleep inhibition on'
-      fi
-      '';
-  };
-
   # seems to be broken for now
   # menu = {
   #   type = "menu";
@@ -119,7 +82,7 @@ let
     height = 24;
     start = [ workspaces hyprscrollerMode bindmode ];
     center = [ music ];
-    end = [ tray wlinhibit keyboardLayouts volume clock ];
+    end = [ tray keyboardLayouts volume clock ];
     ironvar_defaults = {
       hyprscrollerMode = "⇒";
     };
@@ -131,7 +94,7 @@ let
     height = 30;
     start = [ workspaces ];
     center = [ music ];
-    end = [ tray wlinhibit keyboardLayoutsNiri volume clock ];
+    end = [ tray keyboardLayoutsNiri volume clock ];
   };
 
   stylesheet = 
@@ -163,10 +126,6 @@ in
     inputs.ironbar.homeManagerModules.default
   ];
 
-  home.packages = [
-    pkgs.wlinhibit
-  ];
-
   programs.ironbar = {
     enable = true;
     systemd = false;
@@ -177,13 +136,6 @@ in
   systemd.user.services = {
     ironbar-hyprland = mkIronbarSystemdService "hypr" hyprbarConf [ "hyprland-session.target" ];
     ironbar-niri = mkIronbarSystemdService "niri" niribarConf [ "niri.service" ];
-
-    wlinhibit = {
-      Unit.Description = "Systemd service for wlinhibit";
-      Service.Type = "simple";
-      Service.ExecStart = "${lib.getExe' pkgs.wlinhibit "wlinhibit"}";
-      Install = {};
-    };
   };
 
 }

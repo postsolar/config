@@ -187,6 +187,7 @@
     swww.enable = true;
     network-manager-applet.enable = true;
     pueue.enable = true;
+    caffeine.enable = true;
   };
 
   programs = {
