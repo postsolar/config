@@ -39,6 +39,8 @@
     ./wl-kbptr.nix
     ./xdg.nix
     ./yazi.nix
+
+    inputs.wayland-pipewire-idle-inhibit.homeModules.default
   ];
 
   home = {
@@ -188,6 +190,11 @@
     network-manager-applet.enable = true;
     pueue.enable = true;
     caffeine.enable = true;
+
+    wayland-pipewire-idle-inhibit = {
+      enable = true;
+      settings = {};
+    };
   };
 
   programs = {

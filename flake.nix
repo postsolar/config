@@ -155,6 +155,11 @@
       url = "github:abenz1267/walker";
     };
 
+    wayland-pipewire-idle-inhibit = {
+      url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
 }

@@ -39,7 +39,8 @@ in
     interactiveShellInit = # fish
       ''
       source ${starshipInit}
-      source ${atuinInit}
+      # only run atuin outside distrobox
+      command -q atuin && source ${atuinInit}
 
       source ${./functions.fish}
       '';

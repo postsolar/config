@@ -153,6 +153,24 @@
         "type": "github"
       }
     },
+    "flake-parts": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib"
+      },
+      "locked": {
+        "lastModified": 1738453229,
+        "narHash": "sha256-7H9XgNiGLKN1G1CgRh0vUL4AheZSYzPm+zmZ7vxbJdo=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "32ea77a06711b758da0ad9bd6a844c5740a87abd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -764,6 +782,18 @@
         "type": "github"
       }
     },
+    "nixpkgs-lib": {
+      "locked": {
+        "lastModified": 1738452942,
+        "narHash": "sha256-vJzFZGaCpnmo7I6i416HaBLpC+hvcURh/BQwROcGIp8=",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/072a6db25e947df2f31aab9eccd0ab75d5b2da11.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/072a6db25e947df2f31aab9eccd0ab75d5b2da11.tar.gz"
+      }
+    },
     "nixpkgs-master": {
       "locked": {
         "lastModified": 1749215512,
@@ -965,6 +995,7 @@
         "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-staging-next": "nixpkgs-staging-next",
         "walker": "walker",
+        "wayland-pipewire-idle-inhibit": "wayland-pipewire-idle-inhibit",
         "wl-kbptr": "wl-kbptr"
       }
     },
@@ -1070,6 +1101,42 @@
         "type": "github"
       }
     },
+    "systems_5": {
+      "locked": {
+        "lastModified": 1689347949,
+        "narHash": "sha256-12tWmuL2zgBgZkdoB6qXZsgJEH9LR3oUgpaQq2RbI80=",
+        "owner": "nix-systems",
+        "repo": "default-linux",
+        "rev": "31732fcf5e8fea42e59c2488ad31a0e651500f68",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default-linux",
+        "type": "github"
+      }
+    },
+    "treefmt-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "wayland-pipewire-idle-inhibit",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1738953846,
+        "narHash": "sha256-yrK3Hjcr8F7qS/j2F+r7C7o010eVWWlm4T1PrbKBOxQ=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "4f09b473c936d41582dd744e19f34ec27592c5fd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
     "walker": {
       "inputs": {
         "nixpkgs": "nixpkgs_8",
@@ -1086,6 +1153,29 @@
       "original": {
         "owner": "abenz1267",
         "repo": "walker",
+        "type": "github"
+      }
+    },
+    "wayland-pipewire-idle-inhibit": {
+      "inputs": {
+        "flake-parts": "flake-parts",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": "systems_5",
+        "treefmt-nix": "treefmt-nix"
+      },
+      "locked": {
+        "lastModified": 1739081365,
+        "narHash": "sha256-KSufvuzWONO6KuE/N7hQCEfrdgFUp2k9fUWKOvtOolc=",
+        "owner": "rafaelrc7",
+        "repo": "wayland-pipewire-idle-inhibit",
+        "rev": "952aef94b0d8a48c028b1ba7c3a9209fe0c64e46",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rafaelrc7",
+        "repo": "wayland-pipewire-idle-inhibit",
         "type": "github"
       }
     },
