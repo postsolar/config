@@ -43,7 +43,8 @@ bind = SUPER, BackSpace, workspace, previous
 
 # ~ mode change
 
-bind = SUPER, W, event, { "name": "toggleHyprscrollerMode" }
+# https://github.com/dawsers/hyprscroller/commit/d2a77fb00bbcda0f066c8585043706628509b47a
+bind = SUPER, W, scroller:setmode, toggle
 
 # ~ focus change
 
@@ -140,7 +141,7 @@ bind = SUPER, BracketLeft,  scroller:admitwindow, left
 bind = SUPER, BracketRight, scroller:admitwindow, right
 
 bind = SUPER SHIFT, BracketLeft,  scroller:expelwindow, left
-bind = SUPER SHIFT, BracketRigth, scroller:expelwindow, right
+bind = SUPER SHIFT, BracketRight, scroller:expelwindow, right
 
 # ~ pin
 
@@ -163,7 +164,7 @@ submap = reset
 # ~ jump
 
 # warn: crashes
-# bind = SUPER, R, scroller:jump
+bind = SUPER, R, scroller:jump
 
 # ~ float
 
@@ -177,3 +178,14 @@ bind = SUPER      , grave, fullscreenstate, 1 -1
 bind = SUPER SHIFT, grave, fullscreenstate, 2 -1
 bind = SUPER      , F11  , fullscreenstate, -1 2
 
+# ~ settings/mode change
+
+# TODO: add descriptions (`bindd`) because these commands are too long, looks ugly in the hints window
+# sadly i can't think of a nice way to also display current value
+# TODO: add mode change
+bind = SUPER, BackSlash, exec, $submap scroller_settings && $submapHints scroller_settings
+submap = scroller_settings
+  bind = , C, exec, hyprctl keyword plugin:scroller:center_active_column $(hyprctl -j getoption plugin:scroller:center_active_column | jq '.int == 0')
+  bind = SHIFT, C, exec, hyprctl keyword plugin:scroller:center_active_window $(hyprctl -j getoption plugin:scroller:center_active_window | jq '.int == 0')
+  bindir = , catchall, exec, $submapReset
+submap = reset

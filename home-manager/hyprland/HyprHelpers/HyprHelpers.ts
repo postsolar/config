@@ -20,10 +20,6 @@ type MoveWindowOrGroupArgs = {
   Δ: number
 }
 
-// state
-
-let hyprscrollerMode = 'row'
-
 // utils
 
 const timestamp = (): string => `[${new Date().toUTCString()}]`
@@ -60,7 +56,7 @@ const hyprset = (args : Array<string>): void =>
 
 // ironbar wrappers
 
-// update Ironbar variables on hyprscroller mode change
+// update an Ironbar variable
 const updateIronvar = (var_: string, value: string): void => {
   exec(["ironbar", "var", "set", var_, value])
 }
@@ -125,22 +121,12 @@ const toggleFocus = (): void => {
   hyprdo([`focuswindow address:${lastFocused.address}`])
 }
 
-// Toggle between `row` and `column` mode for hyprscroller
-//
-// Change of stateful `let hyprscrollerMode` within HyprHelpers is done by `handleHyprscrollerModeChange`,
-// and happens when Hyprland IPC notifies us about the successful change, so no need to set it here
-const toggleHyprscrollerMode = () => {
-  const nextMode = hyprscrollerMode === 'row' ? 'column' : 'row'
-  hyprdo([`scroller:setmode ${nextMode}`])
-}
-
 // main
 
 const onCustomEvent = (json: string): void => {
   const event = JSON.parse(json)
 
   const customEventsMap = {
-    toggleHyprscrollerMode: toggleHyprscrollerMode,
     movewindoworgroup: moveWindowOrGroup,
     togglefocus: toggleFocus,
   }
@@ -153,7 +139,6 @@ const onScrollerChange = (change: string): void => {
   const eventMap = {
     mode: (args: Array<string>): void => {
       const newMode = args[0]
-      hyprscrollerMode = newMode
       const modeDisplay = `${newMode === "row" ? "⇒" : "⇓"}`
       updateIronvar("hyprscrollerMode", modeDisplay)
     },
