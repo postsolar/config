@@ -19,6 +19,7 @@ in
     # https://github.com/abenz1267/walker/issues/258
     Service.Environment = [ "GTK_IM_MODULE=fcitx" ];
     Service.Restart = "on-failure";
+    Service.KillMode = "process";
   };
 
   xdg.configFile."walker/config.toml".text = # toml
