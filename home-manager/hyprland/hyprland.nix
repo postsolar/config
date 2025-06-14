@@ -38,6 +38,7 @@ in
     enable = true;
     systemd.enable = true;
     systemd.enableXdgAutostart = true;
+    systemd.variables = [ "--all" ];
 
     package = hlPackage;
     portalPackage = hlPortalPackage;

@@ -44,7 +44,7 @@ let
 
   music = {
     type = "music";
-    # TODO: implement https://github.com/JakeStanger/ironbar/issues/1011 )
+    # TODO: implement https://github.com/JakeStanger/ironbar/issues/1011
     # truncate = {
     #   mode = "start";
     #   max_length = 60;
