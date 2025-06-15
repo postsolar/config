@@ -2,7 +2,7 @@
 
 let
   browsers = [ "firefox.desktop" ];
-  terminals = [ "kitty.desktop" "foot.desktop" ];
+  terminals = [ "kitty.desktop" ];
   file-managers = [ "lf.desktop" "nemo.desktop" ];
   image-viewers = [ "swayimg.desktop" ];
   text-editors = "Helix.desktop";

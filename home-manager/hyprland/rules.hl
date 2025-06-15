@@ -47,7 +47,6 @@ windowrulev2 = noborder, initialClass: swayimg
 windowrulev2 = noblur, initialClass: swayimg
 
 # Add some opacity to terminals
-windowrulev2 = opacity 0.95 0.92 0.95, initialTitle: foot
 windowrulev2 = opacity 0.95 0.92 0.95, initialTitle: kitty
 
 # ~ class-based rules controllers

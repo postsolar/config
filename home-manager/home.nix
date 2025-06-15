@@ -1,5 +1,3 @@
-# This module is mostly for things that didn't fit elsewhere or couldn't be easily categorized.
-
 { inputs, outputs, config, pkgs, lib, system, ... }:
 
 {
@@ -24,7 +22,7 @@
     ./hypridle.nix
     ./hyprland/hyprland.nix
     ./ironbar/ironbar.nix
-    ./kitty/kitty.nix
+    ./kitty.nix
     ./lf/lf.nix
     ./mime.nix
     ./niri/niri.nix
@@ -142,7 +140,6 @@
       pkgs.libinput-gestures
       pkgs.libnotify
       pkgs.libxkbcommon
-      pkgs.lsp-ai
       pkgs.moar
       pkgs.mutagen
       pkgs.nemo-fileroller
