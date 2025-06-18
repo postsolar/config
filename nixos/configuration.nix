@@ -24,8 +24,8 @@ in
 
   # ~ keyboard
 
-  # todo: test if it actually works
   console.useXkbConfig = true;
+  services.xserver.xkb.layout = "carpalx-qwyrfm";
 
   # the module basically hardcodes the pkgs.ibus so we just rip module conf into here
   # module will be ready to use when pkgs.ibus version is ≥1.5.32

@@ -36,6 +36,10 @@ let
       volume_low = "󰕿";
       muted = "󰝟";
     };
+    truncate = {
+      mode = "middle";
+      max_length = 60;
+    };
   };
 
   tray = {
@@ -45,10 +49,14 @@ let
   music = {
     type = "music";
     # TODO: implement https://github.com/JakeStanger/ironbar/issues/1011
-    # truncate = {
-    #   mode = "start";
-    #   max_length = 60;
-    # };
+    truncate = {
+      mode = "start";
+      max_length = 60;
+    };
+    truncate_popup_title = {
+      mode = "middle";
+      max_length = 60;
+    };
   };
 
   keyboardLayouts = {

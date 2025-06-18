@@ -1,6 +1,5 @@
 { config, pkgs, lib, ... }:
 
-# TODO: update
 let package = pkgs.sherlock-launcher; in
 
 {
