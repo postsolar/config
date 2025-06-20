@@ -338,4 +338,10 @@
     "aichat/config.yaml".source = ./aichat-config.yaml;
   };
 
+  systemd.user.settings = {
+    Manager.DefaultEnvironment = {
+      PATH = "/run/wrappers/bin:/etc/profiles/per-user/%u/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin:$PATH";
+    };
+  };
+
 }

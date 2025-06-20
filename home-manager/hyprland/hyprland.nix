@@ -1,4 +1,8 @@
-{ inputs, config, pkgs, ... }:
+# todo: add uwsm as it allegedly fixes two major issues:
+#   - ibus: mod keys getting stuck
+#   - nvidia: suspend
+
+{ inputs, config, pkgs, lib, ... }:
 
 let
   system = pkgs.stdenv.hostPlatform.system;
@@ -36,9 +40,12 @@ in
 
   wayland.windowManager.hyprland = {
     enable = true;
-    systemd.enable = true;
-    systemd.enableXdgAutostart = true;
-    systemd.variables = [ "--all" ];
+
+    # switched to uwsm
+    systemd.enable = false;
+    # systemd.enable = true;
+    # systemd.enableXdgAutostart = true;
+    # systemd.variables = [ "--all" ];
 
     package = hlPackage;
     portalPackage = hlPortalPackage;
@@ -88,8 +95,6 @@ in
       }
 
       input {
-        # ref: /nix/store/<hash>-xkeyboard-config-2.43/share/X11/xkb/{symbols,rules}/
-        # ref: https://nixos.org/manual/nixos/stable/#custom-xkb-layouts
         kb_layout = carpalx-qwyrfm,ru
         kb_variant = ,ruu
         kb_options = compose:rctrl,grp:win_space_toggle,caps:escape

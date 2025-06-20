@@ -16,9 +16,9 @@ let
   };
 
   hyprscrollerMode = {
-    class = "hyprscroller-mode";
     type = "label";
     label = "#hyprscrollerMode";
+    class = "hyprscroller-mode";
   };
 
   clock = {
@@ -52,10 +52,11 @@ let
     truncate = {
       mode = "start";
       max_length = 60;
+      length = 60;
     };
     truncate_popup_title = {
       mode = "middle";
-      max_length = 60;
+      max_length = 90;
     };
   };
 
