@@ -1,6 +1,7 @@
 # todo: add uwsm as it allegedly fixes two major issues:
 #   - ibus: mod keys getting stuck
 #   - nvidia: suspend
+# 1st try: didn't seem to fix any of ibus' issues
 
 { inputs, config, pkgs, lib, ... }:
 
@@ -41,11 +42,9 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
 
-    # switched to uwsm
-    systemd.enable = false;
-    # systemd.enable = true;
-    # systemd.enableXdgAutostart = true;
-    # systemd.variables = [ "--all" ];
+    systemd.enable = true;
+    systemd.enableXdgAutostart = true;
+    systemd.variables = [ "--all" ];
 
     package = hlPackage;
     portalPackage = hlPortalPackage;

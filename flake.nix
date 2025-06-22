@@ -81,18 +81,10 @@
       url = "github:nixos/nixpkgs/master";
     };
 
-    nixpkgs-staging-next = {
-      url = "github:nixos/nixpkgs?ref=55bbdb3e20cb34ee43984b9d39a0a8752d99332b";
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # im-emoji-picker-fcitx = {
-    #   url = "git+file:///home/alice/git/im-emoji-picker";
-    # };
 
     helix-ext = {
       url = "github:omentic/helix-ext";

@@ -14,10 +14,8 @@
       waylandFrontend = true;
       addons = [
         pkgs.fcitx5-lua
-        # inputs.im-emoji-picker-fcitx.packages.${system}.default
       ];
     };
   };
 
 }
-

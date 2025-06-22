@@ -1,15 +1,5 @@
 { inputs, config, pkgs, lib, ... }:
 
-let
-  ibusPackage =
-    inputs.nixpkgs-staging-next.legacyPackages.${pkgs.system}.ibus-with-plugins.override {
-      plugins = with inputs.nixpkgs-staging-next.legacyPackages.${pkgs.system}.ibus-engines; [
-        uniemoji
-        typing-booster
-      ];
-    };
-in
-
 {
 
   system.stateVersion = "24.11";
@@ -27,12 +17,7 @@ in
   console.useXkbConfig = true;
   services.xserver.xkb.layout = "carpalx-qwyrfm";
 
-  # the module basically hardcodes the pkgs.ibus so we just rip module conf into here
-  # module will be ready to use when pkgs.ibus version is ≥1.5.32
-  # but ibus is basically unusable with hyprland atm anyways, so disabling it for now
-  # 
-  # https://nixpk.gs/pr-tracker.html?pr=399949
-  # https://nixpk.gs/pr-tracker.html?pr=384689
+  # ibus is basically unusable with hyprland atm anyways, so disabling it for now
   # i18n.inputMethod = {
   #   enable = true;
   #   type = "ibus";
@@ -41,20 +26,6 @@ in
   #     typing-booster
   #   ];
   # };
-  #
-  # environment.systemPackages = [
-  #   ibusAutostart
-  # ];
-  # Without dconf enabled it is impossible to use IBus
-  # programs.dconf.enable = true;
-  # programs.dconf.packages = [ ibusPackage ];
-  # services.dbus.packages = [ ibusPackage ];
-  # environment.variables = {
-  #   GTK_IM_MODULE = "ibus";
-  #   QT_IM_MODULE = "ibus";
-  #   XMODIFIERS = "@im=ibus";
-  # };
-  # xdg.portal.extraPortals = lib.mkIf config.xdg.portal.enable [ ibusPackage ];
 
   # ~ wayland
 
@@ -220,7 +191,7 @@ in
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 
-    withUWSM = true;
+    # withUWSM = true;
   };
 
   services.preload.enable = true;
