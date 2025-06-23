@@ -10,13 +10,14 @@ let
   hlPackage = inputs.hyprland.packages.${system}.hyprland;
   hlPortalPackage = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
 
-  hyprscroller = pkgs.stdenv.mkDerivation {
-    pname = "hyprscroller";
-    version = inputs.hyprscroller.shortRev;
-    src = inputs.hyprscroller;
-    buildInputs = [ hlPackage ] ++ hlPackage.buildInputs;
-    nativeBuildInputs = [ pkgs.pkg-config pkgs.cmake ];
-    installPhase = "install -D hyprscroller.so $out/lib/libhyprscroller.so";
+  hyprscroller = inputs.hyprscroller.packages.${system}.hyprscroller.overrideAttrs {
+    patches = [
+      # + scroller:setmode toggle
+      (pkgs.fetchurl {
+        url = "https://github.com/dawsers/hyprscroller/commit/d2a77fb00bbcda0f066c8585043706628509b47a.diff";
+        hash = "sha256-Zd1NUQL4g3RVULe/V8lGDU9ejZVbyDoDFzZlh6CoeH4=";
+      })
+    ];
   };
 
 in
@@ -108,6 +109,7 @@ in
           natural_scroll = yes
           disable_while_typing = yes
           scroll_factor = 1.25
+          drag_lock = 0
         }
       }
 

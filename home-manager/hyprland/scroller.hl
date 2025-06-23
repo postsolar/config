@@ -18,9 +18,9 @@ plugin {
     window_heights = oneeighth onesixth onefourth onethird threeeighths onehalf fiveeighths twothirds threequarters fivesixths seveneighths one
     column_default_width = twothirds
 
-    # lets us focus workspaces with focus window up/down dispatchers
-    # https://github.com/dawsers/hyprscroller/commit/b6137db944a5fc7598c08ba23c041c41d7093336
-    focus_wrap = no
+    # disabling lets us focus workspaces with focus window up/down dispatchers
+    # https://github.com/nasirHo/hyprscroller/commit/b6137db944a5fc7598c08ba23c041c41d7093336
+    focus_wrap = yes
 
     jump_labels_color = 0xaa$active
     jump_labels_scale = 0.8

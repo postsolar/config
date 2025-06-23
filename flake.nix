@@ -91,7 +91,7 @@
     };
 
     hyprland = {
-      url = "github:hyprwm/Hyprland";
+      url = "github:hyprwm/hyprland";
     };
 
     hyprpicker = {
@@ -105,8 +105,8 @@
     };
 
     hyprscroller = {
-      url = "github:nasirHo/hyprscroller";
-      flake = false;
+      url = "github:cpiber/hyprscroller";
+      inputs.hyprland.follows = "hyprland";
     };
 
     ironbar = {

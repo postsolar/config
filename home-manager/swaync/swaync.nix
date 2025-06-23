@@ -1,5 +1,8 @@
 { lib, pkgs, ... }:
 
+# TODO: broken for some reason
+# TODO: https://github.com/ErikReider/SwayNotificationCenter/pull/529
+
 {
 
   xdg.configFile."swaync/style.css".source =

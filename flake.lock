@@ -264,16 +264,16 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1750525408,
-        "narHash": "sha256-a6SN50G3JLZV7OQoQL9O7vNFVO9uR9/2arJcqUpI4EU=",
+        "lastModified": 1750589353,
+        "narHash": "sha256-+3W7HI8ZzVqhjaws8++TFaUX8JP2eq9Uzn/KHA/qr0U=",
         "owner": "hyprwm",
-        "repo": "Hyprland",
-        "rev": "8b1d5560cf1ca2c4c2624914de284d315502a092",
+        "repo": "hyprland",
+        "rev": "dd33128c2f127f39c30cca72addb1970b8936d07",
         "type": "github"
       },
       "original": {
         "owner": "hyprwm",
-        "repo": "Hyprland",
+        "repo": "hyprland",
         "type": "github"
       }
     },
@@ -443,17 +443,21 @@
       }
     },
     "hyprscroller": {
-      "flake": false,
+      "inputs": {
+        "hyprland": [
+          "hyprland"
+        ]
+      },
       "locked": {
-        "lastModified": 1746737129,
-        "narHash": "sha256-+e4BPjPIGD1pdSM0SujaN7ShWjJHM32OpSu+1eolkMY=",
-        "owner": "nasirHo",
+        "lastModified": 1750367365,
+        "narHash": "sha256-3GUgrP7zbw2Hes5RWMjVVEPWlOMRNnJOihpE3djnyAU=",
+        "owner": "cpiber",
         "repo": "hyprscroller",
-        "rev": "ccc2d1ebdcac04992e2fad2bf2540bb54da322dd",
+        "rev": "735a6a091c13ba058003704dc2d0efd395fd0526",
         "type": "github"
       },
       "original": {
-        "owner": "nasirHo",
+        "owner": "cpiber",
         "repo": "hyprscroller",
         "type": "github"
       }

@@ -161,10 +161,10 @@ submap = scroller_select
   bindr = , catchall, exec, $submapReset
 submap = reset
 
-# ~ jump
+# ~ jump/overview
 
-# warn: crashes
 bind = SUPER, R, scroller:jump
+bind = SUPER, A, scroller:toggleoverview
 
 # ~ float
 
