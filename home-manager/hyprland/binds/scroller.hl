@@ -1,6 +1,7 @@
 $submap = hyprctl dispatch submap
-$submapHints = bun $scripts/submap-hints.ts
-$submapReset = hyprctl dispatch submap reset && pkill --signal 31 nwg-wrapper
+$showSubmapHints = ironbar bar hyprbar show-popup bindmode-hints
+$hideSubmapHints = ironbar bar hyprbar hide-popup
+$resetSubmap = hyprctl dispatch submap reset && $hideSubmapHints
 
 # ~ programs
 
@@ -24,7 +25,7 @@ bind = SUPER, B, exec, ironbar bar hyprbar toggle-visible
 bind = SUPER,       Tab, workspace, +1
 bind = SUPER SHIFT, Tab, workspace, -1
 
-bind = SUPER ALT, W, exec, $submap workspace && $submapHints workspace
+bind = SUPER ALT, W, exec, $submap workspace && $showSubmapHints
 submap = workspace
   bind = , 1, workspace, 1
   bind = , 2, workspace, 2
@@ -36,7 +37,7 @@ submap = workspace
   bind = , 8, workspace, 8
   bind = , 9, workspace, 9
   bind = , 0, workspace, 10
-  bind = , catchall, exec, $submapReset
+  bind = , catchall, exec, $resetSubmap
 submap = reset
 
 bind = SUPER, BackSpace, workspace, previous
@@ -100,7 +101,7 @@ binde = SUPER    , Equal, exec, bun $scripts/gaps.ts outer 3
 
 # a note on submaps: `ir` flags make it exit on modded keys
 
-bind = SUPER, Slash, exec, $submap scroller_align && $submapHints scroller_align
+bind = SUPER, Slash, exec, $submap scroller_align && $showSubmapHints
 submap = scroller_align
   bind = , Left,  scroller:alignwindow, left
   bind = , Right, scroller:alignwindow, right
@@ -108,10 +109,10 @@ submap = scroller_align
   bind = , Down,  scroller:alignwindow, down
   bind = , M,     scroller:alignwindow, middle
   bind = , C,     scroller:alignwindow, center
-  bind = , catchall, exec, $submapReset
+  bind = , catchall, exec, $resetSubmap
 submap = reset
 
-bind = SUPER SHIFT, Slash, exec, $submap scroller_fit && $submapHints scroller_fit
+bind = SUPER SHIFT, Slash, exec, $submap scroller_fit && $showSubmapHints
 submap = scroller_fit
   bind = ,      A, scroller:fitsize,   active
   bind = ,      V, scroller:fitsize,   visible
@@ -128,7 +129,7 @@ submap = scroller_fit
   bind = ALT,   L, scroller:fitheight, all
   bind = ALT,   E, scroller:fitheight, toend
   bind = ALT,   B, scroller:fitheight, tobeginning
-  bindir = , catchall, exec, $submapReset
+  bindir = , catchall, exec, $resetSubmap
 submap = reset
 
 # reset width/height
@@ -152,13 +153,13 @@ bind = SUPER SHIFT, P, pin
 
 bind = SUPER, F, scroller:selectiontoggle
 
-bind = SUPER SHIFT, F, exec, $submap scroller_select && $submapHints scroller_select
+bind = SUPER SHIFT, F, exec, $submap scroller_select && $showSubmapHints
 submap = scroller_select
   bind = , W, scroller:selectionworkspace
   bind = , R, scroller:selectionreset
   bind = , Left, scroller:selectionmove, left
   bind = , Right, scroller:selectionmove, right
-  bindr = , catchall, exec, $submapReset
+  bindr = , catchall, exec, $resetSubmap
 submap = reset
 
 # ~ jump/overview
@@ -183,9 +184,9 @@ bind = SUPER      , F11  , fullscreenstate, -1 2
 # TODO: add descriptions (`bindd`) because these commands are too long, looks ugly in the hints window
 # sadly i can't think of a nice way to also display current value
 # TODO: add mode change
-bind = SUPER, BackSlash, exec, $submap scroller_settings && $submapHints scroller_settings
+bind = SUPER, BackSlash, exec, $submap scroller_settings && $showSubmapHints
 submap = scroller_settings
   bind = , C, exec, hyprctl keyword plugin:scroller:center_active_column $(hyprctl -j getoption plugin:scroller:center_active_column | jq '.int == 0')
   bind = SHIFT, C, exec, hyprctl keyword plugin:scroller:center_active_window $(hyprctl -j getoption plugin:scroller:center_active_window | jq '.int == 0')
-  bindir = , catchall, exec, $submapReset
+  bindir = , catchall, exec, $resetSubmap
 submap = reset

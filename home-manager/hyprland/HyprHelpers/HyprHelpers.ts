@@ -1,5 +1,26 @@
 #! /usr/bin/env bun
 
+// constants
+
+const humanizeModmask = {
+  "0": [],
+  "1": [ "Shift" ],
+  "4": [ "Ctrl" ],
+  "5": [ "Ctrl", "Shift" ],
+  "8": [ "Alt" ],
+  "9": [ "Alt", "Shift" ],
+  "12": [ "Ctrl", "Alt" ],
+  "13": [ "Ctrl", "Alt", "Shift" ],
+  "64": [ "Super" ],
+  "65": [ "Super", "Shift" ],
+  "68": [ "Super", "Ctrl" ],
+  "69": [ "Super", "Ctrl", "Shift" ],
+  "72": [ "Super", "Alt" ],
+  "73": [ "Super", "Alt", "Shift" ],
+  "76": [ "Super", "Ctrl", "Alt" ],
+  "77": [ "Super", "Ctrl", "Alt", "Shift" ],
+}
+
 // types
 
 type HyWindow = {
@@ -147,6 +168,44 @@ const onScrollerChange = (change: string): void => {
   event in eventMap && eventMap[event](args)
 }
 
+// TODO: will need truncation
+// TODO: add binds descriptions (`bindd`), prioritize over dispatcher+arg display
+// FIXME: ironbar doesn't allow setting variables via the IPC if they're bigger than 966 bytes, so
+// some submaps won't be displayed.
+// issue: https://github.com/JakeStanger/ironbar/issues/1065
+// potential fix would be running the respective label in `poll` mode but this is hard and wasteful
+const onSubmapChange = (submap: string): void => {
+  if (submap === "") {
+    updateIronvar("bindmode-hints", "")
+    return
+  }
+
+  const submapBinds = hyprget(["binds"]).filter(b => b.submap === submap)
+  const { no: binds, yes: catchalls } = partition(b => b.catch_all)(submapBinds)
+
+  const printBind = b => {
+    const mods = humanizeModmask[b.modmask].join("+")
+    const key = `${mods}${mods === "" ? "" : "+"}${b.key}`
+    return `<span weight="bold" color="darkturquoise">${Bun.escapeHTML(key)}</span>: ${Bun.escapeHTML(b.dispatcher)} ${Bun.escapeHTML(b.arg)}`
+  }
+
+  const printCatchall = b =>
+    Bun.escapeHTML(`${b.dispatcher} ${b.arg}`)
+
+  const printBinds = binds =>
+    `<span weight="bold">Binds</span>:\n\n` + binds.map(printBind).join("\n\n")
+
+  const printCatchalls = catchalls =>
+    `<span weight="bold">Catch-alls</span>:\n\n` + catchalls.map(printCatchall).join("\n\n")
+
+  const display =
+    [ (binds.length > 0 ? printBinds(binds) : ""),
+      (catchalls.length > 0 ? printCatchalls(catchalls) : "")
+    ].join("\n\n").trim()
+
+  Bun.spawn([ "ironbar", "var", "set", "bindmode-hints", display ])
+}
+
 const handleLine = (line: string): void => {
   const [ event, ...rest_ ] = line.split(/>>/)
   const rest = rest_.join(">>")
@@ -154,6 +213,7 @@ const handleLine = (line: string): void => {
   const eventMap: Record<string, ((args: string) => void)> = {
     custom: onCustomEvent,
     scroller: onScrollerChange,
+    submap: onSubmapChange,
   }
 
   event in eventMap && eventMap[event](rest)

@@ -10,9 +10,26 @@ let
   #   type = "menu";
   # };
 
-  bindmode = {
-    type = "bindmode";
-    transition_type = "crossfade";
+  bindmode-with-hints = {
+    type = "custom";
+    name = "bindmode-hints";
+
+    bar = [
+      {
+        type = "button";
+        on_click = "popup:toggle";
+        widgets = [
+          { type = "bindmode"; }
+        ];
+      }
+    ];
+
+    popup = [
+      {
+        type = "label";
+        label = "#bindmode-hints";
+      }
+    ];
   };
 
   hyprscrollerMode = {
@@ -89,7 +106,7 @@ let
     name = "hyprbar";
     position = "top";
     height = 24;
-    start = [ workspaces hyprscrollerMode bindmode ];
+    start = [ workspaces hyprscrollerMode bindmode-with-hints ];
     center = [ music ];
     end = [ tray keyboardLayouts volume clock ];
     ironvar_defaults = {
@@ -115,7 +132,7 @@ let
   mkIronbarSystemdService = name: conf: targets:
     {
       Unit = {
-        Description = "Systemd service for Ironbar";
+        Description = "Ironbar (${name})";
         Requires = [ "graphical-session.target" ];
       };
       Service = {

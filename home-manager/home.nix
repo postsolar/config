@@ -282,6 +282,7 @@
         "--hidden"
         "--max-filesize=500K"
         "--colors=column:fg:blue"
+        # TODO: remove everything past this line and replace with shell aliases instead
         "--column"
         "--line-number"
         "--trim"
