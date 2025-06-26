@@ -120,6 +120,7 @@
       pkgs.file
       pkgs.firefox
       pkgs.fx
+      pkgs.gemini-cli
       pkgs.gh
       pkgs.gimp3
       pkgs.glib
@@ -282,13 +283,6 @@
         "--hidden"
         "--max-filesize=500K"
         "--colors=column:fg:blue"
-        # TODO: remove everything past this line and replace with shell aliases instead
-        "--column"
-        "--line-number"
-        "--trim"
-        "--no-require-git"
-        # without this, --hidden makes it search .git/ even in presence of .gitignore
-        "--glob='!.git'"
       ];
     };
     bun.enable = true;
@@ -317,23 +311,6 @@
     };
     swayimg.enable = true;
   };
-
-  # ref: https://github.com/sharkdp/fd/issues/1150
-  # ref: https://github.com/BurntSushi/ripgrep/issues/2366
-  # basically the solution is still to have per-directory ignore files
-  # alternatively, since it's only the `~/.config` that requires access,
-  # set XDG_CONFIG_HOME to ~/config, and never use --hidden with anything
-  home.file.".ignore".text =
-    ''
-    .npm
-    .cache
-    .config/google-chrome
-    .local/share
-    .local/state
-    .mozilla
-    .nv
-    .pki
-    '';
 
   xdg.configFile = {
     "aichat/config.yaml".source = ./aichat-config.yaml;

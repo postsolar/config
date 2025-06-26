@@ -49,6 +49,9 @@ windowrulev2 = noblur, initialClass: swayimg
 # Add some opacity to terminals
 windowrulev2 = opacity 0.95 0.92 0.95, initialTitle: kitty
 
+# Fix telegram media viewer (should work on its own but got broken recently as of 27.06)
+windowrulev2 = fullscreen, class: org.telegram.desktop, title: Media viewer
+
 # ~ class-based rules controllers
 #
 # (needed for launching forking processes,

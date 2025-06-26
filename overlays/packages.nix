@@ -35,5 +35,7 @@ inputs: f: p:
       })
       ;
 
+  gemini-cli = inputs.nixpkgs-master.legacyPackages.${f.system}.gemini-cli;
+
 }
 

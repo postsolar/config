@@ -74,7 +74,7 @@
   inputs = {
 
     nixpkgs = {
-      url = "github:nixos/nixpkgs?ref=nixpkgs-unstable";
+      url = "github:nixos/nixpkgs/nixpkgs-unstable";
     };
 
     nixpkgs-master = {
@@ -111,8 +111,6 @@
 
     ironbar = {
       url = "github:postsolar/ironbar/kb-icon-globs";
-      # put here temporarily to avoid narHashMismatch (idk why i'm getting it)
-      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     apple-color-emoji-src = {

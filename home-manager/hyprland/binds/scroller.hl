@@ -186,7 +186,7 @@ bind = SUPER      , F11  , fullscreenstate, -1 2
 # TODO: add mode change
 bind = SUPER, BackSlash, exec, $submap scroller_settings && $showSubmapHints
 submap = scroller_settings
-  bind = , C, exec, hyprctl keyword plugin:scroller:center_active_column $(hyprctl -j getoption plugin:scroller:center_active_column | jq '.int == 0')
-  bind = SHIFT, C, exec, hyprctl keyword plugin:scroller:center_active_window $(hyprctl -j getoption plugin:scroller:center_active_window | jq '.int == 0')
-  bindir = , catchall, exec, $resetSubmap
+  bindd = , C, Toggle centering active column, exec, hyprctl keyword plugin:scroller:center_active_column $(hyprctl -j getoption plugin:scroller:center_active_column | jq '.int == 0')
+  bindd = SHIFT, C, Toggle centering active window (vertically), exec, hyprctl keyword plugin:scroller:center_active_window $(hyprctl -j getoption plugin:scroller:center_active_window | jq '.int == 0')
+  bindird = , catchall, Reset submap, exec, $resetSubmap
 submap = reset

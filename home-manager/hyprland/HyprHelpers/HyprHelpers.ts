@@ -57,6 +57,11 @@ const minBy = <T>(f: (a: T) => number) => (as: Array<T>): T =>
 const partition = <T>(f: (a: T) => boolean) => (as: Array<T>): { yes: Array<T>, no: Array<T> } =>
   as.reduce<{ yes: Array<T>, no: Array<T> }>(({ yes, no }, a) => f(a) ? { yes: [ ...yes, a ], no: no } : { yes: yes, no: [ ...no, a ] }, { yes: [], no: [] })
 
+const truncate = (maxLength: number, string: string): string => 
+  string.length > maxLength
+    ? `${string.substring(0, maxLength)}…`
+    : string
+
 // hyprctl wrappers
 
 const workspaceWindows = (): Array<HyWindow> => {
@@ -168,8 +173,6 @@ const onScrollerChange = (change: string): void => {
   event in eventMap && eventMap[event](args)
 }
 
-// TODO: will need truncation
-// TODO: add binds descriptions (`bindd`), prioritize over dispatcher+arg display
 // FIXME: ironbar doesn't allow setting variables via the IPC if they're bigger than 966 bytes, so
 // some submaps won't be displayed.
 // issue: https://github.com/JakeStanger/ironbar/issues/1065
@@ -184,13 +187,22 @@ const onSubmapChange = (submap: string): void => {
   const { no: binds, yes: catchalls } = partition(b => b.catch_all)(submapBinds)
 
   const printBind = b => {
-    const mods = humanizeModmask[b.modmask].join("+")
-    const key = `${mods}${mods === "" ? "" : "+"}${b.key}`
-    return `<span weight="bold" color="darkturquoise">${Bun.escapeHTML(key)}</span>: ${Bun.escapeHTML(b.dispatcher)} ${Bun.escapeHTML(b.arg)}`
+    const mods = humanizeModmask[b.modmask]
+    const key = [ ...mods, b.key ].join("+")
+
+    const description = truncate(60,
+      b.has_description ? b.description : `${b.dispatcher} ${b.arg}`
+    )
+
+    return `<span weight="bold" color="darkturquoise">${Bun.escapeHTML(key)}</span>: ${Bun.escapeHTML(description)}`
   }
 
-  const printCatchall = b =>
-    Bun.escapeHTML(`${b.dispatcher} ${b.arg}`)
+  const printCatchall = b => {
+    const description = truncate(60,
+      b.has_description ? b.description : `${b.dispatcher} ${b.arg}`
+    )
+    return Bun.escapeHTML(description)
+  }
 
   const printBinds = binds =>
     `<span weight="bold">Binds</span>:\n\n` + binds.map(printBind).join("\n\n")
