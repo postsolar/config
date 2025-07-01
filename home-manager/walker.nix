@@ -193,7 +193,7 @@ in
     typeahead = true
 
     [builtins.finder]
-    use_fd = false
+    use_fd = true
     fd_flags = "--ignore-vcs --type file"
     weight = 5
     icon = "file"

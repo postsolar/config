@@ -65,10 +65,6 @@
 
       KOOHA_EXPERIMENTAL = "all";
 
-      # WARN: for some reason widgets don't work with `--with-shell='zsh -ic'`, only with non-interactive zsh
-      FZF_CTRL_T_COMMAND = "fd -- '$cdpath'";
-      FZF_ALT_C_COMMAND = "fd -td -tl -- '$cdpath'";
-
       PAGER = "moar";
       MOAR = "--no-linenumbers --no-statusbar --scroll-left-hint=ESC[90m‹ --scroll-right-hint=ESC[90m› --terminal-fg";
     };
@@ -228,15 +224,7 @@
       nix-direnv.enable = true;
     };
     eza.enable = true;
-    fd = {
-      enable = true;
-      # use a wrapper instead of `programs.fd.extraOptions` because it works via
-      # shell aliases which leads to surprises when used outside of a shell
-      package = pkgs.writers.writeDashBin "fd"
-        ''
-        ${lib.getExe pkgs.fd} --follow --hidden --color=always --hyperlink=always "$@"
-        '';
-    };
+    fd.enable = true;
     foliate.enable = true;
     fzf = {
       enable = true;

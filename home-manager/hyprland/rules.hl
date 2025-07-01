@@ -26,20 +26,20 @@ windowrulev2 = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinn
 windowrulev2 = noshadow, floating:1
 
 # Some windows have to be floating by default
-windowrulev2 = float, initialClass: \.blueman-manager-wrapped
+windowrulev2 = float, initialClass: .blueman-manager-wrapped
 windowrulev2 = float, initialClass: xdg-desktop-portal-gtk
-windowrulev2 = float, initialClass: com\.github\.hluk\.copyq
+windowrulev2 = float, initialClass: com.github.hluk.copyq
 windowrulev2 = float, initialClass: it.mijorus.smile
 windowrulev2 = float, initialTitle: fzf-picker
-windowrulev2 = float, initialTitle: Pilt pildis
-windowrulev2 = float, initialClass: firefox, initialTitle: Pilt-pildis
 windowrulev2 = float, initialTitle: MainPicker # xdph
 
-# browser pop ups
+# browser pop ups / pip
 # i guess no such windowrule would work for regular new window opening because a window would first open and then only set its title
 # but will keep it here for now
 windowrulev2 = float, initialClass: firefox, title: Logige sisse – Google´i kontod.+
-windowrulev2 = float, initialClass: firefox, title: Laiendus\: \(Bitwardeni paroolihaldur\) - Bitwarden — Mozilla Firefox
+windowrulev2 = float, initialClass: firefox, title: Laiendus:.*
+windowrulev2 = float, initialTitle: Pilt pildis
+windowrulev2 = float, initialClass: firefox, initialTitle: Pilt-pildis
 
 # Make swayimg prettier
 windowrulev2 = float, initialClass: swayimg

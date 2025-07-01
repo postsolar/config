@@ -1066,11 +1066,11 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1748502384,
-        "narHash": "sha256-nmTVxvbENySXZryA+TOGZ9nRr3m/+Xqc07Sy3aSN5Nw=",
+        "lastModified": 1751302125,
+        "narHash": "sha256-52uRVfO4OMx5/8SN7yuSsxbiUiltxzla+RXF0hnwunI=",
         "owner": "abenz1267",
         "repo": "walker",
-        "rev": "ade63feb9f1d91f1b1bf709bb139060579126c19",
+        "rev": "54262709a678baa06f34fa5f73baa259fa5b755f",
         "type": "github"
       },
       "original": {
