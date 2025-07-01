@@ -1,14 +1,14 @@
 { pkgs, ... }:
 
 let
-  browsers = [ "firefox.desktop" ];
-  terminals = [ "kitty.desktop" ];
+  browsers = "firefox.desktop";
+  terminals = "kitty.desktop";
   file-managers = [ "lf.desktop" "nemo.desktop" ];
-  image-viewers = [ "swayimg.desktop" ];
+  image-viewers = "org.gnome.eog.desktop";
   text-editors = "Helix.desktop";
 
   associations = {
-    # term
+    # terminal
     "x-scheme-handler/terminal" = terminals;
 
     # web

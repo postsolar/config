@@ -1,8 +1,3 @@
-# todo: add uwsm as it allegedly fixes two major issues:
-#   - ibus: mod keys getting stuck
-#   - nvidia: suspend
-# 1st try: didn't seem to fix any of ibus' issues
-
 { inputs, config, pkgs, lib, ... }:
 
 let

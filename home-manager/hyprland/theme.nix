@@ -22,7 +22,7 @@ in
     $locked = ff8c00 # darkorange
 
     general {
-      border_size = 4
+      border_size = 2
       col.active_border = 0xff$active
       col.inactive_border = 0xff$inactive
       gaps_in = 10

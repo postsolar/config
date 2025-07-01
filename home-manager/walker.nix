@@ -19,12 +19,11 @@ in
     # https://github.com/abenz1267/walker/issues/258
     Service.Environment = [ "GTK_IM_MODULE=fcitx" ];
     Service.Restart = "on-failure";
-    Service.KillMode = "process";
   };
 
   xdg.configFile."walker/config.toml".text = # toml
     ''
-    app_launch_prefix = ""
+    app_launch_prefix = "systemd-run --user "
     terminal_title_flag = ""
     locale = ""
     close_when_open = false
@@ -193,7 +192,7 @@ in
     typeahead = true
 
     [builtins.finder]
-    use_fd = false
+    use_fd = true
     fd_flags = "--ignore-vcs --type file"
     weight = 5
     icon = "file"

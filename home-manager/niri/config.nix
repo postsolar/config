@@ -175,23 +175,6 @@
       block-out-from "screencast"
     }
 
-    // swayimg
-    window-rule {
-      match app-id="swayimg"
-      open-floating true
-      focus-ring {
-        off
-      }
-      border {
-        off
-      }
-      shadow {
-        off
-      }
-      max-height 600
-      max-width 1200
-    }
-
     // ~ binds
 
     binds {

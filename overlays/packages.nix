@@ -35,6 +35,7 @@ inputs: f: p:
       })
       ;
 
+  # keep it on master for now as 1) it's cheap 2) it updates often and has quite a way to go
   gemini-cli = inputs.nixpkgs-master.legacyPackages.${f.system}.gemini-cli;
 
 }

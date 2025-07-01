@@ -1,5 +1,3 @@
-# todo refactor, add qol stuff
-
 # ~ layers
 
 # wl-kbptr
@@ -15,95 +13,50 @@ layerrule = ignorezero, swaync-notification-window
 
 # ~ windows
 
-# Ignore maximize requests from apps
-windowrulev2 = suppressevent maximize, class:.*
-
-# Fix some dragging issues with XWayland
-windowrulev2 = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
-
-# Make floating windows have no shadow
-# (because my shadows look ugly against darker backgrounds)
+# No shadow on floating windows
 windowrulev2 = noshadow, floating:1
 
 # Some windows have to be floating by default
-windowrulev2 = float, initialClass: \.blueman-manager-wrapped
+windowrulev2 = float, initialClass: .blueman-manager-wrapped
 windowrulev2 = float, initialClass: xdg-desktop-portal-gtk
-windowrulev2 = float, initialClass: com\.github\.hluk\.copyq
-windowrulev2 = float, initialClass: it.mijorus.smile
+windowrulev2 = float, initialClass: com.github.hluk.copyq
 windowrulev2 = float, initialTitle: fzf-picker
+
+# smile emoji picker
+windowrulev2 = float,            initialClass: it.mijorus.smile
+windowrulev2 = pin,              initialClass: it.mijorus.smile
+windowrulev2 = size 50% 95%,     initialClass: it.mijorus.smile
+windowrulev2 = move 0% 100%-w-0, initialClass: it.mijorus.smile 
+windowrulev2 = noborder,         initialClass: it.mijorus.smile
+windowrulev2 = opacity 0.8,      initialClass: it.mijorus.smile
+
+# XDPH
+windowrulev2 = float,        initialClass: , initialTitle: MainPicker
+windowrulev2 = float,        initialClass: , initialTitle: Select what to share
+windowrulev2 = size 20% 15%, initialClass: , initialTitle: Select what to share
+
+# browser pop ups / PiP
 windowrulev2 = float, initialTitle: Pilt pildis
+windowrulev2 = float, initialClass: firefox, title: Laiendus:.*
 windowrulev2 = float, initialClass: firefox, initialTitle: Pilt-pildis
-windowrulev2 = float, initialTitle: MainPicker # xdph
-
-# browser pop ups
-# i guess no such windowrule would work for regular new window opening because a window would first open and then only set its title
-# but will keep it here for now
-windowrulev2 = float, initialClass: firefox, title: Logige sisse – Google´i kontod.+
-windowrulev2 = float, initialClass: firefox, title: Laiendus\: \(Bitwardeni paroolihaldur\) - Bitwarden — Mozilla Firefox
-
-# Make swayimg prettier
-windowrulev2 = float, initialClass: swayimg
-windowrulev2 = noborder, initialClass: swayimg
-windowrulev2 = noblur, initialClass: swayimg
 
 # Add some opacity to terminals
 windowrulev2 = opacity 0.95 0.92 0.95, initialTitle: kitty
 
 # Fix telegram media viewer (should work on its own but got broken recently as of 27.06)
-windowrulev2 = fullscreen, class: org.telegram.desktop, title: Media viewer
+windowrulev2 = fullscreenstate 2 2, class: org.telegram.desktop, title: Media viewer
+
+# Kooha
+# note that these are two different kooha windows
+windowrulev2 = center, initialClass: kooha
+windowrulev2 = move 100%-w-10, initialClass: io.github.seadve.Kooha
 
 # ~ class-based rules controllers
-#
-# (needed for launching forking processes,
-# as exec dispatcher doesn't apply rules to them)
+# (needed for launching forking processes, as exec dispatcher doesn't apply rules to them)
 
 # floating, fullscreen and centering
 windowrulev2 = float,               class: .*-float.*
 windowrulev2 = fullscreen,          class: .*-fullscreen.*
 windowrulev2 = fullscreenstate 2 1, class: .*-fakefullscreen.*
 windowrulev2 = center,              class: .*-center.*
-
-# size
-windowrulev2 = size 20% 20%, class: .*-wh20.*
-windowrulev2 = size 25% 25%, class: .*-wh25.*
-windowrulev2 = size 30% 30%, class: .*-wh30.*
-windowrulev2 = size 35% 35%, class: .*-wh35.*
-windowrulev2 = size 40% 40%, class: .*-wh40.*
-windowrulev2 = size 45% 45%, class: .*-wh45.*
-windowrulev2 = size 50% 50%, class: .*-wh50.*
-windowrulev2 = size 55% 55%, class: .*-wh55.*
-windowrulev2 = size 60% 60%, class: .*-wh60.*
-
-# opacity
-windowrulev2 = opacity 0.2,  class: .*-opacity20.*
-windowrulev2 = opacity 0.3,  class: .*-opacity30.*
-windowrulev2 = opacity 0.4,  class: .*-opacity40.*
-windowrulev2 = opacity 0.5,  class: .*-opacity50.*
-windowrulev2 = opacity 0.6,  class: .*-opacity60.*
-windowrulev2 = opacity 0.7,  class: .*-opacity70.*
-windowrulev2 = opacity 0.8,  class: .*-opacity80.*
-windowrulev2 = opacity 0.85, class: .*-opacity85.*
-windowrulev2 = opacity 0.9,  class: .*-opacity90.*
-windowrulev2 = opacity 0.95, class: .*-opacity95.*
-windowrulev2 = opaque,       class: .*-opaque.*
-windowrulev2 = forcergbx,    class: .*-fullopaque.*
-
-# border size
-windowrulev2 = bordersize 0, class: .*-border0.*
-windowrulev2 = bordersize 1, class: .*-border1.*
-windowrulev2 = bordersize 2, class: .*-border2.*
-windowrulev2 = bordersize 3, class: .*-border3.*
-windowrulev2 = bordersize 4, class: .*-border4.*
-windowrulev2 = bordersize 5, class: .*-border5.*
-windowrulev2 = bordersize 6, class: .*-border6.*
-windowrulev2 = bordersize 7, class: .*-border7.*
-windowrulev2 = bordersize 8, class: .*-border8.*
-windowrulev2 = bordersize 9, class: .*-border9.*
-
-# dim, shadow, x-ray
-windowrulev2 = nodim,     class: .*-nodim.*
-windowrulev2 = noshadow,  class: .*-noshadow.*
-windowrulev2 = dimaround, class: .*-dimaround.*
-windowrulev2 = xray 1,    class: .*-xray.*
-windowrulev2 = xray 0,    class: .*-noxray.*
 
