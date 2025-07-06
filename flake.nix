@@ -92,6 +92,13 @@
 
     hyprland = {
       url = "github:hyprwm/hyprland";
+      # FIXME aquamarine is pinned to a broken version currently
+      # pin:
+      #   https://github.com/hyprwm/Hyprland/pull/10919
+      # PR breaking aquamarine:
+      #   https://github.com/hyprwm/aquamarine/pull/183#issuecomment-3035802607
+      # remove when Hyprland's aquamarine input is updated
+      inputs.aquamarine.url = "github:hyprwm/aquamarine/v0.9.0";
     };
 
     hyprpicker = {

@@ -181,12 +181,21 @@ bind = SUPER      , F11  , fullscreenstate, -1 2
 
 # ~ settings/mode change
 
-# TODO: add descriptions (`bindd`) because these commands are too long, looks ugly in the hints window
-# sadly i can't think of a nice way to also display current value
-# TODO: add mode change
 bind = SUPER, BackSlash, exec, $submap scroller_settings && $showSubmapHints
 submap = scroller_settings
+  # toggle centering active column / window
+  # sadly i can't think of a nice way to also display current value
   bindd = , C, Toggle centering active column, exec, hyprctl keyword plugin:scroller:center_active_column $(hyprctl -j getoption plugin:scroller:center_active_column | jq '.int == 0')
   bindd = SHIFT, C, Toggle centering active window (vertically), exec, hyprctl keyword plugin:scroller:center_active_window $(hyprctl -j getoption plugin:scroller:center_active_window | jq '.int == 0')
+
+  # mode change
+  # TODO: add descriptions after https://github.com/JakeStanger/ironbar/pull/1067
+  bind = , right, scroller:setmodemodifier, after
+  bind = , left, scroller:setmodemodifier, before
+  bind = , home, scroller:setmodemodifier, beginning
+  bind = , end, scroller:setmodemodifier, end
+  bind = , up, scroller:setmodemodifier, , focus
+  bind = , down, scroller:setmodemodifier, , nofocus
+
   bindird = , catchall, Reset submap, exec, $resetSubmap
 submap = reset

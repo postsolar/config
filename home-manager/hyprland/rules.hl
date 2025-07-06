@@ -35,13 +35,18 @@ windowrulev2 = float,        initialClass: , initialTitle: MainPicker
 windowrulev2 = float,        initialClass: , initialTitle: Select what to share
 windowrulev2 = size 20% 15%, initialClass: , initialTitle: Select what to share
 
+# XDP-gtk
+windowrulev2 = float, initialClass: xdg-desktop-portal-gtk
+windowrulev2 = size 60% 70%, initialClass: xdg-desktop-portal-gtk
+windowrulev2 = center, initialClass: xdg-desktop-portal-gtk
+
 # browser pop ups / PiP
 windowrulev2 = float, initialTitle: Pilt pildis
 windowrulev2 = float, initialClass: firefox, title: Laiendus:.*
 windowrulev2 = float, initialClass: firefox, initialTitle: Pilt-pildis
 
 # Add some opacity to terminals
-windowrulev2 = opacity 0.95 0.92 0.95, initialTitle: kitty
+windowrulev2 = opacity 0.9 0.9 0.9, initialTitle: kitty
 
 # Fix telegram media viewer (should work on its own but got broken recently as of 27.06)
 windowrulev2 = fullscreenstate 2 2, class: org.telegram.desktop, title: Media viewer

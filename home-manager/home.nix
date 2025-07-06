@@ -165,6 +165,7 @@
       pkgs.uni
       pkgs.urlencode
       pkgs.vivaldi
+      pkgs.vscode-fhs
       pkgs.vscode-langservers-extracted
       pkgs.watchexec
       pkgs.waypaper

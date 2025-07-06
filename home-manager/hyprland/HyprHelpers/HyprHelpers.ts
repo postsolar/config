@@ -62,6 +62,16 @@ const truncate = (maxLength: number, string: string): string =>
     ? `${string.substring(0, maxLength)}…`
     : string
 
+type Result<T> = { ok: true; value: T } | { ok: false; error: unknown };
+
+function safe<T>(fn: () => T): Result<T> {
+  try {
+    return { ok: true, value: fn() };
+  } catch (error) {
+    return { ok: false, error };
+  }
+}
+
 // hyprctl wrappers
 
 const workspaceWindows = (): Array<HyWindow> => {
@@ -183,7 +193,13 @@ const onSubmapChange = (submap: string): void => {
     return
   }
 
-  const submapBinds = hyprget(["binds"]).filter(b => b.submap === submap)
+  // hyprland sometimes returns invalid json here
+  const maybeSubmapBinds = safe(() => hyprget(["binds"]).filter(b => b.submap === submap))
+  if (!maybeSubmapBinds.ok) {
+    console.log(maybeSubmapBinds.error)
+    return
+  }
+  const submapBinds = maybeSubmapBinds.value
   const { no: binds, yes: catchalls } = partition(b => b.catch_all)(submapBinds)
 
   const printBind = b => {
