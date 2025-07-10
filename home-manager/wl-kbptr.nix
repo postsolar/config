@@ -31,13 +31,13 @@
 
     [mode_floating]
     source=detect
-    label_color=#${white}dd
-    label_select_color=#${hotpink}dd
+    label_color=#${white}ff
+    label_select_color=#${hotpink}ff
     unselectable_bg_color=#${pinkish-black}20
-    selectable_bg_color=#${hotpink}44
-    selectable_border_color=#${hotpink}cc
-    label_font_family=sans-serif
-    label_symbols=abcdefghijklmnopqrstuvwxyz
+    selectable_bg_color=#${hotpink}88
+    selectable_border_color=#${hotpink}ff
+    label_font_family=monospace
+    label_symbols=qwydsazxc
 
     [mode_bisect]
     label_color=#${white}dd

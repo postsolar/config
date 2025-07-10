@@ -59,6 +59,10 @@
                   # home manager
                   inputs.home-manager.nixosModules.home-manager
                   hmConfig
+
+                  # nix-snapd
+                  inputs.nix-snapd.nixosModules.default
+                  { services.snap.enable = true; }
                 ]
               ;
           };
@@ -144,6 +148,11 @@
 
     wayland-pipewire-idle-inhibit = {
       url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-snapd = {
+      url = "github:nix-community/nix-snapd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
