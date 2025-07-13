@@ -40,6 +40,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
 
   # ~ systemd-boot EFI boot loader

@@ -137,6 +137,7 @@
       pkgs.libinput-gestures
       pkgs.libnotify
       pkgs.libxkbcommon
+      pkgs.mixxx
       pkgs.moar
       pkgs.mutagen
       pkgs.nemo-fileroller
