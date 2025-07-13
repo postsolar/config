@@ -25,7 +25,6 @@
     ./kitty.nix
     ./lf/lf.nix
     ./mime.nix
-    ./niri/niri.nix
     ./ocr.nix
     ./satty.nix
     ./sherlock.nix

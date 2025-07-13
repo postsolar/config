@@ -28,7 +28,6 @@
         overlays = [
           (import ./overlays/lib.nix)
           (import ./overlays/packages.nix inputs)
-          inputs.niri-flake.overlays.niri
         ];
 
         nixosModules = {
@@ -120,14 +119,6 @@
     apple-color-emoji-src = {
       url = "file+https://github.com/samuelngs/apple-emoji-linux/releases/latest/download/AppleColorEmoji.ttf";
       flake = false;
-    };
-
-    niri = {
-      url = "github:YaLTeR/niri";
-    };
-
-    niri-flake = {
-      url = "github:sodiboo/niri-flake";
     };
 
     walker = {

@@ -89,14 +89,6 @@ let
     };
   };
 
-  keyboardLayoutsNiri = {
-    type = "script";
-    cmd = "${lib.getExe pkgs.bun} ${./niri-layout-stream.ts}";
-    mode = "watch";
-    on_click_left = "niri msg action switch-layout next";
-    class = "keyboard niri-keyboard";
-  };
-
   workspaces = {
     type = "workspaces";
     hidden = [ "special:magic" "special:special" ];
@@ -114,35 +106,11 @@ let
     };
   };
 
-  niribarConf = {
-    name = "niribar";
-    position = "top";
-    height = 30;
-    start = [ workspaces ];
-    center = [ music ];
-    end = [ tray keyboardLayoutsNiri volume clock ];
-  };
-
   stylesheet = 
     pkgs.runCommandLocal "ironbar-styles" {}
       ''
       ${lib.getExe' pkgs.nodePackages.sass "sass"} ${./style.scss} $out
       '';
-
-  mkIronbarSystemdService = name: conf: targets:
-    {
-      Unit = {
-        Description = "Ironbar (${name})";
-        Requires = [ "graphical-session.target" ];
-      };
-      Service = {
-        Type = "simple";
-        ExecStart = "${lib.getExe config.programs.ironbar.package}";
-        Environment = [ "IRONBAR_CONFIG=${ (pkgs.formats.json {}).generate "ironbar-${name}.json" conf }" ];
-        Restart = "on-failure";
-      };
-      Install.WantedBy = targets;
-    };
 
 in
 
@@ -154,14 +122,10 @@ in
 
   programs.ironbar = {
     enable = true;
-    systemd = false;
     package = inputs.ironbar.packages.${system}.ironbar;
     style = stylesheet;
-  };
-
-  systemd.user.services = {
-    ironbar-hyprland = mkIronbarSystemdService "hypr" hyprbarConf [ "hyprland-session.target" ];
-    ironbar-niri = mkIronbarSystemdService "niri" niribarConf [ "niri.service" ];
+    config = hyprbarConf;
+    systemd = true;
   };
 
 }
