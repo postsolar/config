@@ -59,10 +59,6 @@
                   # home manager
                   inputs.home-manager.nixosModules.home-manager
                   hmConfig
-
-                  # nix-snapd
-                  inputs.nix-snapd.nixosModules.default
-                  { services.snap.enable = true; }
                 ]
               ;
           };
@@ -95,14 +91,9 @@
     };
 
     hyprland = {
+      # one before 8f948827 Renderer: Implement new render scheduling (#10936) which breaks hyprscroller
+      # url = "github:hyprwm/hyprland/9856563f8966856871a95f70757362f694ff22a6";
       url = "github:hyprwm/hyprland";
-      # FIXME aquamarine is pinned to a broken version currently
-      # pin:
-      #   https://github.com/hyprwm/Hyprland/pull/10919
-      # PR breaking aquamarine:
-      #   https://github.com/hyprwm/aquamarine/pull/183#issuecomment-3035802607
-      # remove when Hyprland's aquamarine input is updated
-      inputs.aquamarine.url = "github:hyprwm/aquamarine/v0.9.0";
     };
 
     hyprpicker = {
@@ -116,6 +107,8 @@
     };
 
     hyprscroller = {
+      # pin to hyprland bugfix pin
+      # url = "github:cpiber/hyprscroller/a48716c9865af6b3dfb6fe3e642aba087fd669c1";
       url = "github:cpiber/hyprscroller";
       inputs.hyprland.follows = "hyprland";
     };
@@ -137,22 +130,12 @@
       url = "github:sodiboo/niri-flake";
     };
 
-    wl-kbptr = {
-      url = "github:moverest/wl-kbptr";
-      flake = false;
-    };
-
     walker = {
       url = "github:abenz1267/walker";
     };
 
     wayland-pipewire-idle-inhibit = {
       url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-snapd = {
-      url = "github:nix-community/nix-snapd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

@@ -20,6 +20,8 @@ bind = SUPER, Escape, submap, reset
 submap = reset
 
 # mouse window move/resize
+bind = SUPER, mouse:272, tagwindow, +dragged
+bindr = SUPER, mouse:272, tagwindow, -dragged
 bindm = SUPER, mouse:272, movewindow
 bindm = SUPER, mouse:273, resizewindow
 

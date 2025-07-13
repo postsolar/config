@@ -132,4 +132,4 @@ binde = SUPER ALT, equal, exec, $scripts/gaps.zsh outer 3
 
 # ~ wl-kbptr
 
-bind = SUPER, z, exec, sh $scripts/click.sh
+bind = SUPER, z, exec, sh $scripts/keep-cursor.sh wl-kbptr -o modes=floating,click -o mode_floating.source=detect

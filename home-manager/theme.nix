@@ -33,7 +33,6 @@ in
     iconTheme.name = "Vimix-black";
   };
 
-  # TODO adjust
   xdg.configFile."gtk-4.0/gtk.css".text =
     # From: https://github.com/phisch/dotfiles/blob/b83d92c3dd0bd67075de22d0faeb62deb9cfe6ee/.config/gtk-4.0/gtk.css
     # css

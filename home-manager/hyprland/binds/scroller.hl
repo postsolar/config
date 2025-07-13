@@ -3,6 +3,21 @@ $showSubmapHints = ironbar bar hyprbar show-popup bindmode-hints
 $hideSubmapHints = ironbar bar hyprbar hide-popup
 $resetSubmap = hyprctl dispatch submap reset && $hideSubmapHints
 
+# ~ wl-kbptr
+# TODO: maybe just make it a submap
+
+$keepCursor  = sh $scripts/keep-cursor.sh
+$runFloating = -o modes=floating,click -o mode_floating.source=detect
+$clickRight  = -o mode_click.button=right
+$clickMiddle = -o mode_click.button=middle
+
+bind = SUPER,            Z, exec,             wl-kbptr $runFloating
+bind = SUPER SHIFT,      Z, exec, $keepCursor wl-kbptr $runFloating
+bind = SUPER ALT,        Z, exec,             wl-kbptr $runFloating $clickRight
+bind = SUPER ALT SHIFT,  Z, exec, $keepCursor wl-kbptr $runFloating $clickRight
+bind = SUPER CTRL,       Z, exec,             wl-kbptr $runFloating $clickMiddle
+bind = SUPER CTRL SHIFT, Z, exec, $keepCursor wl-kbptr $runFloating $clickMiddle
+
 # ~ programs
 
 bind = SUPER SHIFT, Return, exec, kitty -1 --class 'kitty -float'
@@ -15,8 +30,6 @@ bind = SUPER, O, exec, copyq toggle
 
 bind = SUPER, N, exec, swaync-client --toggle-panel
 bind = SUPER SHIFT, N, exec, swaync-client --hide-latest
-
-bind = SUPER, Z, exec, sh $scripts/click.sh
 
 bind = SUPER, B, exec, ironbar bar hyprbar toggle-visible
 
@@ -79,6 +92,12 @@ binde = SUPER CTRL, Right, movewindowpixel, 20 0, active
 binde = SUPER CTRL, Up,    movewindowpixel, 0 -20, active
 binde = SUPER CTRL, Down,  movewindowpixel, 0 20, active
 
+# ~ gaps
+binde = SUPER ALT, Minus, exec, bun $scripts/gaps.ts inner -3
+binde = SUPER ALT, Equal, exec, bun $scripts/gaps.ts inner 3
+binde = SUPER    , Minus, exec, bun $scripts/gaps.ts outer -3
+binde = SUPER    , Equal, exec, bun $scripts/gaps.ts outer 3
+
 # ~ resize
 
 bind = SUPER, Comma, scroller:cyclewidth, -1
@@ -90,12 +109,6 @@ binde = SUPER CTRL ALT, Left,  resizewindowpixel, -20 0, active
 binde = SUPER CTRL ALT, Right, resizewindowpixel, 20 0, active
 binde = SUPER CTRL ALT, Up,    resizewindowpixel, 0 -20, active
 binde = SUPER CTRL ALT, Down,  resizewindowpixel, 0 20, active
-
-# I guess this counts as resizing too
-binde = SUPER ALT, Minus, exec, bun $scripts/gaps.ts inner -3
-binde = SUPER ALT, Equal, exec, bun $scripts/gaps.ts inner 3
-binde = SUPER    , Minus, exec, bun $scripts/gaps.ts outer -3
-binde = SUPER    , Equal, exec, bun $scripts/gaps.ts outer 3
 
 # ~ align + fit
 

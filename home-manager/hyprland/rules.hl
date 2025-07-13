@@ -56,6 +56,10 @@ windowrulev2 = fullscreenstate 2 2, class: org.telegram.desktop, title: Media vi
 windowrulev2 = center, initialClass: kooha
 windowrulev2 = move 100%-w-10, initialClass: io.github.seadve.Kooha
 
+# For windows when they're being dragged
+windowrule = opacity 0.5 override, tag: dragged
+windowrule = noborder, tag: dragged
+
 # ~ class-based rules controllers
 # (needed for launching forking processes, as exec dispatcher doesn't apply rules to them)
 

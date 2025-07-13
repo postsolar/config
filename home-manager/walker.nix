@@ -17,7 +17,7 @@ in
     Install.WantedBy = [ "graphical-session.target" ];
     Service.ExecStart = "${lib.getExe walker} --gapplication-service";
     # https://github.com/abenz1267/walker/issues/258
-    Service.Environment = [ "GTK_IM_MODULE=fcitx" "GSK_RENDERER=cairo" ];
+    Service.Environment = [ "GTK_IM_MODULE=fcitx" ];
     Service.Restart = "on-failure";
   };
 

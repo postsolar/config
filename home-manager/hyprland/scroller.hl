@@ -11,7 +11,7 @@ gestures {
 plugin {
   scroller {
     center_row_if_space_available = yes
-    center_active_window = yes
+    center_active_window = no
 
     # all available sizes: oneeighth onesixth onefourth onethird threeeighths onehalf fiveeighths twothirds threequarters fivesixths seveneighths one
     column_widths = oneeighth onesixth onefourth onethird threeeighths onehalf fiveeighths twothirds threequarters fivesixths seveneighths one

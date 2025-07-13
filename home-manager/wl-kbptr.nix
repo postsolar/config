@@ -6,6 +6,7 @@
   xdg.configFile."wl-kbptr/config".text =
     let
       white = "ffffff";
+      black = "000000";
       hotpink = "ff69b4";
       hotpink-but-darker = "cf0068";
       pinkish-black = "17000c";
@@ -13,6 +14,8 @@
       grey = "333333";
       dark-grey = "222222";
       dark-blue = "000033";
+      crimson = "dc143c";
+      lightgreen = "90ee90";
     in
     # ini
     ''
@@ -31,13 +34,16 @@
 
     [mode_floating]
     source=detect
-    label_color=#${white}ff
-    label_select_color=#${hotpink}ff
-    unselectable_bg_color=#${pinkish-black}20
-    selectable_bg_color=#${hotpink}88
-    selectable_border_color=#${hotpink}ff
     label_font_family=monospace
-    label_symbols=qwydsazxc
+    label_symbols=qwydsazxcrtvfnj
+
+    label_color=#${black}dd
+    label_select_color=#${crimson}ff
+
+    selectable_bg_color=#${lightgreen}bb
+    selectable_border_color=#${lightgreen}ff
+
+    unselectable_bg_color=#${white}22
 
     [mode_bisect]
     label_color=#${white}dd

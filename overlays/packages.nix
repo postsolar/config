@@ -8,14 +8,6 @@ inputs: f: p:
       {}
       ;
 
-  wl-kbptr =
-    p.wl-kbptr.overrideAttrs
-      (_: _: {
-        src = inputs.wl-kbptr;
-        version = inputs.wl-kbptr.shortRev;
-      })
-      ;
-
   satty =
     let version = "576861832b040b380a176979355f210b3caf6be6"; in
     p.satty.overrideAttrs
