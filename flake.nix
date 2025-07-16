@@ -90,8 +90,6 @@
     };
 
     hyprland = {
-      # one before 8f948827 Renderer: Implement new render scheduling (#10936) which breaks hyprscroller
-      # url = "github:hyprwm/hyprland/9856563f8966856871a95f70757362f694ff22a6";
       url = "github:hyprwm/hyprland";
     };
 
@@ -106,8 +104,6 @@
     };
 
     hyprscroller = {
-      # pin to hyprland bugfix pin
-      # url = "github:cpiber/hyprscroller/a48716c9865af6b3dfb6fe3e642aba087fd669c1";
       url = "github:cpiber/hyprscroller";
       inputs.hyprland.follows = "hyprland";
     };

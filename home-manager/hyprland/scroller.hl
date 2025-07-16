@@ -8,6 +8,11 @@ gestures {
   workspace_swipe_invert = no
 }
 
+input {
+  # refocus is annoying
+  follow_mouse = 2
+}
+
 plugin {
   scroller {
     center_row_if_space_available = yes
@@ -19,8 +24,9 @@ plugin {
     column_default_width = twothirds
 
     # disabling lets us focus workspaces with focus window up/down dispatchers
-    # https://github.com/nasirHo/hyprscroller/commit/b6137db944a5fc7598c08ba23c041c41d7093336
-    focus_wrap = yes
+    # https://github.com/cpiber/hyprscroller/pull/12
+    focus_wrap = no
+    movefocus_changes_workspace = yes
 
     jump_labels_color = 0xaa$active
     jump_labels_scale = 0.8

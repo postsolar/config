@@ -29,7 +29,7 @@ bind = SUPER, Apostrophe, exec, smile
 bind = SUPER, O, exec, copyq toggle
 
 bind = SUPER, N, exec, swaync-client --toggle-panel
-bind = SUPER SHIFT, N, exec, swaync-client --hide-latest
+bind = SUPER SHIFT, N, exec, swaync-client --hide-all
 
 bind = SUPER, B, exec, ironbar bar hyprbar toggle-visible
 

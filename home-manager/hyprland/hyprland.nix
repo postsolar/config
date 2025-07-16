@@ -5,15 +5,7 @@ let
   hlPackage = inputs.hyprland.packages.${system}.hyprland;
   hlPortalPackage = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
 
-  hyprscroller = inputs.hyprscroller.packages.${system}.hyprscroller.overrideAttrs {
-    patches = [
-      # + scroller:setmode toggle
-      (pkgs.fetchurl {
-        url = "https://github.com/dawsers/hyprscroller/commit/d2a77fb00bbcda0f066c8585043706628509b47a.diff";
-        hash = "sha256-Zd1NUQL4g3RVULe/V8lGDU9ejZVbyDoDFzZlh6CoeH4=";
-      })
-    ];
-  };
+  hyprscroller = inputs.hyprscroller.packages.${system}.hyprscroller;
 
 in
 

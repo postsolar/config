@@ -26,6 +26,7 @@
     nixPath = [ "nixpkgs=${ inputs.nixpkgs }" ];
 
     settings = {
+      warn-dirty = false;
       experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
       builders-use-substitutes = true;
       auto-optimise-store = true;

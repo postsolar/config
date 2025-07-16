@@ -24,10 +24,6 @@ in
     ./keybindings.nix
   ];
 
-  home.packages = [
-    pkgs.carapace
-  ];
-
   programs.fish = {
     enable = true;
 
