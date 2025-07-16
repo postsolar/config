@@ -3,7 +3,7 @@
 # WARN: remember to sync baseline models with aichat --sync-models
 
 # ---- llm ----
-model: gemini:gemini-2.5-flash-preview-05-20 # Specify the default LLM to use
+model: gemini:gemini-2.5-flash   # Specify the default LLM to use
 temperature: null                # Set default temperature parameter (0, 1)
 top_p: null                      # Set default top-p parameter, with a range of (0, 1) or (0, 2) depending on the model
 

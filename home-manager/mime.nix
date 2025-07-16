@@ -1,9 +1,9 @@
 { pkgs, ... }:
 
 let
-  browsers = "firefox.desktop";
+  browsers = "brave-browser.desktop";
   terminals = "kitty.desktop";
-  file-managers = [ "lf.desktop" "nemo.desktop" ];
+  file-managers = [ "yazi.desktop" "nemo.desktop" ];
   image-viewers = "org.gnome.eog.desktop";
   text-editors = "Helix.desktop";
 
@@ -49,7 +49,7 @@ in
     "handlr/handlr.toml".text =
       ''
       enable_selector = true
-      selector = "sherlock"
+      selector = "walker -d -k -p 'Open with:'"
       term_exec_args = '-e'
       expand_wildcards = true
       '';

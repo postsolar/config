@@ -1,0 +1,146 @@
+/*
+assuming needed colors are defined in ~/.config/gtk-4.0/gtk.css
+which gtk auto-imports
+*/
+
+#window,
+#box,
+#aiScroll,
+#aiList,
+#search,
+#password,
+#input,
+#prompt,
+#clear,
+#typeahead,
+#list,
+child,
+scrollbar,
+slider,
+#item,
+#text,
+#label,
+#bar,
+#sub,
+#activationlabel {
+  all: unset;
+}
+
+#cfgerr {
+  background: rgba(255, 0, 0, 0.4);
+  margin-top: 20px;
+  padding: 8px;
+  font-size: 1.2em;
+}
+
+#window {
+  color: @window_fg_color;
+}
+
+#box {
+  background: @window_bg_color;
+  padding: 16px 12px 8px 12px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 3px 1px black;
+}
+
+#search {
+  background: lighter(@window_bg_color);
+  padding: 8px;
+}
+
+#prompt {
+  margin-left: 4px;
+  margin-right: 12px;
+  color: @window_fg_color;
+  opacity: 0.4;
+}
+
+#clear {
+  color: @window_fg_color;
+  opacity: 0.8;
+}
+
+#password,
+#input,
+#typeahead {
+  border-radius: 10px;
+}
+
+#input {
+  background: none;
+}
+
+#password {}
+
+#spinner {
+  padding: 8px;
+}
+
+#typeahead {
+  color: @window_fg_color;
+  opacity: 0.8;
+}
+
+#input placeholder {
+  opacity: 0.5;
+}
+
+#list {}
+
+child {
+  padding: 8px;
+  border-radius: 10px;
+}
+
+child:selected,
+child:hover {
+  background: @popover_bg_color ;
+}
+
+#item {}
+
+#icon {
+  margin-right: 8px;
+}
+
+#text {}
+
+#label {
+  font-weight: 500;
+}
+
+#sub {
+  opacity: 0.5;
+  font-size: 0.8em;
+}
+
+#activationlabel {}
+
+#bar {}
+
+.barentry {}
+
+.activation #activationlabel {}
+
+.activation #text,
+.activation #icon,
+.activation #search {
+  opacity: 0.5;
+}
+
+.aiItem {
+  padding: 10px;
+  border-radius: 2px;
+  color: @window_fg_color;
+  background: @window_bg_color;
+}
+
+.aiItem.user {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.aiItem.assistant {
+  background: lighter(@window_bg_color);
+}

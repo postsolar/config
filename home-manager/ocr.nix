@@ -14,12 +14,14 @@ let
     if set -q argv[1]
       set text "$(tesseract -l $langs $argv[1] -)"
     else
+      # let selector window close
+      sleep 0.5
       set text "$(
         grim -t ppm - \
           | satty -f - -o - \
               --initial-tool crop \
               --default-hide-toolbars \
-              --action-on-enter save-to-file-and-exit \
+              --actions-on-enter save-to-file,exit \
           | tesseract -l $langs - -
       )"
     end

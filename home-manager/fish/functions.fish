@@ -9,6 +9,8 @@ function ee -w eza; e -l $argv; end
 function et -w eza; e -T $argv; end
 
 function bb -w btm; command btm $argv; end
+function y -w yazi; command yazi $argv; end
+function ai -w aichat; command aichat $argv; end
 
 function hx -w hx
   if count $argv &>/dev/null
@@ -26,11 +28,6 @@ end
 # function fzfcd -w fzf
 #   builtin cd -- (fd -HL -td . | fzf --scheme=path --tiebreak=length --height=50% +m)
 # end
-
-# change directory using lf
-function lfcd -w lf
-  builtin cd -- "$(lf -print-last-dir)"
-end
 
 # open a manpage formatted into markdown in $PAGER via `glow`
 #

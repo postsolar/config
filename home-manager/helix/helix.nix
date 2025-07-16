@@ -21,7 +21,7 @@ in
       color-modes = true
       cursorline = true
       gutters = ["diagnostics", "diff"]
-      jump-label-alphabet = "qwfarsxcd"
+      jump-label-alphabet = "qwydsazxcrfmtnhvjg"
       preview-completion-insert = false
       scrolloff = 3
 

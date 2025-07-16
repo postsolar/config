@@ -20,7 +20,7 @@
       PartOf = [ "graphical-session.target" ];
     };
     Install.WantedBy = [ "graphical-session.target" ];
-    Service.ExecStart = "${lib.getExe pkgs.wl-clip-persist} --clipboard both";
+    Service.ExecStart = "${lib.getExe pkgs.wl-clip-persist} --clipboard regular";
   };
 }
 

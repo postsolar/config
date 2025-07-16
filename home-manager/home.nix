@@ -14,6 +14,7 @@
 
   imports = [
     ./broot.nix
+    ./browsers.nix
     ./clipboard.nix
     ./fcitx5.nix
     ./fish/fish.nix
@@ -23,7 +24,6 @@
     ./hyprland/hyprland.nix
     ./ironbar/ironbar.nix
     ./kitty.nix
-    ./lf/lf.nix
     ./mime.nix
     ./ocr.nix
     ./satty.nix
@@ -32,7 +32,7 @@
     ./starship.nix
     ./swaync/swaync.nix
     ./theme.nix
-    ./walker.nix
+    ./walker/walker.nix
     ./wl-kbptr.nix
     ./xdg.nix
     ./yazi.nix
@@ -84,68 +84,38 @@
       # needed because the latter will be ignored on `nixos-rebuild`
       (lib.lowPrio pkgs.home-manager)
 
-      (pkgs.google-chrome.override {
-        commandLineArgs = [
-          "--new-window"
-          "--disable-features=OutdatedBuildDetector,UseChromeOSDirectVideoDecoder"
-          "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder,WaylandWindowDecorations,TouchpadOverscrollHistoryNavigation"
-          "--enable-wayland-ime=true"
-          "--ozone-platform-hint=auto"
-        ];
-      })
-      (pkgs.hyprshot.override { hyprland = config.wayland.windowManager.hyprland.package; })
       pkgs.aichat
-      pkgs.bemoji
-      pkgs.better-control
-      (pkgs.brave.override {
-        commandLineArgs = [
-          "--enable-features=TouchpadOverscrollHistoryNavigation"
-          "--enable-wayland-ime=true"
-        ];
-      })
       pkgs.chafa
       pkgs.choose
       pkgs.dash
-      pkgs.dconf
-      pkgs.devenv
+      pkgs.difftastic
       pkgs.distrobox
       pkgs.du-dust
       pkgs.eog
       pkgs.expect
       pkgs.ffmpeg-full
       pkgs.file
-      pkgs.firefox
       pkgs.fx
       pkgs.gemini-cli
       pkgs.gh
-      pkgs.gimp3
       pkgs.glib
       pkgs.glow
-      pkgs.gowall
       pkgs.gum
       pkgs.huniq
       pkgs.hyperfine
       pkgs.hyprls
       pkgs.hyprpicker
       pkgs.jq
-      pkgs.jtbl
       pkgs.just
       pkgs.killall
-      pkgs.kooha
-      pkgs.lazygit
-      pkgs.libinput
-      pkgs.libinput-gestures
       pkgs.libnotify
-      pkgs.libxkbcommon
       pkgs.mixxx
       pkgs.moar
-      pkgs.mutagen
       pkgs.nemo-fileroller
       pkgs.nemo-preview
       pkgs.nemo-with-extensions
       pkgs.nixd
       pkgs.nodePackages.sass
-      pkgs.nwg-wrapper
       pkgs.obsidian
       pkgs.ouch
       pkgs.overskride
@@ -164,17 +134,16 @@
       pkgs.typescript-language-server
       pkgs.uni
       pkgs.urlencode
-      pkgs.vivaldi
-      pkgs.vscode-fhs
       pkgs.vscode-langservers-extracted
       pkgs.watchexec
-      pkgs.waypaper
       pkgs.wf-recorder
       pkgs.wlinhibit
+      pkgs.wlrctl
       pkgs.wl-kbptr
       pkgs.yj
       pkgs.yt-dlp
       pkgs.ytmdl
+      pkgs.yq
     ];
   };
 
@@ -183,7 +152,6 @@
     playerctld.enable = true;
     swww.enable = true;
     network-manager-applet.enable = true;
-    pueue.enable = true;
     caffeine.enable = true;
 
     wayland-pipewire-idle-inhibit = {

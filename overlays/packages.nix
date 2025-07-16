@@ -3,10 +3,11 @@ inputs: f: p:
 {
 
   apple-color-emoji =
-    f.callPackage
-      (import ../packages/apple-color-emoji.nix inputs.apple-color-emoji-src)
-      {}
-      ;
+    f.runCommandNoCC "apple-color-emoji" {}
+      ''
+      mkdir -p $out/share/fonts/truetype
+      cp ${inputs.apple-color-emoji} $out/share/fonts/truetype/AppleColorEmoji.ttf
+      '';
 
   satty =
     let version = "576861832b040b380a176979355f210b3caf6be6"; in
@@ -27,8 +28,12 @@ inputs: f: p:
       })
       ;
 
-  # keep it on master for now as 1) it's cheap 2) it updates often and has quite a way to go
-  gemini-cli = inputs.nixpkgs-master.legacyPackages.${f.system}.gemini-cli;
+  # keep it on master for now as 1) it's easy to build 2) it updates often and has quite a way to go
+  # gemini-cli = inputs.nixpkgs-master.legacyPackages.${f.system}.gemini-cli;
+  # nah actually master is too slow, wasn't updated in weeks, use NUR instead
+  gemini-cli = inputs.nur.legacyPackages.${f.system}.repos.lonerOrz.gemini-cli.overrideAttrs (o: {
+    patches = (o.patches or []) ++ [ ./gemini-support-editor.patch ];
+  });
 
 }
 

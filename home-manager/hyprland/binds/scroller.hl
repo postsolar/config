@@ -3,20 +3,35 @@ $showSubmapHints = ironbar bar hyprbar show-popup bindmode-hints
 $hideSubmapHints = ironbar bar hyprbar hide-popup
 $resetSubmap = hyprctl dispatch submap reset && $hideSubmapHints
 
-# ~ wl-kbptr
-# TODO: maybe just make it a submap
+# ~ cursor control
 
-$keepCursor  = sh $scripts/keep-cursor.sh
-$runFloating = -o modes=floating,click -o mode_floating.source=detect
-$clickRight  = -o mode_click.button=right
-$clickMiddle = -o mode_click.button=middle
+bind = SUPER, Z, exec, wl-kbptr -o modes=floating,click -o mode_floating.source=detect
+bind = SUPER SHIFT, Z, exec, sh $scripts/keep-cursor.sh wl-kbptr -o modes=floating,click -o mode_floating.source=detect
 
-bind = SUPER,            Z, exec,             wl-kbptr $runFloating
-bind = SUPER SHIFT,      Z, exec, $keepCursor wl-kbptr $runFloating
-bind = SUPER ALT,        Z, exec,             wl-kbptr $runFloating $clickRight
-bind = SUPER ALT SHIFT,  Z, exec, $keepCursor wl-kbptr $runFloating $clickRight
-bind = SUPER CTRL,       Z, exec,             wl-kbptr $runFloating $clickMiddle
-bind = SUPER CTRL SHIFT, Z, exec, $keepCursor wl-kbptr $runFloating $clickMiddle
+bind = SUPER CTRL, Z, exec, hyprctl --batch 'keyword cursor:inactive_timeout 0; keyword cursor:hide_on_key_press false; dispatch submap cursor'
+submap = cursor
+  # wl-kbptr
+  bindd = , 1, wl-kbptr: floating, exec, wl-kbptr -o modes=floating -o mode_floating.source=detect
+  bindd = , 2, wl-kbptr: bisect, exec, wl-kbptr -o modes=bisect
+  bindd = , 3, wl-kbptr: split, exec, wl-kbptr -o modes=split
+  bindd = , 4, wl-kbptr: tile, exec, wl-kbptr -o modes=tile
+  # move
+  bindd = , left,  Move cursor left,  exec, wlrctl pointer move -10 0
+  bindd = , right, Move cursor right, exec, wlrctl pointer move 10 0
+  bindd = , up,    Move cursor up,    exec, wlrctl pointer move 0 -10
+  bindd = , down,  Move cursor down,  exec, wlrctl pointer move 0 10
+  # click
+  bindd = ,      Return, Click left, exec,   wlrctl pointer click left
+  bindd = SHIFT, Return, Click right, exec,  wlrctl pointer click right
+  bindd = ALT,   Return, Click middle, exec, wlrctl pointer click middle
+  # scroll
+  bindd = ALT, left,  Scroll left,  exec, wlrctl pointer scroll -10 0
+  bindd = ALT, right, Scroll right, exec, wlrctl pointer scroll 10 0
+  bindd = ALT, up,    Scroll up,    exec, wlrctl pointer scroll 0 -10
+  bindd = ALT, down,  Scroll down,  exec, wlrctl pointer scroll 0 10
+  # exit
+  bindd = , Escape, Reset submap, exec, hyprctl --batch 'keyword cursor:inactive_timeout 3; keyword cursor:hide_on_key_press true; dispatch submap reset'
+submap = reset
 
 # ~ programs
 
@@ -28,8 +43,8 @@ bind = SUPER ALT, S, exec, sherlock
 bind = SUPER, Apostrophe, exec, smile
 bind = SUPER, O, exec, copyq toggle
 
-bind = SUPER, N, exec, swaync-client --toggle-panel
-bind = SUPER SHIFT, N, exec, swaync-client --hide-latest
+bind = SUPER SHIFT, N, exec, swaync-client --toggle-panel
+bind = SUPER, N, exec, swaync-client --hide-all
 
 bind = SUPER, B, exec, ironbar bar hyprbar toggle-visible
 
@@ -55,9 +70,10 @@ submap = reset
 
 bind = SUPER, BackSpace, workspace, previous
 
+bind = SUPER, I, togglespecialworkspace, special
+
 # ~ mode change
 
-# https://github.com/dawsers/hyprscroller/commit/d2a77fb00bbcda0f066c8585043706628509b47a
 bind = SUPER, W, scroller:setmode, toggle
 
 # ~ focus change
@@ -116,33 +132,33 @@ binde = SUPER CTRL ALT, Down,  resizewindowpixel, 0 20, active
 
 bind = SUPER, Slash, exec, $submap scroller_align && $showSubmapHints
 submap = scroller_align
-  bind = , Left,  scroller:alignwindow, left
-  bind = , Right, scroller:alignwindow, right
-  bind = , Up,    scroller:alignwindow, up
-  bind = , Down,  scroller:alignwindow, down
-  bind = , M,     scroller:alignwindow, middle
-  bind = , C,     scroller:alignwindow, center
-  bind = , catchall, exec, $resetSubmap
+  bindd = , Left,  Align window left,   scroller:alignwindow, left
+  bindd = , Right, Align window right,  scroller:alignwindow, right
+  bindd = , Up,    Align window up,     scroller:alignwindow, up
+  bindd = , Down,  Align window down,   scroller:alignwindow, down
+  bindd = , M,     Align window middle, scroller:alignwindow, middle
+  bindd = , C,     Align window center, scroller:alignwindow, center
+  bindd = , catchall, Submap reset, exec, $resetSubmap
 submap = reset
 
 bind = SUPER SHIFT, Slash, exec, $submap scroller_fit && $showSubmapHints
 submap = scroller_fit
-  bind = ,      A, scroller:fitsize,   active
-  bind = ,      V, scroller:fitsize,   visible
-  bind = ,      L, scroller:fitsize,   all
-  bind = ,      E, scroller:fitsize,   toend
-  bind = ,      B, scroller:fitsize,   tobeginning
-  bind = SHIFT, A, scroller:fitwidth,  active
-  bind = SHIFT, V, scroller:fitwidth,  visible
-  bind = SHIFT, L, scroller:fitwidth,  all
-  bind = SHIFT, E, scroller:fitwidth,  toend
-  bind = SHIFT, B, scroller:fitwidth,  tobeginning
-  bind = ALT,   A, scroller:fitheight, active
-  bind = ALT,   V, scroller:fitheight, visible
-  bind = ALT,   L, scroller:fitheight, all
-  bind = ALT,   E, scroller:fitheight, toend
-  bind = ALT,   B, scroller:fitheight, tobeginning
-  bindir = , catchall, exec, $resetSubmap
+  bindd = ,      A, Fit height/width (active window),            scroller:fitsize,   active
+  bindd = ,      V, Fit height/width (visible windows),          scroller:fitsize,   visible
+  bindd = ,      L, Fit height/width (all windows),              scroller:fitsize,   all
+  bindd = ,      E, Fit height/width (all windows to beginning), scroller:fitsize,   toend
+  bindd = ,      B, Fit height/width (all windows to end),       scroller:fitsize,   tobeginning
+  bindd = SHIFT, A, Fit width (active window),                   scroller:fitwidth,  active
+  bindd = SHIFT, V, Fit width (visible windows),                 scroller:fitwidth,  visible
+  bindd = SHIFT, L, Fit width (all windows),                     scroller:fitwidth,  all
+  bindd = SHIFT, E, Fit width (all windows to beginning),        scroller:fitwidth,  toend
+  bindd = SHIFT, B, Fit width (all windows to end),              scroller:fitwidth,  tobeginning
+  bindd = ALT,   A, Fit height (active window),                  scroller:fitheight, active
+  bindd = ALT,   V, Fit height (visible windows),                scroller:fitheight, visible
+  bindd = ALT,   L, Fit height (all windows),                    scroller:fitheight, all
+  bindd = ALT,   E, Fit height (all windows to beginning),       scroller:fitheight, toend
+  bindd = ALT,   B, Fit height (all windows to end),             scroller:fitheight, tobeginning
+  binddir = , catchall, Submap reset, exec, $resetSubmap
 submap = reset
 
 # reset width/height
@@ -168,11 +184,11 @@ bind = SUPER, F, scroller:selectiontoggle
 
 bind = SUPER SHIFT, F, exec, $submap scroller_select && $showSubmapHints
 submap = scroller_select
-  bind = , W, scroller:selectionworkspace
-  bind = , R, scroller:selectionreset
-  bind = , Left, scroller:selectionmove, left
-  bind = , Right, scroller:selectionmove, right
-  bindr = , catchall, exec, $resetSubmap
+  bindd = , W, Select all windows on the workspace, scroller:selectionworkspace
+  bindd = , R, Reset selection, scroller:selectionreset
+  bindd = , Left, Move selected windows to the left, scroller:selectionmove, left
+  bindd = , Right, Move selected windows to the right, scroller:selectionmove, right
+  binddr = , catchall, Submap reset, exec, $resetSubmap
 submap = reset
 
 # ~ jump/overview
@@ -194,21 +210,19 @@ bind = SUPER      , F11  , fullscreenstate, -1 2
 
 # ~ settings/mode change
 
+# TODO: maybe rip submap hints out of hyprland helpers into separate one-off scripts, non-IPC
+# some infrastructure for this is ready, stateful scroller mode events get logged to $XDG_STATE_HOME/hyprscroller-mode
 bind = SUPER, BackSlash, exec, $submap scroller_settings && $showSubmapHints
 submap = scroller_settings
-  # toggle centering active column / window
-  # sadly i can't think of a nice way to also display current value
-  bindd = , C, Toggle centering active column, exec, hyprctl keyword plugin:scroller:center_active_column $(hyprctl -j getoption plugin:scroller:center_active_column | jq '.int == 0')
-  bindd = SHIFT, C, Toggle centering active window (vertically), exec, hyprctl keyword plugin:scroller:center_active_window $(hyprctl -j getoption plugin:scroller:center_active_window | jq '.int == 0')
+  bindd = ,      C, Toggle centering active column,              exec, hyprctl dispatch scroller:setmodemodifier $(cat $XDG_STATE_HOME/hyprscroller-mode | grep -Eq nocenter_column && echo center_column || echo nocenter_column)
+  bindd = SHIFT, C, Toggle centering active window (vertically), exec, hyprctl dispatch scroller:setmodemodifier $(cat $XDG_STATE_HOME/hyprscroller-mode | grep -Eq nocenter_window && echo center_window || echo nocenter_window)
 
-  # mode change
-  # TODO: add descriptions after https://github.com/JakeStanger/ironbar/pull/1067
-  bind = , right, scroller:setmodemodifier, after
-  bind = , left, scroller:setmodemodifier, before
-  bind = , home, scroller:setmodemodifier, beginning
-  bind = , end, scroller:setmodemodifier, end
-  bind = , up, scroller:setmodemodifier, , focus
-  bind = , down, scroller:setmodemodifier, , nofocus
+  bindd = , right, New windows open after,            scroller:setmodemodifier, after
+  bindd = , left,  New windows open before,           scroller:setmodemodifier, before
+  bindd = , home,  New windows open at the beginning, scroller:setmodemodifier, beginning
+  bindd = , end,   New windows open at the end,       scroller:setmodemodifier, end
+  bindd = , up,    Focus new windows,                 scroller:setmodemodifier, focus
+  bindd = , down,  Don't focus new windows,           scroller:setmodemodifier, nofocus
 
   bindird = , catchall, Reset submap, exec, $resetSubmap
 submap = reset
