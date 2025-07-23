@@ -3,6 +3,8 @@
   outputs = inputs:
     let
 
+      flakeDir = "/data/nix";
+
       inherit (inputs.self) outputs;
 
       system = "x86_64-linux";
@@ -10,7 +12,14 @@
       hmConfig = {
         home-manager.useGlobalPkgs = false;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit inputs outputs system; };
+        home-manager.extraSpecialArgs = {
+          inherit
+            inputs
+            outputs
+            system
+            flakeDir
+            ;
+        };
         home-manager.sharedModules = [
         ];
         home-manager.users.alice.imports =
@@ -40,7 +49,7 @@
         nixosConfigurations.nixos =
           inputs.nixpkgs.lib.nixosSystem {
             inherit system;
-            specialArgs = { inherit system inputs outputs; };
+            specialArgs = { inherit system inputs outputs flakeDir; };
             modules =
               # my own nixos modules
               (builtins.attrValues outputs.nixosModules)

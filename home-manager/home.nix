@@ -1,4 +1,8 @@
-{ inputs, outputs, config, pkgs, lib, system, ... }:
+{ inputs, outputs, config, pkgs, lib, flakeDir, system, ... }:
+
+let
+  link = f: config.lib.file.mkOutOfStoreSymlink "${flakeDir}/home-manager/${f}";
+in
 
 {
 
@@ -60,7 +64,7 @@
 
       BROWSER = "firefox";
 
-      XCOMPOSEFILE = ./XCompose;
+      XCOMPOSEFILE = link "./XCompose";
 
       KOOHA_EXPERIMENTAL = "all";
 
@@ -269,7 +273,7 @@
   };
 
   xdg.configFile = {
-    "aichat/config.yaml".source = ./aichat-config.yaml;
+    "aichat/config.yaml".source = link "./aichat-config.yaml";
   };
 
   systemd.user.settings = {

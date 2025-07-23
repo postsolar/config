@@ -1,0 +1,155 @@
+# kept in the config are, for the most part, non-default things and some examples
+# ref: https://github.com/abenz1267/walker/blob/master/internal/config/config.default.toml
+#
+# general module fields:
+# ┌───────────────────────┬─────────────┬────────────────────┬────────────────────────────────────────────────────────────────────────────────────────┐
+# │ Field                 │ Type        │ Default Value      │ Description                                                                            │
+# ├───────────────────────┼─────────────┼────────────────────┼────────────────────────────────────────────────────────────────────────────────────────┤
+# │ weight                │ int         │ 5                  │ Determines the sorting priority of the module's entries. Higher is better.             │
+# │ placeholder           │ string      │ (Varies by module) │ The placeholder text shown in the search bar when this module is active.               │
+# │ icon                  │ string      │ (Varies by module) │ The icon displayed for the module and its entries.                                     │
+# │ name                  │ string      │ (Varies by module) │ The internal name of the module.                                                       │
+# │ switcher_only         │ bool        │ false              │ If true, the module only appears when the switcher is active (e.g., via the / prefix). │
+# │ prefix                │ string      │ ""                 │ A prefix that, when typed, activates this module exclusively.                          │
+# │ hidden                │ bool        │ false              │ If true, the module is not shown in the switcher list.                                 │
+# │ history               │ bool        │ false              │ If true, the module will remember and prioritize selected entries.                     │
+# │ typeahead             │ bool        │ false              │ If true, the first result is automatically selected as you type.                       │
+# │ min_chars             │ int         │ 0                  │ The minimum number of characters required before the module provides results.          │
+# │ delay                 │ int         │ 0                  │ The delay in milliseconds before the module starts searching after you stop typing.    │
+# │ show_sub_when_single  │ bool        │ false              │ If true, the sub-text is shown even when there is only one result.                     │
+# │ show_icon_when_single │ bool        │ false              │ If true, the icon is shown even when there is only one result.                         │
+# │ refresh               │ bool        │ false              │ If true, the module's entries are refreshed on every query.                            │
+# │ eager_loading         │ bool        │ false              │ If true, the module's data is loaded at startup rather than on first use.              │
+# │ keep_selection        │ bool        │ false              │ If true, the selection is maintained even when the results change.                     │
+# │ keep_sort             │ bool        │ false              │ If true, the sorting order is maintained even when results change.                     │
+# │ auto_select           │ bool        │ false              │ If true, the first item is automatically selected.                                     │
+# │ on_select             │ string      │ ""                 │ A command to execute when an item from this module is selected.                        │
+# │ output_placeholder    │ string      │ ""                 │ Placeholder text for the output area, if applicable.                                   │
+# │ theme                 │ string      │ ""                 │ A specific theme to use for this module.                                               │
+# │ theme_base            │ []string    │ []                 │ A list of base themes to inherit from.                                                 │
+# │ blacklist             │ []Blacklist │ []                 │ A list of regular expressions to filter out entries.                                   │
+# │ history_blacklist     │ []Blacklist │ []                 │ A list of regular expressions to prevent entries from being added to history.          │
+# │ external_config       │ bool        │ false              │ If true, the module will look for its own configuration file (e.g., ai.toml).          │
+# └───────────────────────┴─────────────┴────────────────────┴────────────────────────────────────────────────────────────────────────────────────────┘
+# for the rest of them, run gemini in the repo
+
+theme = "black"
+app_launch_prefix = "systemd-run --user "
+hotreload_theme = true
+disable_click_to_close = true
+
+[keys]
+
+[keys.activation_modifiers]
+
+[keys.ai]
+
+[events]
+
+[list]
+placeholder = "No results"
+
+[search]
+# e.g. `fish#-ic bb` or `firefox#--private-window`
+argument_delimiter = "#"
+placeholder = "Search…"
+
+[activation_mode]
+labels = "qwydsazxc"
+
+[builtins.hyprland_keybinds]
+weight = 5
+
+[builtins.applications]
+weight = 5
+
+[builtins.applications.actions]
+
+# bookmarks are added manually, see example below
+[builtins.bookmarks]
+weight = 5
+
+[[builtins.bookmarks.entries]]
+label = "Walker"
+url = "https://github.com/abenz1267/walker"
+keywords = ["walker", "github"]
+
+[builtins.xdph_picker]
+# the default is `xdphpicker` for some reason, not matching conf name
+name = "xdph_picker"
+
+[builtins.ai]
+hidden = false
+weight = 5
+placeholder = "AI"
+name = "ai"
+icon = "help-browser"
+switcher_only = true
+show_sub_when_single = true
+
+[builtins.ai.gemini]
+# can have multiple prompts - indexed in the view by `label` field value
+[[builtins.ai.gemini.prompts]]
+model = "gemini-2.5-flash"
+temperature = 1.0
+max_tokens = 1000
+label = "General Assistant"
+prompt = "You are a helpful general assistant. Keep your answers short and precise."
+
+[builtins.calc]
+require_number = false
+min_chars = 0
+weight = 5
+
+[builtins.windows]
+weight = 6
+
+[builtins.clipboard]
+
+[builtins.commands]
+
+[builtins.custom_commands]
+
+[builtins.emojis]
+
+[builtins.symbols]
+
+# finder is mostly broken, not sure why
+[builtins.finder]
+use_fd = true
+fd_flags = "--ignore-vcs --type file --type directory"
+cmd_alt = "xdg-open $(dirname ~/%RESULT%)"
+weight = 5
+
+[builtins.runner]
+eager_loading = true
+weight = 5
+icon = "utilities-terminal"
+name = "runner"
+placeholder = "Runner"
+typeahead = true
+history = true
+generic_entry = false
+refresh = true
+use_fd = true
+
+[builtins.ssh]
+weight = 5
+
+[builtins.switcher]
+
+[builtins.websearch]
+keep_selection = true
+weight = 5
+
+[[builtins.websearch.entries]]
+name = "Google"
+url = "https://www.google.com/search?q=%TERM%"
+
+[builtins.dmenu]
+hidden = true
+weight = 5
+
+[builtins.translation]
+delay = 1000
+

@@ -119,14 +119,11 @@ function ns -w 'nix shell'
 end
 
 # write a commit message with aichat
-function aichat-commit
-  set prompt "
-    write a commit message body (just the body, without a title, because the title is already present), based on this diff.
-    only output the message contents, and do not wrap it into a codeblock.
-    "
+function ai-commit
+  set prompt "write a commit message based on this diff"
   begin
     date +%c\n | string replace '   ' ' '
-    git diff --staged --no-ext-diff | aichat $prompt
+    git diff --staged --no-ext-diff | aichat -c -S $prompt
   end | git commit -e -F -
 end
 
@@ -171,3 +168,13 @@ function scdl-tgup
 
   tdl up -c $chat $tdlArgs
 end
+
+function _aichat_fish
+  set -l _old (commandline)
+  if test -n $_old
+    echo -n "⌛"
+    commandline -f repaint
+    commandline -- (aichat -c -e $_old)
+  end
+end
+

@@ -1,6 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, flakeDir, ... }:
 
 let
+
+  link = f: config.lib.file.mkOutOfStoreSymlink "${flakeDir}/home-manager/fish/${f}";
 
   # shave 5ms off startup time by not calling the bin each time
   atuinInit = pkgs.runCommandLocal "fish atuin init" {}
@@ -38,7 +40,7 @@ in
       # only run atuin outside distrobox
       command -q atuin && source ${atuinInit}
 
-      source ${./functions.fish}
+      source ${link "./functions.fish"}
       '';
   };
 

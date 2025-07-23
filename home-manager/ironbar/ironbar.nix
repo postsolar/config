@@ -91,7 +91,8 @@ let
 
   workspaces = {
     type = "workspaces";
-    hidden = [ "special:magic" "special:special" ];
+    # TODO: open a PR adding globbing?
+    hidden = [ "special:magic" "special:special" "special:aichat" "special:btm" ];
   };
 
   hyprbarConf = {

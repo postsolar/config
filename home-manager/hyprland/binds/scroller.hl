@@ -1,3 +1,5 @@
+# TODO: rework (binds' keys specifically, make them better organized by functionality spatially)
+
 $submap = hyprctl dispatch submap
 $showSubmapHints = ironbar bar hyprbar show-popup bindmode-hints
 $hideSubmapHints = ironbar bar hyprbar hide-popup
@@ -70,7 +72,9 @@ submap = reset
 
 bind = SUPER, BackSpace, workspace, previous
 
-bind = SUPER, I, togglespecialworkspace, special
+bind = SUPER, 1, togglespecialworkspace, btm
+bind = SUPER, 2, togglespecialworkspace, aichat
+bind = SUPER, 3, togglespecialworkspace, special
 
 # ~ mode change
 

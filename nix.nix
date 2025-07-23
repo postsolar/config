@@ -1,4 +1,4 @@
-{ inputs, lib, pkgs, config, ... }:
+{ inputs, lib, pkgs, config, flakeDir, ... }:
 
 {
 
@@ -88,7 +88,7 @@
     clean.enable = true;
     clean.extraArgs = "-d";
     # WARN has to be changed on directory move
-    flake = "/data/nix";
+    flake = flakeDir;
   };
 
 }

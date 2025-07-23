@@ -52,10 +52,8 @@ in
 
       [keys.normal]
       A-S-o = "add_newline_above"
-      # A-S-t = [":sh handlr launch x-scheme-handler/terminal -- hx /tmp/lsp-ai-chat.md"]
       A-S-x = "select_line_above"
       A-o = "add_newline_below"
-      # A-t = [":vsplit /tmp/lsp-ai-chat.md", "goto_file_end", "insert_mode"]
       A-x = "select_line_below"
       A-y = "yank_joined"
       S-tab = "goto_previous_buffer"
