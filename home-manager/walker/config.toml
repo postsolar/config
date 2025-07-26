@@ -62,6 +62,17 @@ weight = 5
 
 [builtins.applications]
 weight = 5
+name = "applications"
+placeholder = "Applications"
+prioritize_new = true
+hide_actions_with_empty_query = true
+context_aware = true
+refresh = true
+show_sub_when_single = true
+show_icon_when_single = true
+show_generic = true
+history = true
+icon = "applications-other"
 
 [builtins.applications.actions]
 

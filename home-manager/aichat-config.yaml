@@ -72,6 +72,8 @@ document_loaders:
   # Note: Use `$1` for input file and `$2` for output file. If `$2` is omitted, use stdout as output.
   pdf: 'pdftotext $1 -'                         # Load .pdf file, see https://poppler.freedesktop.org to set up pdftotext
   docx: 'pandoc --to plain $1'                  # Load .docx file, see https://pandoc.org to set up pandoc
+  git: >
+    sh -c "yek $1 --json | jq '[.[] | { path: .filename, contents: .content }]'"
 
 # ---- appearance ----
 highlight: true                  # Controls syntax highlighting

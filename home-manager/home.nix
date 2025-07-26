@@ -144,6 +144,8 @@ in
       pkgs.wlinhibit
       pkgs.wlrctl
       pkgs.wl-kbptr
+      pkgs.xpdf
+      pkgs.yek
       pkgs.yj
       pkgs.yt-dlp
       pkgs.ytmdl
