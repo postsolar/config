@@ -1,4 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
+
+# TODO try gradia
 
 let
   screenshot = pkgs.writers.writeDashBin "screenshot"
@@ -24,7 +26,7 @@ in
     initial-tool = "crop"
     copy-command = "wl-copy -t image/png"
     annotation-size-factor = 1
-    output-filename = "~/Pictures/Screenshots/Screenshot %d.%m.%Y %H:%M:%S.png"
+    output-filename = "${config.home.homeDirectory}/Pictures/Screenshots/Screenshot %d.%m.%Y %H:%M:%S.png"
     save-after-copy = false
     default-hide-toolbars = false
     primary-highlighter = "freehand"

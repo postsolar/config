@@ -6,7 +6,7 @@ function trash -w "gio trash"; gio trash $argv; end
 function e  -w eza; eza --icons always --color always --reverse --hyperlink --no-quotes --git --all --group-directories-first $argv; end
 function e1 -w eza; e -1 $argv; end
 function ee -w eza; e -l $argv; end
-function et -w eza; e -T $argv; end
+function et -w eza; e -T --git-ignore $argv; end
 
 function bb -w btm; command btm $argv; end
 function y -w yazi; command yazi $argv; end

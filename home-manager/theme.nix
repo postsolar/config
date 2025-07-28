@@ -155,6 +155,8 @@ in
   };
 
   xdg.configFile = {
+    # TODO: codegen a QT phocus
+    # the word on the street is qt theming is easy so shouldn't be much work
     "Kvantum/kvantum.kvconfig".text =
       ''
       [General]

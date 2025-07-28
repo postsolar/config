@@ -117,8 +117,9 @@ clients:
   - type: openai-compatible
     name: groq
 
-  - type: openai-compatible
-    name: openrouter
+  # kinda useless these days
+  # - type: openai-compatible
+  #   name: openrouter
 
   # we can add some more free providers:
   #   x.ai
