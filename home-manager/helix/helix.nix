@@ -63,6 +63,8 @@ in
       ret = "goto_word"
       tab = "goto_next_buffer"
 
+      A-t = ":toggle soft-wrap.enable"
+
       [keys.normal.g]
       g = "goto_first_nonwhitespace"
       s = "goto_file_start"

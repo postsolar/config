@@ -40,7 +40,6 @@ submap = reset
 bind = SUPER SHIFT, Return, exec, kitty -1 --class 'kitty -float'
 
 bind = SUPER, S, exec, walker
-bind = SUPER ALT, S, exec, sherlock
 
 bind = SUPER, Apostrophe, exec, smile
 bind = SUPER, O, exec, copyq toggle
@@ -129,6 +128,8 @@ binde = SUPER CTRL ALT, Left,  resizewindowpixel, -20 0, active
 binde = SUPER CTRL ALT, Right, resizewindowpixel, 20 0, active
 binde = SUPER CTRL ALT, Up,    resizewindowpixel, 0 -20, active
 binde = SUPER CTRL ALT, Down,  resizewindowpixel, 0 20, active
+
+bind = SUPER, X, scroller:setwidth, one
 
 # ~ align + fit
 

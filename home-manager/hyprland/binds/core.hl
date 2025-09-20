@@ -27,7 +27,8 @@ bindm = SUPER, mouse:273, resizewindow
 
 # screenshot
 
-bind = , Print, exec, grim -t ppm - | satty -f -
+bind = , Print, exec, grimblast copy area
+bind = SUPER, Print, exec, GRIMBLAST_EDITOR=gradia grimblast edit area
 
 # hardware controls
 

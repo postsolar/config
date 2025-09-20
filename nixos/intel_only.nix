@@ -2,6 +2,11 @@
 
 { inputs, config, pkgs, lib, ...  }:
 
+let
+  # This pins the mesa version to what is specified by Hyprland
+  openglDriver = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.system}.mesa;
+in
+
 {
 
   boot.blacklistedKernelModules = [
@@ -20,6 +25,8 @@
   hardware.graphics = {
     enable = true;
 
+    package = openglDriver;
+
     extraPackages = [
       pkgs.egl-wayland
       pkgs.intel-compute-runtime-legacy1
@@ -31,4 +38,3 @@
   };
 
 }
-

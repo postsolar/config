@@ -30,8 +30,7 @@ in
     ./kitty.nix
     ./mime.nix
     ./ocr.nix
-    ./satty.nix
-    ./sherlock.nix
+    # ./satty.nix
     ./smile.nix
     ./starship.nix
     ./swaync/swaync.nix
@@ -62,8 +61,6 @@ in
 
       TERMINAL = "kitty";
 
-      BROWSER = "firefox";
-
       XCOMPOSEFILE = link "./XCompose";
 
       KOOHA_EXPERIMENTAL = "all";
@@ -90,6 +87,7 @@ in
 
       pkgs.aichat
       pkgs.chafa
+      pkgs.cheese
       pkgs.choose
       pkgs.dash
       pkgs.difftastic
@@ -104,6 +102,8 @@ in
       pkgs.gh
       pkgs.glib
       pkgs.glow
+      pkgs.gradia
+      (pkgs.grimblast.override { hyprland = inputs.hyprland.packages.${system}.hyprland; })
       pkgs.gum
       pkgs.huniq
       pkgs.hyperfine

@@ -100,12 +100,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # TODO: it might be necessary to update it myself in the coming weeks
+    # because the author of this fork archived their repo
     helix-ext = {
       url = "github:omentic/helix-ext";
     };
 
     hyprland = {
-      url = "github:hyprwm/hyprland";
+      url = "github:hyprwm/hyprland/v0.50.1";
     };
 
     hyprpicker = {
@@ -133,7 +135,7 @@
     };
 
     walker = {
-      url = "github:abenz1267/walker";
+      url = "github:abenz1267/walker/0.13.26";
     };
 
     wayland-pipewire-idle-inhibit = {

@@ -17,12 +17,13 @@ let
       # let selector window close
       sleep 0.5
       set text "$(
-        grim -t ppm - \
-          | satty -f - -o - \
-              --initial-tool crop \
-              --default-hide-toolbars \
-              --actions-on-enter save-to-file,exit \
-          | tesseract -l $langs - -
+        # grim -t ppm - \
+        #   | satty -f - -o - \
+        #       --initial-tool crop \
+        #       --default-hide-toolbars \
+        #       --actions-on-enter save-to-file,exit \
+        #   | tesseract -l $langs - -
+        grim -t png -g $(slurp) - | tesseract -l $langs - -
       )"
     end
 

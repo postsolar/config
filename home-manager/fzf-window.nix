@@ -1,7 +1,5 @@
 { config, lib, pkgs, ... }:
 
-# TODO: remove if/when sherlock supports selecting multiple lines
-
 let
 
   fzf = lib.getExe config.programs.fzf.package;
