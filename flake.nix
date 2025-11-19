@@ -89,25 +89,22 @@
       url = "github:nixos/nixpkgs/master";
     };
 
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # TODO: it might be necessary to update it myself in the coming weeks
-    # because the author of this fork archived their repo
-    helix-ext = {
-      url = "github:omentic/helix-ext";
+    helix = {
+      url = "github:helix-editor/helix";
     };
 
     hyprland = {
-      url = "github:hyprwm/hyprland/v0.50.1";
+      url = "github:hyprwm/hyprland/v0.52.1";
+    };
+
+    hyprscroller = {
+      url = "github:cpiber/hyprscroller";
+      inputs.hyprland.follows = "hyprland";
     };
 
     hyprpicker = {
@@ -120,13 +117,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprscroller = {
-      url = "github:cpiber/hyprscroller";
-      inputs.hyprland.follows = "hyprland";
-    };
-
+    # TODO update
     ironbar = {
-      url = "github:JakeStanger/ironbar";
+      url = "github:JakeStanger/ironbar/v0.17.1";
+      # url = "github:JakeStanger/ironbar";
     };
 
     apple-color-emoji = {
@@ -134,6 +128,7 @@
       flake = false;
     };
 
+    # TODO move on maybe
     walker = {
       url = "github:abenz1267/walker/0.13.26";
     };

@@ -4,14 +4,6 @@ let
 
   link = f: config.lib.file.mkOutOfStoreSymlink "${flakeDir}/home-manager/fish/${f}";
 
-  # shave 5ms off startup time by not calling the bin each time
-  atuinInit = pkgs.runCommandLocal "fish atuin init" {}
-    ''
-    tmp=$(mktemp -d)
-    export XDG_CONFIG_HOME=$tmp XDG_DATA_HOME=$tmp
-    ${lib.getExe config.programs.atuin.package} init fish --disable-up-arrow --disable-ctrl-r >$out
-    '';
-
   # shave 3ms off startup time by not calling the bin each time
   starshipInit = pkgs.runCommandLocal "fish starship init" {}
     ''
@@ -31,14 +23,13 @@ in
 
     shellInit = # fish
       ''
+      # TODO maybe shouldn't be fish-related actually
       source ${../../secrets/api_keys.env}
       '';
 
     interactiveShellInit = # fish
       ''
       source ${starshipInit}
-      # only run atuin outside distrobox
-      command -q atuin && source ${atuinInit}
 
       source ${link "./functions.fish"}
       '';

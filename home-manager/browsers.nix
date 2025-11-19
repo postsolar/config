@@ -8,6 +8,8 @@ let
           [ "--new-window"
             "--disable-features=OutdatedBuildDetector,UseChromeOSDirectVideoDecoder"
             "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder,WaylandWindowDecorations,TouchpadOverscrollHistoryNavigation"
+            # i think the 2 below are now default and dont need to be set
+            # TODO check
             "--enable-wayland-ime=true"
             "--ozone-platform-hint=auto"
           ];
@@ -17,10 +19,8 @@ let
 
   brave =
     (pkgs.brave.overrideAttrs (n: o: {
-      # postInstall = (o.postInstall or "") +
-      #   ''
-      #   sed -i 's/exec -a/exec -a env LANGUAGE=en_US.UTF-8 /' $out/bin/brave
-      #   '';
+      # problem: chromium browsers dont allow configuring locale and just use system locale
+      # solution: wrap it with english
       preFixup = (o.preFixup or "") +
         ''
         gappsWrapperArgs+=(

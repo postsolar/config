@@ -12,7 +12,7 @@ let
   nvidiaDriver = config.boot.kernelPackages.nvidiaPackages.stable;
 
   # This pins the mesa version to what is specified by Hyprland
-  openglDriver = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.system}.mesa;
+  openglDriver = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.mesa;
 
 in
 
@@ -32,7 +32,7 @@ in
       enable = true;
       package = openglDriver;
       extraPackages = [
-        pkgs.vaapiVdpau
+        pkgs.libva-vdpau-driver
         pkgs.libvdpau-va-gl
         pkgs.vaapi-intel-hybrid
         pkgs.egl-wayland

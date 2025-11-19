@@ -5,36 +5,6 @@ $showSubmapHints = ironbar bar hyprbar show-popup bindmode-hints
 $hideSubmapHints = ironbar bar hyprbar hide-popup
 $resetSubmap = hyprctl dispatch submap reset && $hideSubmapHints
 
-# ~ cursor control
-
-bind = SUPER, Z, exec, wl-kbptr -o modes=floating,click -o mode_floating.source=detect
-bind = SUPER SHIFT, Z, exec, sh $scripts/keep-cursor.sh wl-kbptr -o modes=floating,click -o mode_floating.source=detect
-
-bind = SUPER CTRL, Z, exec, hyprctl --batch 'keyword cursor:inactive_timeout 0; keyword cursor:hide_on_key_press false; dispatch submap cursor'
-submap = cursor
-  # wl-kbptr
-  bindd = , 1, wl-kbptr: floating, exec, wl-kbptr -o modes=floating -o mode_floating.source=detect
-  bindd = , 2, wl-kbptr: bisect, exec, wl-kbptr -o modes=bisect
-  bindd = , 3, wl-kbptr: split, exec, wl-kbptr -o modes=split
-  bindd = , 4, wl-kbptr: tile, exec, wl-kbptr -o modes=tile
-  # move
-  bindd = , left,  Move cursor left,  exec, wlrctl pointer move -10 0
-  bindd = , right, Move cursor right, exec, wlrctl pointer move 10 0
-  bindd = , up,    Move cursor up,    exec, wlrctl pointer move 0 -10
-  bindd = , down,  Move cursor down,  exec, wlrctl pointer move 0 10
-  # click
-  bindd = ,      Return, Click left, exec,   wlrctl pointer click left
-  bindd = SHIFT, Return, Click right, exec,  wlrctl pointer click right
-  bindd = ALT,   Return, Click middle, exec, wlrctl pointer click middle
-  # scroll
-  bindd = ALT, left,  Scroll left,  exec, wlrctl pointer scroll -10 0
-  bindd = ALT, right, Scroll right, exec, wlrctl pointer scroll 10 0
-  bindd = ALT, up,    Scroll up,    exec, wlrctl pointer scroll 0 -10
-  bindd = ALT, down,  Scroll down,  exec, wlrctl pointer scroll 0 10
-  # exit
-  bindd = , Escape, Reset submap, exec, hyprctl --batch 'keyword cursor:inactive_timeout 3; keyword cursor:hide_on_key_press true; dispatch submap reset'
-submap = reset
-
 # ~ programs
 
 bind = SUPER SHIFT, Return, exec, kitty -1 --class 'kitty -float'
@@ -72,8 +42,8 @@ submap = reset
 bind = SUPER, BackSpace, workspace, previous
 
 bind = SUPER, 1, togglespecialworkspace, btm
-bind = SUPER, 2, togglespecialworkspace, aichat
-bind = SUPER, 3, togglespecialworkspace, special
+# bind = SUPER, 2, togglespecialworkspace, aichat
+bind = SUPER, 2, togglespecialworkspace, special
 
 # ~ mode change
 

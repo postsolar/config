@@ -124,11 +124,7 @@ bind = SUPER, Backspace, workspace, previous
 # bind = SUPER, A, focuscurrentorlast
 bind = SUPER, A, focusurgentorlast
 
-binde = SUPER    , minus, exec, $scripts/gaps.zsh inner -3
-binde = SUPER    , equal, exec, $scripts/gaps.zsh inner 3
-binde = SUPER ALT, minus, exec, $scripts/gaps.zsh outer -3
-binde = SUPER ALT, equal, exec, $scripts/gaps.zsh outer 3
-
-# ~ wl-kbptr
-
-bind = SUPER, z, exec, sh $scripts/keep-cursor.sh wl-kbptr -o modes=floating,click -o mode_floating.source=detect
+binde = SUPER    , minus, exec, bun $scripts/gaps.ts inner -3
+binde = SUPER    , equal, exec, bun $scripts/gaps.ts inner 3
+binde = SUPER ALT, minus, exec, bun $scripts/gaps.ts outer -3
+binde = SUPER ALT, equal, exec, bun $scripts/gaps.ts outer 3

@@ -1,5 +1,7 @@
 { inputs, system, pkgs, ... }:
 
+# TODO remember why i still use it
+
 {
 
   home.sessionVariables = {

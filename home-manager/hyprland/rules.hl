@@ -2,12 +2,9 @@
 
 workspace = s[1], shadow:false
 workspace = special:btm, border:false, on-created-empty:kitty --hold btm
-workspace = special:aichat, border:false, on-created-empty:kitty --hold aichat -s
+# workspace = special:aichat, border:false, on-created-empty:kitty --hold aichat -s
 
 # ~ layers
-
-# wl-kbptr
-layerrule = noanim, selection
 
 # SwayNC
 layerrule = blur, swaync-control-center

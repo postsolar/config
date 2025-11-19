@@ -175,6 +175,9 @@
       map kitty_mod+u        kitten unicode_input
       map kitty_mod+escape   kitty_shell window
 
+      # make claude use shift+enter for newlines alongside alt+enter
+      map --when-focus-on title:claude shift+enter send_key alt+enter
+
       # ~ extra dynamic configuration
 
       source ~/.config/kitty/overrides.conf

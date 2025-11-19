@@ -17,26 +17,21 @@ in
   services.home-manager.autoExpire.enable = true;
 
   imports = [
-    ./broot.nix
     ./browsers.nix
     ./clipboard.nix
     ./fcitx5.nix
     ./fish/fish.nix
-    ./fzf-window.nix
     ./helix/helix.nix
     ./hypridle.nix
     ./hyprland/hyprland.nix
     ./ironbar/ironbar.nix
     ./kitty.nix
     ./mime.nix
-    ./ocr.nix
-    # ./satty.nix
     ./smile.nix
     ./starship.nix
     ./swaync/swaync.nix
     ./theme.nix
     ./walker/walker.nix
-    ./wl-kbptr.nix
     ./xdg.nix
     ./yazi.nix
 
@@ -65,8 +60,8 @@ in
 
       KOOHA_EXPERIMENTAL = "all";
 
-      PAGER = "moar";
-      MOAR = "--no-linenumbers --no-statusbar --scroll-left-hint=ESC[90m‹ --scroll-right-hint=ESC[90m› --terminal-fg";
+      PAGER = "moor";
+      MOOR = "--no-linenumbers --no-statusbar --scroll-left-hint=ESC[90m‹ --scroll-right-hint=ESC[90m› --terminal-fg";
     };
 
     activation.removeExtraFiles = lib.hm.dag.entryAfter [ "writeBoundary" ]
@@ -89,10 +84,11 @@ in
       pkgs.chafa
       pkgs.cheese
       pkgs.choose
+      pkgs.claude-code
       pkgs.dash
       pkgs.difftastic
       pkgs.distrobox
-      pkgs.du-dust
+      pkgs.dust
       pkgs.eog
       pkgs.expect
       pkgs.ffmpeg-full
@@ -114,13 +110,12 @@ in
       pkgs.killall
       pkgs.libnotify
       pkgs.mixxx
-      pkgs.moar
+      pkgs.moor
       pkgs.nemo-fileroller
       pkgs.nemo-preview
       pkgs.nemo-with-extensions
       pkgs.nixd
       pkgs.nodePackages.sass
-      pkgs.obsidian
       pkgs.ouch
       pkgs.overskride
       pkgs.pamixer
@@ -129,11 +124,8 @@ in
       pkgs.playerctl
       pkgs.pulseaudio
       pkgs.pwvucontrol
-      pkgs.scdl
       pkgs.sd
       pkgs.socat
-      pkgs.streamrip
-      pkgs.tdl
       pkgs.telegram-desktop
       pkgs.typescript-language-server
       pkgs.uni
@@ -142,13 +134,10 @@ in
       pkgs.watchexec
       pkgs.wf-recorder
       pkgs.wlinhibit
-      pkgs.wlrctl
-      pkgs.wl-kbptr
-      pkgs.xpdf
+      # TODO re-enable when build no longer fails
+      # pkgs.xpdf
       pkgs.yek
       pkgs.yj
-      pkgs.yt-dlp
-      pkgs.ytmdl
       pkgs.yq
     ];
   };
@@ -162,26 +151,12 @@ in
 
     wayland-pipewire-idle-inhibit = {
       enable = true;
+      package = pkgs.wayland-pipewire-idle-inhibit;
       settings = {};
     };
   };
 
   programs = {
-    atuin = {
-      enable = true;
-      settings = {
-        update_check      = false;
-        style             = "compact";
-        inline_height     = 12;
-        dialect           = "uk";
-        keys = {
-          scroll_exits = false;
-          exit_past_line_start = false;
-          accept_past_line_end = false;
-        };
-        history_filter    = [ "^\s+" ];
-      };
-    };
     bottom = {
       enable = true;
       settings.flags = {
@@ -252,11 +227,15 @@ in
     gh.enable = true;
     git = {
       enable = true;
-      userEmail = "120750161+postsolar@users.noreply.github.com";
-      userName = "postsolar";
-
-      difftastic.enable = true;
-      difftastic.display = "side-by-side";
+      settings.user = {
+        email = "120750161+postsolar@users.noreply.github.com";
+        name = "postsolar";
+      };
+    };
+    difftastic = {
+      enable = true;
+      git.enable = true;
+      options.display = "side-by-side";
     };
     home-manager.enable = true;
     mpv = {

@@ -1,7 +1,9 @@
 { inputs, system, pkgs, ... }:
 
+# TODO q4 2025 - q1 2026 go through setting once again get a fresh look
+
 let
-  package = inputs.helix-ext.packages.${system}.helix;
+  package = inputs.helix.packages.${system}.helix;
 in
 
 {
