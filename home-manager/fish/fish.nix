@@ -21,6 +21,11 @@ in
   programs.fish = {
     enable = true;
 
+    loginShellInit = # fish
+      ''
+      status is-interactive; and cd /data
+      '';
+
     shellInit = # fish
       ''
       # TODO maybe shouldn't be fish-related actually
@@ -30,7 +35,6 @@ in
     interactiveShellInit = # fish
       ''
       source ${starshipInit}
-
       source ${link "./functions.fish"}
       '';
   };

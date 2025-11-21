@@ -118,6 +118,8 @@
 
   services.dbus.implementation = "broker";
 
+  programs.dconf.enable = true;
+
   # ~ shells
 
   programs.fish = {

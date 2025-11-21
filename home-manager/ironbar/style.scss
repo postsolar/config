@@ -1,11 +1,16 @@
-// meant to be used with Phocus GTK theme or something similar
+// meant to be used with a black, flat GTK theme
 
 $border_radius: 10px;
 $bg: black;
 $fg: white;
 $accent: hotpink;
+$accent_dark: crimson;
 
-// ~ some base styles
+$shadow: rgba(0, 0, 0, 0.4);
+
+$widget_icon_size: 16px;
+
+// ~ base styles
 
 window.background {
   background: none;
@@ -16,36 +21,54 @@ window.background {
   border-radius: $border_radius;
   // margin has to be set here otherwise shadows don't work properly
   margin: 8px 8px 8px 8px;
-  box-shadow: 0px 0px 3px 1px black;
+  box-shadow: 0px 0px 4px 1px $shadow;
 }
 
 button,
 label {
-  color: $fg;
-  font-size: 11px;
-  font-family: "sans";
+  font-size: 12px;
 }
 
 tooltip {
   background: $bg;
   border-radius: $border_radius;
+  box-shadow: 0px 0px 4px 1px $shadow;
 
   * {
     font-size: 14px;
   }
 }
 
-scale {
-  contents trough highlight {
-    background: $fg;
+scale.slider {
+  trough {
+    background: rgba(255, 255, 255, 0.10);
+
+    slider {
+      min-width: 12px;
+      min-height: 12px;
+      background: $accent_dark;
+    }
   }
 
-  contents trough slider {}
-}
+  &.horizontal trough {
+    slider {
+      margin: -5px 0px -5px 0px;
+    }
 
-.slider slider {
-  background: $bg;
-  box-shadow: 0px 0px 1px 2px $fg;
+    highlight {
+      background: linear-gradient(to right, $accent, $accent_dark);
+    }
+  }
+
+  &.vertical trough {
+    slider {
+      margin: 0px -5px 0px -5px;
+    }
+
+    highlight {
+      background: linear-gradient(to top, $accent, $accent_dark);
+    }
+  }
 }
 
 // ~ ~ the bar
@@ -61,33 +84,32 @@ box#end {
 // ~ start widgets
 
 .workspaces {
+  .item {
+    margin: 0px -2px 0px -2px;
 
-  .item>label {
-    padding: 0px 3px 0px 3px;
-    border-radius: 100%;
-    font-weight: bold;
+    >label {
+      font-weight: bold;
+      border-radius: 100%;
+    }
+
+    &:hover>label {
+      background: rgba(55, 55, 55, 0.8);
+    }
+
+    &:not(.focused):not(.urgent):hover>label {}
+
+    &.focused>label {
+      border: 2px solid $accent;
+    }
+
+    &.urgent:not(.focused)>label {
+      border: 2px solid orange;
+    }
   }
-
-  .item:hover>label {
-    background: rgb(55, 55, 55);
-  }
-
-  .item:not(.focused):not(.urgent):hover>label {
-    box-shadow: 0px 0px 0px 3px rgb(55, 55, 55);
-  }
-
-  .item.focused>label {
-    box-shadow: 0px 0px 0px 3px rgba($accent, 0.8);
-  }
-
-  .item.urgent:not(.focused)>label {
-    box-shadow: 0px 0px 0px 3px rgba(orange, 0.8);
-  }
-
 }
 
 .hyprscroller-mode {
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .bindmode {
@@ -106,21 +128,59 @@ box#end {
 
 // ~ end widgets
 
-.swaync-state {
-  margin-left: 8px;
-  margin-right: 6px;
-  font-size: 16px;
+// bluetooth
+
+.bluetooth label {
+  font-size: $widget_icon_size;
+}
+
+.bluetooth.disabled label {
+  color: grey;
+}
+
+// tray
+
+.tray .item {
+  margin: 0px -3px 0px -3px;
+}
+
+// notifications
+
+.notifications {
+  margin: 0px 0px 0px -15px;
+
+  .button {
+    margin-right: -10px;
+
+    label {
+      font-size: $widget_icon_size;
+    }
+  }
+
+  .count {
+    font-size: 12px;
+    padding-top: 6px;
+  }
+}
+
+// keyboard
+
+.keyboard {
+  margin: 0px -15px 0px -15px;
 }
 
 // ~ ~ popups
 
+popover {
+  // margin: 6px 18px 6px 6px;
+}
+
 .popup {
   background: $bg;
   border-radius: $border_radius;
-  padding: 10px;
-
+  padding: 10px 10px 10px 10px;
   margin: 6px 6px 6px 6px;
-  box-shadow: 0px 0px 3px 2px $bg;
+  box-shadow: 3px 3px 3px 2px $bg;
 }
 
 // ~ music
@@ -129,28 +189,92 @@ box#end {
 
   .title .icon,
   .title .label {
+    font-size: 16px;
+  }
+
+  .artist .icon,
+  .artist .label {
     font-size: 14px;
   }
 
-  .controls * {
-    margin: 0px 4px 0px 4px;
+  .controls button {
+    &:hover {
+      background: rgba(55, 55, 55, 0.8);
+    }
+
+    label {
+      font-size: 18px;
+    }
   }
 }
 
 // ~ clock and calendar
 
+/*
+.popup-clock .calendar header > button,
+                                stack.month > label,
+                                button,
+                                button,
+                                stack.year > label,
+                                button
+
+.popup-clock .calendar grid > label.day-name,
+                              label.week-number,
+                              label.day-number.other-month,
+                              label.day-number,
+                              label.day-number.today,
+                              label.day-number:selected
+*/
+
 .popup-clock {
   .calendar-clock {
-    font-size: 2.0em;
-    padding-bottom: 0.1em;
+    font-size: 28px;
+    padding-bottom: 4px;
   }
 
-  .calendar .header {
-    border-top: 1px solid rgba($fg, 0.1);
-    font-size: 1.5em;
+  .calendar {
+    label {
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    grid label {
+      &:selected {
+        outline: 2px solid $accent;
+        outline-offset: -2px;
+      }
+
+      &.today {
+        background: $accent;
+        color: $fg;
+      }
+    }
+
+    // border between month and year buttons
+    header>button:nth-child(4) {
+      border-left: 1px solid rgba($fg, 0.2);
+      padding-left: 4px;
+      margin-left: 4px;
+    }
+  }
+}
+
+// extra
+
+// quick hack for https://github.com/JakeStanger/ironbar/issues/1244
+.volume {
+  min-width: 40px;
+}
+
+.popup-bluetooth {
+  // workaround for https://github.com/JakeStanger/ironbar/issues/1186
+  min-height: 200px;
+
+  .devices viewport box .device {
+    margin: 10px 0px 10px 0px;
   }
 
-  .calendar:selected {
-    background: $accent;
+  .header .switch {
+    margin-right: 10px;
   }
 }

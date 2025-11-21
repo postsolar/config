@@ -11,23 +11,18 @@ let
   # };
   #
 
-  # TODO: address https://github.com/JakeStanger/ironbar/issues/415 and make it possible to set classes via ironvars,
-  # so that we could set styles via CSS and not Pango
-  swaync-state = {
-    type = "script";
-    mode = "watch";
-    cmd =
-      let
-        go = pkgs.writers.writeDash "swaync-state-for-ironbar" ''
-          swaync-client -s | jq --unbuffered -r '
-            (if .dnd then "" else "" end) +
-            (if .count > 0 then " <span foreground=\"white\"><sup>" + (.count | tostring) + "</sup></span>" else "" end)
-            '
-        '';
-      in
-        "${go}";
-    class = "swaync-state";
-    on_click_left = "swaync-client -t";
+  bluetooth = {
+    type = "bluetooth";
+    format = {
+      disabled = "󰂲";
+      enabled = "";
+      connected = " {device_alias}";
+      connected_battery = " {device_alias} • {device_battery_percent}%";
+    };
+  };
+
+  notifications = {
+    type = "notifications";
   };
 
   bindmode-with-hints = {
@@ -121,7 +116,7 @@ let
     height = 24;
     start = [ workspaces hyprscrollerMode bindmode-with-hints ];
     center = [ music ];
-    end = [ tray swaync-state keyboardLayouts volume clock ];
+    end = [ bluetooth tray notifications keyboardLayouts volume clock ];
     ironvar_defaults = {
       hyprscrollerMode = "⇒";
     };

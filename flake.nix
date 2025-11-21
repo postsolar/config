@@ -99,7 +99,8 @@
     };
 
     hyprland = {
-      url = "github:hyprwm/hyprland/v0.52.1";
+      # url = "github:hyprwm/hyprland/v0.52.1";
+      url = "github:hyprwm/hyprland";
     };
 
     hyprscroller = {
@@ -117,10 +118,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # TODO update
     ironbar = {
-      url = "github:JakeStanger/ironbar/v0.17.1";
-      # url = "github:JakeStanger/ironbar";
+      url = "github:JakeStanger/ironbar";
     };
 
     apple-color-emoji = {

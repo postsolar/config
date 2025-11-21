@@ -24,7 +24,7 @@
       ''
       # ~ fonts
 
-      font_size 10.0
+      font_size 12.0
 
       text_composition_strategy legacy
 

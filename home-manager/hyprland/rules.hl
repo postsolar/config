@@ -7,68 +7,89 @@ workspace = special:btm, border:false, on-created-empty:kitty --hold btm
 # ~ layers
 
 # SwayNC
-layerrule = blur, swaync-control-center
-layerrule = blur, swaync-notification-window
-layerrule = ignorezero, swaync-control-center
-layerrule = ignorezero, swaync-notification-window
-# layerrule = ignorealpha 0.5, swaync-control-center
-# layerrule = ignorealpha 0.5, swaync-notification-window
+layerrule {
+  name = swaync-control-center
+  match:namespace = swaync-control-center
+  blur = on
+  ignore_alpha = 0
+  # ignore_alpha = 0.5
+}
+
+layerrule {
+  name = swaync-notification-window
+  match:namespace = swaync-notification-window
+  blur = on
+  ignore_alpha = 0
+  # ignore_alpha = 0.5
+}
 
 # ~ windows
 
 # No shadow on floating windows
-windowrulev2 = noshadow, floating:1
+windowrule = match:float 1, no_shadow on
 
 # Some windows have to be floating by default
-windowrulev2 = float, initialClass: .blueman-manager-wrapped
-windowrulev2 = float, initialClass: xdg-desktop-portal-gtk
-windowrulev2 = float, initialClass: com.github.hluk.copyq
-windowrulev2 = float, initialTitle: fzf-picker
+windowrule = match:initial_class .blueman-manager-wrapped, float on
+windowrule = match:initial_class xdg-desktop-portal-gtk, float on
+windowrule = match:initial_class com.github.hluk.copyq, float on
+windowrule = match:initial_title fzf-picker, float on
 
 # smile emoji picker
-windowrulev2 = float,            initialClass: it.mijorus.smile
-windowrulev2 = pin,              initialClass: it.mijorus.smile
-windowrulev2 = size 50% 95%,     initialClass: it.mijorus.smile
-windowrulev2 = move 0% 100%-w-0, initialClass: it.mijorus.smile 
-windowrulev2 = noborder,         initialClass: it.mijorus.smile
-windowrulev2 = opacity 0.8,      initialClass: it.mijorus.smile
+windowrule {
+  name = smile-picker
+  match:initial_class = it.mijorus.smile
+  float = on
+  pin = on
+  size = 50% 95%
+  move = 0 (monitor_h-window_h)
+  border_size = 0
+  opacity = 0.8
+}
 
 # XDPH
-windowrulev2 = float,        initialClass: , initialTitle: MainPicker
-windowrulev2 = float,        initialClass: , initialTitle: Select what to share
-windowrulev2 = size 20% 15%, initialClass: , initialTitle: Select what to share
+windowrule = match:initial_title MainPicker, float on
+windowrule = match:initial_title Select what to share, float on
+windowrule = match:initial_title Select what to share, size 20% 15%
 
 # XDP-gtk
-windowrulev2 = float, initialClass: xdg-desktop-portal-gtk
-windowrulev2 = size 60% 70%, initialClass: xdg-desktop-portal-gtk
-windowrulev2 = center, initialClass: xdg-desktop-portal-gtk
+windowrule {
+  name = xdp-gtk
+  match:initial_class = xdg-desktop-portal-gtk
+  float = on
+  size = 60% 70%
+  center = on
+}
 
 # browser pop ups / PiP
-windowrulev2 = float, initialTitle: Pilt pildis
-windowrulev2 = float, initialClass: firefox, title: Laiendus:.*
-windowrulev2 = float, initialClass: firefox, initialTitle: Pilt-pildis
+windowrule = match:initial_title Pilt pildis, float on
+windowrule = match:initial_class firefox, match:title Laiendus:.*, float on
+windowrule = match:initial_class firefox, match:initial_title Pilt-pildis, float on
 
 # Add some opacity to terminals
-windowrulev2 = opacity 0.9 0.9 0.9, initialTitle: kitty
+windowrule = match:initial_title kitty, opacity 0.9 0.9 0.9
 
 # Fix telegram media viewer (should work on its own but got broken recently as of 27.06)
-windowrulev2 = fullscreenstate 2 2, class: org.telegram.desktop, title: Media viewer
+windowrule = match:class org.telegram.desktop, match:title Media viewer, fullscreen_state 2 2
 
 # Kooha
 # note that these are two different kooha windows
-windowrulev2 = center, initialClass: kooha
-windowrulev2 = move 100%-w-10, initialClass: io.github.seadve.Kooha
+windowrule = match:initial_class kooha, center on
+windowrule = match:initial_class io.github.seadve.Kooha, move 100%-w-10
 
 # For windows when they're being dragged
-windowrule = opacity 0.5 override, tag: dragged
-windowrule = noborder, tag: dragged
+windowrule {
+  name = dragged-windows
+  match:tag = dragged
+  opacity = 0.5 override
+  border_size = 0
+}
 
 # ~ class-based rules controllers
 # (needed for launching forking processes, as exec dispatcher doesn't apply rules to them)
 
 # floating, fullscreen and centering
-windowrulev2 = float,               class: .*-float.*
-windowrulev2 = fullscreen,          class: .*-fullscreen.*
-windowrulev2 = fullscreenstate 2 1, class: .*-fakefullscreen.*
-windowrulev2 = center,              class: .*-center.*
+windowrule = match:class .*-float.*, float on
+windowrule = match:class .*-fullscreen.*, fullscreen on
+windowrule = match:class .*-fakefullscreen.*, fullscreen_state 2 1
+windowrule = match:class .*-center.*, center on
 

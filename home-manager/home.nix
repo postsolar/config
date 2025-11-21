@@ -27,6 +27,7 @@ in
     ./ironbar/ironbar.nix
     ./kitty.nix
     ./mime.nix
+    ./satty.nix
     ./smile.nix
     ./starship.nix
     ./swaync/swaync.nix
@@ -53,6 +54,10 @@ in
       __HM_SESS_VARS_SOURCED = "";
 
       NIXOS_OZONE_WL = 1;
+
+      # Force GTK4 to use Cairo renderer instead of Vulkan/OpenGL to fix flickering issues
+      # TODO: Check if this is still needed with future GTK4/driver updates
+      GSK_RENDERER = "cairo";
 
       TERMINAL = "kitty";
 
@@ -143,7 +148,8 @@ in
   };
 
   services = {
-    blueman-applet.enable = true;
+    # ironbar's bluetooth module is a bit nicer
+    # blueman-applet.enable = true;
     playerctld.enable = true;
     swww.enable = true;
     network-manager-applet.enable = true;

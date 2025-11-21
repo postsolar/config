@@ -15,6 +15,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.settings.General.Experimental = true;
   services.blueman.enable = true;
   environment.systemPackages = [ pkgs.bluetui pkgs.fbset ];
 
