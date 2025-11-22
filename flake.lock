@@ -165,11 +165,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1763416652,
-        "narHash": "sha256-8EBEEvtzQ11LCxpQHMNEBQAGtQiCu/pqP9zSovDSbNM=",
+        "lastModified": 1763748372,
+        "narHash": "sha256-AUc78Qv3sWir0hvbmfXoZ7Jzq9VVL97l+sP9Jgms+JU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "ea164b7c9ccdc2321379c2ff78fd4317b4c41312",
+        "rev": "d10a9b16b2a3ee28433f3d1c603f4e9f1fecb8e1",
         "type": "github"
       },
       "original": {
@@ -588,15 +588,16 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1763650952,
-        "narHash": "sha256-ttUmgY62QUiz4M0tv/QwOIyeDEmNdHWP4xkAGAqpwlU=",
-        "owner": "JakeStanger",
+        "lastModified": 1763754419,
+        "narHash": "sha256-2dHFpmMN+A//VafgkAlyNNkvuIxe9dYe5EHp/MfxJ90=",
+        "owner": "postsolar",
         "repo": "ironbar",
-        "rev": "f20a679a3e1bf7eb327337dc980a6222bb25e169",
+        "rev": "f1a334f09db677b3ff1b245a86300698156c823b",
         "type": "github"
       },
       "original": {
-        "owner": "JakeStanger",
+        "owner": "postsolar",
+        "ref": "feat/double-clicks-and-tray-actions",
         "repo": "ironbar",
         "type": "github"
       }
@@ -671,11 +672,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1763551176,
-        "narHash": "sha256-E30nmvrk7b2cua3Mu210j+vSh7qMLfqJr4lEpBOrBh4=",
+        "lastModified": 1763821920,
+        "narHash": "sha256-zRl+Id5f+1ALLZj6ZSfYDujFqwI4XUhmy0ZxjT9JkbQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "79dbd3152334a0330da46eb83e1cebcdd7b876c6",
+        "rev": "f1250bf16729e8ca54f9687320f0ca971e4ad8eb",
         "type": "github"
       },
       "original": {
@@ -719,11 +720,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1763464769,
-        "narHash": "sha256-AJHrsT7VoeQzErpBRlLJM1SODcaayp0joAoEA35yiwM=",
+        "lastModified": 1763618868,
+        "narHash": "sha256-v5afmLjn/uyD9EQuPBn7nZuaZVV9r+JerayK/4wvdWA=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "6f374686605df381de8541c072038472a5ea2e2d",
+        "rev": "a8d610af3f1a5fb71e23e08434d8d61a466fc942",
         "type": "github"
       },
       "original": {

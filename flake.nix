@@ -19,6 +19,8 @@
             system
             flakeDir
             ;
+
+          pkgs-master = inputs.nixpkgs.legacyPackages.${system};
         };
         home-manager.sharedModules = [
         ];
@@ -119,7 +121,8 @@
     };
 
     ironbar = {
-      url = "github:JakeStanger/ironbar";
+      # url = "github:JakeStanger/ironbar";
+      url = "github:postsolar/ironbar/feat/double-clicks-and-tray-actions";
     };
 
     apple-color-emoji = {

@@ -1,15 +1,6 @@
 { inputs, system, config, pkgs, lib, ... }:
 
-# to debug mpris:
-# set IRONBAR_FILE_LOG and IRONBAR_LOG=info,ironbar::clients::mpris=trace
-
 let
-
-  # seems to be broken for now
-  # menu = {
-  #   type = "menu";
-  # };
-  #
 
   bluetooth = {
     type = "bluetooth";
@@ -76,6 +67,9 @@ let
 
   tray = {
     type = "tray";
+    on_click_left = "open_menu";
+    on_click_left_double = "trigger_default";
+    on_click_right = "none";
   };
 
   music = {
@@ -120,6 +114,7 @@ let
     ironvar_defaults = {
       hyprscrollerMode = "⇒";
     };
+    popup_autohide = true;
   };
 
   stylesheet = 

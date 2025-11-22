@@ -1,4 +1,4 @@
-{ inputs, outputs, config, pkgs, lib, flakeDir, system, ... }:
+{ inputs, outputs, config, pkgs, pkgs-master, lib, flakeDir, system, ... }:
 
 let
   link = f: config.lib.file.mkOutOfStoreSymlink "${flakeDir}/home-manager/${f}";
@@ -18,6 +18,7 @@ in
 
   imports = [
     ./browsers.nix
+    ./claude.nix
     ./clipboard.nix
     ./fcitx5.nix
     ./fish/fish.nix
@@ -89,7 +90,6 @@ in
       pkgs.chafa
       pkgs.cheese
       pkgs.choose
-      pkgs.claude-code
       pkgs.dash
       pkgs.difftastic
       pkgs.distrobox
@@ -99,7 +99,8 @@ in
       pkgs.ffmpeg-full
       pkgs.file
       pkgs.fx
-      pkgs.gemini-cli
+      # needs a couple updates
+      pkgs-master.gemini-cli
       pkgs.gh
       pkgs.glib
       pkgs.glow

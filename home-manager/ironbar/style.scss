@@ -1,11 +1,12 @@
 // meant to be used with a black, flat GTK theme
 
 $border_radius: 10px;
+
 $bg: black;
 $fg: white;
 $accent: hotpink;
 $accent_dark: crimson;
-
+$hover: rgba(55, 55, 55, 0.8);
 $shadow: rgba(0, 0, 0, 0.4);
 
 $widget_icon_size: 16px;
@@ -41,7 +42,7 @@ tooltip {
 
 scale.slider {
   trough {
-    background: rgba(255, 255, 255, 0.10);
+    background: $hover;
 
     slider {
       min-width: 12px;
@@ -93,17 +94,20 @@ box#end {
     }
 
     &:hover>label {
-      background: rgba(55, 55, 55, 0.8);
+      background: $hover;
     }
 
     &:not(.focused):not(.urgent):hover>label {}
 
     &.focused>label {
-      border: 2px solid $accent;
+      outline: 2px solid $accent;
+      outline-offset: -2px;
     }
 
     &.urgent:not(.focused)>label {
       border: 2px solid orange;
+      outline: 2px solid orange;
+      outline-offset: -2px;
     }
   }
 }
@@ -132,6 +136,11 @@ box#end {
 
 .bluetooth label {
   font-size: $widget_icon_size;
+}
+
+// kinda hacky but there's no way to distinguish between the icon and the following text, it's all one label
+.bluetooth.connected label {
+  font-size: 12px;
 }
 
 .bluetooth.disabled label {
@@ -199,12 +208,23 @@ popover {
 
   .controls button {
     &:hover {
-      background: rgba(55, 55, 55, 0.8);
+      background: $hover;
     }
 
     label {
       font-size: 18px;
     }
+  }
+}
+
+// ~ bluetooth
+.popup-bluetooth {
+  .devices viewport box .device {
+    margin: 10px 0px 10px 0px;
+  }
+
+  .header .switch {
+    margin-right: 10px;
   }
 }
 
@@ -269,12 +289,4 @@ popover {
 .popup-bluetooth {
   // workaround for https://github.com/JakeStanger/ironbar/issues/1186
   min-height: 200px;
-
-  .devices viewport box .device {
-    margin: 10px 0px 10px 0px;
-  }
-
-  .header .switch {
-    margin-right: 10px;
-  }
 }
