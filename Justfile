@@ -24,6 +24,11 @@ switch:
     git add . || :
     sudo nixos-rebuild switch --flake . --verbose -L
 
+# Build the system and switch to it (for Claude Code - without verbose flag)
+switch-claude:
+    git add . || :
+    sudo nixos-rebuild switch --flake . -L
+
 # Build the system and switch to it (with NOM)
 switch-fancy:
     git add . || :

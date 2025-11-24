@@ -33,7 +33,7 @@ in
     ./starship.nix
     ./swaync/swaync.nix
     ./theme.nix
-    ./walker/walker.nix
+    ./vicinae.nix
     ./xdg.nix
     ./yazi.nix
 
@@ -58,6 +58,7 @@ in
 
       # Force GTK4 to use Cairo renderer instead of Vulkan/OpenGL to fix flickering issues
       # TODO: Check if this is still needed with future GTK4/driver updates
+      # possibly related: https://github.com/NixOS/nixpkgs/issues/463220
       GSK_RENDERER = "cairo";
 
       TERMINAL = "kitty";
@@ -115,6 +116,7 @@ in
       pkgs.just
       pkgs.killall
       pkgs.libnotify
+      pkgs.libqalculate
       pkgs.mixxx
       pkgs.moor
       pkgs.nemo-fileroller

@@ -21,6 +21,9 @@ in
   programs.fish = {
     enable = true;
 
+    # TODO maybe try out
+    # environment.loginShellInit = '[ "$(tty)" = "/dev/tty1" ] && Hyprland';
+
     loginShellInit = # fish
       ''
       status is-interactive; and cd /data

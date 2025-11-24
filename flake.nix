@@ -101,7 +101,7 @@
     };
 
     hyprland = {
-      # url = "github:hyprwm/hyprland/v0.52.1";
+      # url = "github:hyprwm/hyprland/v0.52.1"; # idk why but hyprscroller doesnt vibe with it, crashes
       url = "github:hyprwm/hyprland";
     };
 
@@ -122,7 +122,7 @@
 
     ironbar = {
       # url = "github:JakeStanger/ironbar";
-      url = "github:postsolar/ironbar/feat/double-clicks-and-tray-actions";
+      url = "github:postsolar/ironbar/personal";
     };
 
     apple-color-emoji = {
@@ -130,10 +130,10 @@
       flake = false;
     };
 
-    # TODO move on maybe
-    walker = {
-      url = "github:abenz1267/walker/0.13.26";
+    vicinae = {
+      url = "github:vicinaehq/vicinae";
     };
+
 
     wayland-pipewire-idle-inhibit = {
       url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
