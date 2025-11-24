@@ -10,6 +10,7 @@
     Service.ExecStart = "${lib.getExe pkgs.hyprland-per-window-layout}";
   };
 
+  # TODO add error notifications and restarts
   systemd.user.services.hyprland-helpers = {
     Unit = {
       Description = "My Hyprland helpers";

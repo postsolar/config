@@ -183,10 +183,6 @@ const onScrollerChange = (change: string): void => {
   event in eventMap && eventMap[event](args)
 }
 
-// FIXME: ironbar doesn't allow setting variables via the IPC if they're bigger than 966 bytes, so
-// some submaps won't be displayed.
-// issue: https://github.com/JakeStanger/ironbar/issues/1065
-// potential fix would be running the respective label in `poll` mode but this is hard and wasteful
 const onSubmapChange = (submap: string): void => {
   if (submap === "") {
     updateIronvar("bindmode-hints", "")

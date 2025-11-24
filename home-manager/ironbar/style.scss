@@ -25,6 +25,12 @@ window.background {
   box-shadow: 0px 0px 4px 1px $shadow;
 }
 
+// gtk theme is being a bit too smart here, tame it down
+.widget:not(:hover) {
+  background-color: inherit;
+  box-shadow: inherit;
+}
+
 button,
 label {
   font-size: 12px;
@@ -75,20 +81,27 @@ scale.slider {
 // ~ ~ the bar
 
 box#start {
-  margin-left: 5px;
+  margin-left: 10px;
 }
 
 box#end {
-  margin-right: 5px;
+  margin-right: 10px;
+
+  .widget {
+    padding: 0px;
+  }
 }
 
 // ~ start widgets
 
 .workspaces {
   .item {
-    margin: 0px -2px 0px -2px;
+    padding: 0px;
 
     >label {
+      // makes the outline circle a bit smaller
+      margin: 3px;
+
       font-weight: bold;
       border-radius: 100%;
     }
@@ -149,17 +162,13 @@ box#end {
 
 // tray
 
-.tray .item {
-  margin: 0px -3px 0px -3px;
-}
+.tray .item {}
 
 // notifications
 
 .notifications {
-  margin: 0px 0px 0px -15px;
-
   .button {
-    margin-right: -10px;
+    padding: 0px;
 
     label {
       font-size: $widget_icon_size;
@@ -175,14 +184,20 @@ box#end {
 // keyboard
 
 .keyboard {
-  margin: 0px -15px 0px -15px;
+  button {
+    padding: 0px;
+  }
+}
+
+.volume,
+.clock {
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 // ~ ~ popups
 
-popover {
-  // margin: 6px 18px 6px 6px;
-}
+popover {}
 
 .popup {
   background: $bg;
@@ -230,22 +245,6 @@ popover {
 
 // ~ clock and calendar
 
-/*
-.popup-clock .calendar header > button,
-                                stack.month > label,
-                                button,
-                                button,
-                                stack.year > label,
-                                button
-
-.popup-clock .calendar grid > label.day-name,
-                              label.week-number,
-                              label.day-number.other-month,
-                              label.day-number,
-                              label.day-number.today,
-                              label.day-number:selected
-*/
-
 .popup-clock {
   .calendar-clock {
     font-size: 28px;
@@ -284,9 +283,4 @@ popover {
 // quick hack for https://github.com/JakeStanger/ironbar/issues/1244
 .volume {
   min-width: 40px;
-}
-
-.popup-bluetooth {
-  // workaround for https://github.com/JakeStanger/ironbar/issues/1186
-  min-height: 200px;
 }

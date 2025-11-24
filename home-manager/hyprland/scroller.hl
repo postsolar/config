@@ -39,7 +39,7 @@ plugin {
     # it resets after one or a few 4-finger taps/gestures
 
     # buggy, often crashes Hyprland
-    gesture_overview_enable = false
+    gesture_overview_enable = no # TODO is it still true? may be useless either way
   }
 }
 

@@ -66,7 +66,7 @@
     bind ctrl-z 'jobs -q && fg; commandline -f repaint'
 
     bind ctrl-t fzf-file-widget
-    bind ctrl-r _atuin_search
+    bind ctrl-r history-pager
     bind alt-up "builtin cd ..; commandline -f repaint"
     bind alt-down fzf-cd-widget
     bind alt-a hx

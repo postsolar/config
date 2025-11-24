@@ -31,9 +31,9 @@ agent_prelude: null              # Set a session to use when starting a agent (e
 # Controls the persistence of the session. if true, auto save; if false, not save; if null, asking the user
 save_session: null
 # Compress session when token count reaches or exceeds this threshold
-compress_threshold: 4000
+compress_threshold: 32000
 # Text prompt used for creating a concise summary of session message
-summarize_prompt: 'Summarize the discussion briefly in 200 words or less to use as a prompt for future context.'
+summarize_prompt: 'Summarize this conversation for another AI to continue seamlessly. Preserve all significant context: plot developments, motivations, key events, emotional moments, decisions made, and current situation. Remove only mundane or trivial details. Aim for comprehensive compression that retains everything necessary.'
 # Text prompt used for including the summary of the entire session
 summary_prompt: 'This is a summary of the chat history as a recap: '
 
@@ -97,7 +97,6 @@ clients:
       chat_completions:
         '.*':
           body:
-            # not really useful on its own because a jailbreak prompt still has to be supplied
             safetySettings:
               - category: HARM_CATEGORY_HARASSMENT
                 threshold: BLOCK_NONE
@@ -116,10 +115,6 @@ clients:
 
   - type: openai-compatible
     name: groq
-
-  # kinda useless these days
-  # - type: openai-compatible
-  #   name: openrouter
 
   # we can add some more free providers:
   #   x.ai

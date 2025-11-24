@@ -171,20 +171,6 @@
     pkgs.git-crypt
   ];
 
-  services.locate = {
-    enable = true;
-    # all the default paths sans /nix/store
-    prunePaths = [
-      "/tmp"
-      "/var/tmp"
-      "/var/cache"
-      "/var/lock"
-      "/var/run"
-      "/var/spool"
-      "/nix/var/log/nix"
-    ];
-  };
-
   virtualisation.podman.enable = true;
   virtualisation.docker.enable = true;
 
@@ -198,7 +184,4 @@
     portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
-  services.preload.enable = true;
-
 }
-

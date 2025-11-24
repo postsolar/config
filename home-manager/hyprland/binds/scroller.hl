@@ -9,7 +9,7 @@ $resetSubmap = hyprctl dispatch submap reset && $hideSubmapHints
 
 bind = SUPER SHIFT, Return, exec, kitty -1 --class 'kitty -float'
 
-bind = SUPER, S, exec, walker
+bind = SUPER, S, exec, vicinae open
 
 bind = SUPER, Apostrophe, exec, smile
 bind = SUPER, O, exec, copyq toggle

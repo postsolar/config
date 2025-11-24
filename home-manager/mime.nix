@@ -49,7 +49,7 @@ in
     "handlr/handlr.toml".text =
       ''
       enable_selector = true
-      selector = "walker -d -k -p 'Open with:'"
+      selector = "vicinae dmenu -p 'Open with:'"
       term_exec_args = '-e'
       expand_wildcards = true
       '';

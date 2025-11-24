@@ -1,7 +1,7 @@
 # ~ workspaces
 
-workspace = s[1], shadow:false
-workspace = special:btm, border:false, on-created-empty:kitty --hold btm
+workspace = s[1], shadow:false # TODO remember what it was about
+workspace = special:btm, border:false, on-created-empty:kitty --hold sudo btm
 # workspace = special:aichat, border:false, on-created-empty:kitty --hold aichat -s
 
 # ~ layers
@@ -21,6 +21,12 @@ layerrule {
   blur = on
   ignore_alpha = 0
   # ignore_alpha = 0.5
+}
+
+layerrule {
+  name = grim # and all wrappers eg grimblast
+  match:namespace = selection
+  no_anim = yes dont want them
 }
 
 # ~ windows

@@ -33,7 +33,7 @@ in
     ./starship.nix
     ./swaync/swaync.nix
     ./theme.nix
-    ./walker/walker.nix
+    ./vicinae/vicinae.nix
     ./xdg.nix
     ./yazi.nix
 
@@ -58,6 +58,7 @@ in
 
       # Force GTK4 to use Cairo renderer instead of Vulkan/OpenGL to fix flickering issues
       # TODO: Check if this is still needed with future GTK4/driver updates
+      # possibly related: https://github.com/NixOS/nixpkgs/issues/463220
       GSK_RENDERER = "cairo";
 
       TERMINAL = "kitty";
@@ -90,6 +91,7 @@ in
       pkgs.chafa
       pkgs.cheese
       pkgs.choose
+      pkgs.codex
       pkgs.dash
       pkgs.difftastic
       pkgs.distrobox
@@ -99,14 +101,14 @@ in
       pkgs.ffmpeg-full
       pkgs.file
       pkgs.fx
-      # needs a couple updates
-      pkgs-master.gemini-cli
+      pkgs.gemini-cli
       pkgs.gh
       pkgs.glib
       pkgs.glow
       pkgs.gradia
       (pkgs.grimblast.override { hyprland = inputs.hyprland.packages.${system}.hyprland; })
       pkgs.gum
+      pkgs.hubstaff
       pkgs.huniq
       pkgs.hyperfine
       pkgs.hyprls
@@ -115,6 +117,7 @@ in
       pkgs.just
       pkgs.killall
       pkgs.libnotify
+      pkgs.libqalculate
       pkgs.mixxx
       pkgs.moor
       pkgs.nemo-fileroller
@@ -122,6 +125,7 @@ in
       pkgs.nemo-with-extensions
       pkgs.nixd
       pkgs.nodePackages.sass
+      pkgs.opencode
       pkgs.ouch
       pkgs.overskride
       pkgs.pamixer
@@ -241,7 +245,11 @@ in
     };
     difftastic = {
       enable = true;
-      git.enable = true;
+      # annoying as hell to tell claude (and other tools) to use --no-ext-diff all the time
+      # TODO figure out a better way, maybe wrap the binary with a script with `isatty` to check for interactive shells
+      # update: isatty won't work because it's never a tty, result is managed by git
+      # i dont think theres a solution other than aliases or just using GIT_EXTERNAL_DIFF when necessary
+      # git.enable = true;
       options.display = "side-by-side";
     };
     home-manager.enable = true;
