@@ -60,6 +60,12 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    paneru = {
+      url = "github:karinushka/paneru";
+      # url = "github:karinushka/paneru/testing";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
 }

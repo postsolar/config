@@ -7,6 +7,7 @@
     ./fish/fish.nix
     ./helix.nix
     ./kitty.nix
+    ./paneru.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -100,6 +101,8 @@
     MOOR = "--no-linenumbers --no-statusbar --scroll-left-hint=ESC[90m‹ --scroll-right-hint=ESC[90m› --terminal-fg";
     STARSHIP_LOG = "error";
   };
+
+  xdg.enable = true;
 
   home.activation.diff = lib.hm.dag.entryAfter [ "writeBoundary" ]
     ''

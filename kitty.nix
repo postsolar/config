@@ -9,7 +9,7 @@
     "kitty/kitty.conf".text =
       # shell fake highlight for treesitter
       ''
-      shell fish
+      shell /Users/alan/.nix-profile/bin/fish
 
       macos_option_as_alt left
 
