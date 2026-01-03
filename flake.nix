@@ -27,7 +27,7 @@
           (builtins.attrValues outputs.homeManagerModules)
             ++
               [
-                ./home.nix
+                ./home-manager/home.nix
               ]
             ;
       };
@@ -45,6 +45,17 @@
           modules = hmConfig.home-manager.users.alan.imports;
         };
 
+        darwinConfigurations."Alans-MacBook-Pro" = inputs.nix-darwin.lib.darwinSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+            pkgs-master = inputs.nixpkgs-master.legacyPackages.${system};
+          };
+          modules = [
+            ./nix-darwin/configuration.nix
+          ];
+        };
+
       };
 
   inputs = {
@@ -56,6 +67,11 @@
       url = "github:nixos/nixpkgs/master";
     };
 
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -63,7 +79,6 @@
 
     paneru = {
       url = "github:karinushka/paneru";
-      # url = "github:karinushka/paneru/testing";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

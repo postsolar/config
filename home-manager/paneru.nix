@@ -8,10 +8,10 @@ let
     #
     [options]
     # Enables focus follows mouse. Enabled by default, set to false to disable.
-    # focus_follows_mouse = true
+    focus_follows_mouse = false
 
     # Enables mouse follows focus. Enabled by default, set to false to disable.
-    # mouse_follows_focus = true
+    mouse_follows_focus = false
 
     # Array of widths used by the `window_resize` action to cycle between.
     # Defaults to 25%, 33%, 50%, 66% and 75%.
@@ -113,6 +113,7 @@ in
     };
   };
 
+  # why: because 
   home.activation.paneruConfig = lib.hm.dag.entryAfter [ "writeBoundary" ]
     ''
     run mkdir -p ${config.xdg.configHome}/paneru
