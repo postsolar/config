@@ -2,6 +2,7 @@
 
 let
 
+  # TODO make an xdg.configFile after https://github.com/karinushka/paneru/issues/58 is resolved
   paneruConfig = # toml
     ''
     # Example configuration for Paneru.
@@ -27,7 +28,7 @@ let
 
     # Window movement speed in pixels/second.
     # To disable animations, leave this unset or set to a very large value.
-    animation_speed = 2000
+    animation_speed = 70000
 
     [bindings]
     # Moves the focus between windows.
@@ -113,7 +114,6 @@ in
     };
   };
 
-  # why: because 
   home.activation.paneruConfig = lib.hm.dag.entryAfter [ "writeBoundary" ]
     ''
     run mkdir -p ${config.xdg.configHome}/paneru

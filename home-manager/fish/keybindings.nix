@@ -65,11 +65,10 @@
     bind alt-s 'fish_commandline_prepend sudo'
     bind ctrl-z 'jobs -q && fg; commandline -f repaint'
 
-    bind ctrl-t fzf-file-widget
+    bind ctrl-t fzf-file-widget # TODO for kitty replace with built in picker
     bind ctrl-r history-pager
     bind alt-up "builtin cd ..; commandline -f repaint"
-    bind alt-down fzf-cd-widget
+    bind alt-down fzf-cd-widget # TODO for kitty replace with built in picker
     bind alt-a hx
-    bind alt-i _aichat_fish
     '';
 }

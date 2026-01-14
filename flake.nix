@@ -67,6 +67,10 @@
       url = "github:nixos/nixpkgs/master";
     };
 
+    nixpkgs-25-11-darwin = {
+      url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
+    };
+
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -79,7 +83,13 @@
 
     paneru = {
       url = "github:karinushka/paneru";
+      # url = "github:karinushka/paneru/testing";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    carpalx-macos = {
+      url = "github:JuneKelly/carpalx-macos";
+      flake = false;
     };
   };
 

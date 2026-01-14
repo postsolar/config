@@ -1,27 +1,24 @@
 # Non-Nix System Notes
 
-## Auto-Hide Cursor
-
-```sh
-brew install --cask cursorcerer
-open ~/Library/PreferencePanes/Cursorcerer.prefPane
-```
-
-if fails because of certificates:
-```fish
-HOMEBREW_CURLRC=$(echo insecure | psub) brew install --cask cursorcerer
-open ~/Library/PreferencePanes/Cursorcerer.prefPane
-```
+This document lists important but non-reproducible system setup performed.
 
 ## Carpalx Keyboard Layout
 
-README claims we can install to user-level location, but I did not find this to work. System-level location only.
+Why not nixify it?
+- home-manager: home.file creates symlinks, symlinks don't work, need a real file
+- nix-darwin: system.activationScripts doesn't seem to work (just doesn't get included in system derivation's `activate` script) and i couldnt find another way to create a file in `/`
 
 ```sh
 git clone https://github.com/JuneKelly/carpalx-macos
-sudo mv carpalx-macos/Carpalx.bundle /Library/Keyboard\ Layouts/
+sudo cp -rv carpalx-macos/Carpalx.bundle /Library/Keyboard\ Layouts/
 ```
 
 Then reboot and enable it in System Settings → Keyboard → Input Sources.
 
-Limitation: cannot have it be the only Latin (?) layout, another one would need to be added alongside. The reason is seemingly the usual security theater. This could possibly be worked around by fucking with stuff in system paths instead.
+**Limitation**: out of the box, cannot have it be the only Latin layout, another one would need to be added alongside. See `help/flush-layouts.sh` for resolution instructions.
+
+## Chrome flags
+
+Why not nixify it? Not managing browsers with Nix for now.
+
+#auto-picture-in-picture-for-video-playback -> false (good in theory, but inconsistent, only works on tab switch but not window switch, easier to just disable it)

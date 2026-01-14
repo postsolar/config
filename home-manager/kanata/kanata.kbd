@@ -1,0 +1,33 @@
+;; Minimal passthrough QWERTY layout with one-shot modifiers.
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]
+  caps a    s    d    f    g    h    j    k    l    ;    '    \    ret
+  lsft lsgt z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lalt lmet           spc            ralt rmet rctl
+)
+
+(deflayer base
+  brdn brup mctl lpad dtn dnd prev pp next mute vold volu
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]
+  caps a    s    d    f    g    h    j    k    l    ;    '    \    ret
+  @os-lsft lsgt z    x    c    v    b    n    m    ,    .    /    @os-rsft
+  @os-lctl @os-lalt @os-lmet           spc            @os-ralt @os-rmet @os-rctl
+)
+
+(defalias
+  os-lctl (one-shot 2000 lctl)
+  os-lsft (one-shot 2000 lsft)
+  os-lalt (one-shot 2000 lalt)
+  os-lmet (one-shot 2000 lmet)
+  os-rctl (one-shot 2000 rctl)
+  os-rsft (one-shot 2000 rsft)
+  os-ralt (one-shot 2000 ralt)
+  os-rmet (one-shot 2000 rmet)
+)

@@ -9,9 +9,10 @@
     "kitty/kitty.conf".text =
       # shell fake highlight for treesitter
       ''
-      shell /Users/alan/.nix-profile/bin/fish
+      # shell /run/current-system/sw/bin/fish
 
       macos_option_as_alt left
+      macos_titlebar_color background
 
       # TODO: fonts
 
@@ -34,8 +35,6 @@
 
       # ~ misc
 
-      # this will be expanded to unix:$XDG_STATE_HOME/kitty/kitty.sock-{{kitty_pid}} and made available as $KITTY_LISTEN_ON
-      # a better choice would be $XDG_RUNTIME_DIR, but 1) kitty won't create it itself 2) nixos-rebuild will erase it
       listen_on unix:/Users/alan/.local/state/kitty/kitty.sock
       allow_remote_control yes
 
@@ -49,7 +48,7 @@
 
       # ~ colors
 
-      background_opacity 0.9
+      background_opacity 0.85
 
       selection_foreground none
       selection_background none

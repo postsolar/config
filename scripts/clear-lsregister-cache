@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Usage: scripts/clear-lsregister-cache <app-name-or-bundle>
+# What: Clear LaunchServices registration for a Home Manager app and re-register it.
+# Why: Sometimes LaunchServices gets stuck on a stale record and the app cannot be opened,
+#      even when the bundle is a byte-for-byte copy of the Nix store version that launches
+#      fine elsewhere. The observed fix is to move/rename the bundle to force a cache
+#      refresh, then rename it back; this script does the logical equivalent by
+#      unregistering and re-registering the bundle in place.
+
+if [[ $# -ne 1 ]]; then
+  echo "usage: $(basename "$0") <app-name-or-bundle>"
+  echo "example: $(basename "$0") kitty"
+  exit 2
+fi
+
+app="$1"
+if [[ "$app" != *.app ]]; then
+  app="${app}.app"
+fi
+
+dest_dir="$HOME/Applications/Home Manager Apps"
+dest="${dest_dir}/${app}"
+if [[ ! -d "$dest" ]]; then
+  echo "app bundle not found: $dest" >&2
+  exit 1
+fi
+
+lsregister="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
+if [[ ! -x "$lsregister" ]]; then
+  echo "lsregister not found or not executable: $lsregister" >&2
+  exit 1
+fi
+
+"$lsregister" -u "$dest" >/dev/null 2>&1 || true
+"$lsregister" -f "$dest" >/dev/null 2>&1 || true
+# Nuclear option (use sparingly): rebuild LaunchServices database.
+# "$lsregister" -kill -r -domain local -domain system -domain user
+
+echo "refreshed LaunchServices for: $dest"

@@ -33,6 +33,10 @@ home-fancy:
     git add . || :
     nh home switch .
 
+# Regenerate a single Home Manager app bundle (e.g. just hm-app kitty)
+hm-app app:
+    ./scripts/regen-hm-app "{{app}}"
+
 # Select and update flake inputs
 update:
     nix flake metadata --json 2>/dev/null \

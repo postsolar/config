@@ -6,6 +6,7 @@
   imports = [
     ./fish/fish.nix
     ./helix.nix
+    ./kanata/kanata.nix
     ./kitty.nix
     ./paneru.nix
   ];
@@ -38,6 +39,7 @@
     pkgs.fx
     pkgs.fzf
     pkgs.gemini-cli
+    pkgs.git-crypt
     pkgs.glow
     pkgs.huniq
     pkgs.hyperfine
@@ -141,6 +143,8 @@
     nh = {
       enable = true;
       homeFlake = flakeDir;
+      # as nh doesnt have a nix-darwin module, we set it here
+      darwinFlake = flakeDir;
     };
 
     fzf = {
