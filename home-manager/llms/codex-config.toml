@@ -1,0 +1,34 @@
+# model = "gpt-5.4"
+model_reasoning_effort = "medium"
+
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+show_raw_agent_reasoning = true
+approvals_reviewer = "user"
+
+[features]
+
+[sandbox_read_only]
+network_access = true
+
+[sandbox_workspace_write]
+network_access = true
+exclude_tmpdir_env_var = true
+exclude_slash_tmp = true
+
+[notice]
+hide_full_access_warning = true
+
+[mcp_servers.github]
+url = "https://api.githubcopilot.com/mcp/"
+bearer_token_env_var = "CODEX_GITHUB_MCP_TOKEN"
+
+[mcp_servers.notion]
+url = "https://mcp.notion.com/mcp"
+
+[projects."/Users/alan"]
+trust_level = "trusted"
+
+[projects."/Users/alan/nix"]
+trust_level = "trusted"

@@ -11,8 +11,7 @@
 
   # TODO set up auto gc / auto optimize
   nix = {
-    # TODO set to pkgs.lix when it's not broken anymore
-    package = inputs.nixpkgs-25-11-darwin.legacyPackages."aarch64-darwin".lix;
+    package = pkgs.lix;
 
     settings = {
       experimental-features = "nix-command flakes";
@@ -45,16 +44,40 @@
   environment.systemPackages = [
     pkgs.git-crypt
     pkgs.kanata-with-cmd
+    (pkgs.writeShellScriptBin "copyq" ''
+      exec /Applications/CopyQ.app/Contents/MacOS/CopyQ "$@"
+    '')
   ];
 
   homebrew = {
     enable = true;
 
+    brews = [
+      "mole"
+    ];
+
+    taps = [
+      "dodoapps/tap"
+    ];
+
     casks = [
+      {
+        name = "bettershot";
+      }
       { name = "brave-browser@beta"; }
-      { name = "eqmac"; }
       { name = "cursorcerer"; }
+      # TODO: cask is deprecated and slated for removal on 2026-09-01
+      { name = "copyq"; }
+      {
+        name = "dodoapps/tap/dodoshot";
+        postinstall = "/usr/bin/xattr -cr /Applications/DodoShot.app";
+      }
+      { name = "finetune"; }
+      { name = "gimp"; }
       { name = "karabiner-elements"; }
+      { name = "kitty"; }
+      { name = "lm-studio"; }
+      { name = "middleclick"; }
     ];
   };
 

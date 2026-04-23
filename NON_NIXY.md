@@ -22,3 +22,12 @@ Then reboot and enable it in System Settings → Keyboard → Input Sources.
 Why not nixify it? Not managing browsers with Nix for now.
 
 #auto-picture-in-picture-for-video-playback -> false (good in theory, but inconsistent, only works on tab switch but not window switch, easier to just disable it)
+
+## CopyQ quarantine and codesign
+
+Why not nixify it? Homebrew installs the app, but macOS still blocks it until the quarantine attribute is cleared and the app is ad-hoc signed.
+
+```sh
+xattr -d com.apple.quarantine /Applications/CopyQ.app
+codesign --force --deep --sign - /Applications/CopyQ.app
+```

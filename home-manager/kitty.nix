@@ -2,7 +2,10 @@
 
 {
   home.packages = [
-    pkgs.kitty
+    # it seems that OSC 99 (notifications) doesn't work specifically with nixpkgs kitty,
+    # likely due to Apple banning notifications even with all restrictions off and an ad-hoc signed binary
+    # we therefore install it via homebrew
+    # pkgs.kitty
   ];
 
   xdg.configFile = {

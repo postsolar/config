@@ -5,10 +5,10 @@
 
   imports = [
     ./fish/fish.nix
+    ./llms/llms.nix
     ./helix.nix
     ./kanata/kanata.nix
     ./kitty.nix
-    ./paneru.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -28,9 +28,8 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+    pkgs.bitwarden-desktop
     pkgs.choose
-    pkgs.claude-code
-    pkgs.codex
     pkgs.difftastic
     pkgs.dust
     pkgs.eza
@@ -38,7 +37,6 @@
     pkgs.fd
     pkgs.fx
     pkgs.fzf
-    pkgs.gemini-cli
     pkgs.git-crypt
     pkgs.glow
     pkgs.huniq
@@ -48,9 +46,9 @@
     pkgs.moor
     pkgs.nixd
     pkgs.nvd
-    pkgs.opencode
     pkgs.ouch
     pkgs.ripgrep
+    pkgs.raycast
     pkgs.sd
     pkgs.socat
     pkgs.telegram-desktop
