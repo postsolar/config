@@ -28,13 +28,14 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    pkgs.bitwarden-desktop
+    # pkgs.bitwarden-desktop # TODO re-enable when it's not broken anymore, somewhere in June, probably this: https://github.com/NixOS/nixpkgs/issues/521305
     pkgs.choose
     pkgs.difftastic
     pkgs.dust
     pkgs.eza
     pkgs.expect
     pkgs.fd
+    pkgs.ffmpeg
     pkgs.fx
     pkgs.fzf
     pkgs.git-crypt
@@ -54,9 +55,10 @@
     pkgs.telegram-desktop
     pkgs.typescript-language-server
     pkgs.uni
+    pkgs.vlc-bin
     pkgs.vscode-langservers-extracted
     pkgs.watchexec
-    pkgs.yazi
+    (pkgs.yazi.override { ffmpeg-headless = pkgs.ffmpeg; })
     pkgs.yj
     pkgs.yq
   ];
@@ -201,6 +203,52 @@
         email = "120750161+postsolar@users.noreply.github.com";
       };
     };
+
+    fish.functions.mount_adata_ssd_ntfs = # fish
+      ''
+      set -l mountpoint "/Volumes/ADATA NTFS"
+      set -l label "ADATA NTFS"
+      set -l uid (id -u)
+      set -l gid (id -g)
+      set -l ntfs3g /run/current-system/sw/bin/ntfs-3g
+      set -l ntfsfix /run/current-system/sw/bin/ntfsfix
+      set -l ntfslabel /run/current-system/sw/bin/ntfslabel
+      set -l device
+
+      if not test -x "$ntfs3g"
+        echo "ntfs-3g is not available at $ntfs3g" >&2
+        return 1
+      end
+
+      set -l mount_line (mount | awk -v mp="$mountpoint" 'index($0, " on " mp " ") { print; exit }')
+      if test -n "$mount_line"
+        if string match -q '* (macfuse,*' "$mount_line"
+          echo "$mountpoint is already mounted via ntfs-3g"
+          return 0
+        end
+
+        set device (printf '%s\n' "$mount_line" | awk '{ print $1 }')
+        sudo /sbin/umount "$mountpoint"; or sudo /sbin/umount -f "$mountpoint"; or return 1
+      else
+        for candidate in /dev/disk*s*
+          set -l candidate_label (sudo "$ntfslabel" "$candidate" 2>/dev/null)
+          if test "$candidate_label" = "$label"
+            set device "$candidate"
+            break
+          end
+        end
+      end
+
+      if test -z "$device"
+        echo "Could not find NTFS volume labelled '$label'" >&2
+        return 1
+      end
+
+      sudo /bin/mkdir -p "$mountpoint"; or return 1
+      sudo "$ntfsfix" -d "$device"; or return 1
+      sudo "$ntfs3g" "$device" "$mountpoint" \
+        -o "local,allow_other,noappledouble,noapplexattr,volname=$label,uid=$uid,gid=$gid,big_writes,noatime,delay_mtime=60,recover"
+      '';
 
     starship = {
       enable = true;

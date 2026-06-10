@@ -31,3 +31,20 @@ Why not nixify it? Homebrew installs the app, but macOS still blocks it until th
 xattr -d com.apple.quarantine /Applications/CopyQ.app
 codesign --force --deep --sign - /Applications/CopyQ.app
 ```
+
+## oMLX menubar app
+
+Why not nixify it? The Homebrew formula is CLI/server-only. It does not install the macOS menubar app, and the maintainer treats Homebrew and DMG as separate distribution channels.
+
+If all you want is the server/CLI, keep using the nix-managed Homebrew formula.
+
+If you want the menubar app, install the `.dmg` from the releases page:
+
+```sh
+open https://github.com/jundot/omlx/releases
+```
+
+Notes:
+- the DMG build includes the actual menubar app in `/Applications`
+- it also has built-in auto-update, so this is intentionally non-reproducible / non-Nixy
+- don't expect the Homebrew install to create a Dock/menu bar app

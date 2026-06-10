@@ -63,6 +63,10 @@
       url = "github:nixos/nixpkgs/nixpkgs-unstable";
     };
 
+    nixpkgs-25-11-darwin = {
+      url = "github:nixos/nixpkgs/nixpkgs-25.11-darwin";
+    };
+
     nixpkgs-master = {
       url = "github:nixos/nixpkgs/master";
     };

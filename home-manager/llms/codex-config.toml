@@ -32,3 +32,24 @@ trust_level = "trusted"
 
 [projects."/Users/alan/nix"]
 trust_level = "trusted"
+
+[projects."/Users/alan/code/wuwa-pulls-sim2"]
+trust_level = "trusted"
+
+[projects."/Users/alan/code/open-webui-flake"]
+trust_level = "trusted"
+
+[projects."/Users/alan/Downloads"]
+trust_level = "trusted"
+
+[projects."/Users/alan/code/omlx"]
+trust_level = "trusted"
+
+[projects."/Volumes/ADATA APFS/old-laptop/windows-era/gog"]
+trust_level = "trusted"
+
+[projects."/Users/alan/code/test"]
+trust_level = "trusted"
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4

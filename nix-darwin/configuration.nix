@@ -11,7 +11,8 @@
 
   # TODO set up auto gc / auto optimize
   nix = {
-    package = pkgs.lix;
+    # TODO set to pkgs.lix when it's not broken anymore
+    package = inputs.nixpkgs-25-11-darwin.legacyPackages."aarch64-darwin".lix;
 
     settings = {
       experimental-features = "nix-command flakes";
@@ -44,6 +45,7 @@
   environment.systemPackages = [
     pkgs.git-crypt
     pkgs.kanata-with-cmd
+    pkgs.ntfs3g
     (pkgs.writeShellScriptBin "copyq" ''
       exec /Applications/CopyQ.app/Contents/MacOS/CopyQ "$@"
     '')
@@ -54,10 +56,19 @@
 
     brews = [
       "mole"
+      {
+        name = "jundot/omlx/omlx";
+        # start_service = true;
+      }
     ];
 
     taps = [
       "dodoapps/tap"
+      "xykong/tap"
+      {
+        name = "jundot/omlx";
+        clone_target = "https://github.com/jundot/omlx";
+      }
     ];
 
     casks = [
@@ -67,16 +78,21 @@
       { name = "brave-browser@beta"; }
       { name = "cursorcerer"; }
       # TODO: cask is deprecated and slated for removal on 2026-09-01
-      { name = "copyq"; }
+      {
+        name = "copyq";
+        postinstall = "/usr/bin/xattr -cr /Applications/CopyQ.app && /usr/bin/codesign --force --deep --sign - /Applications/CopyQ.app";
+      }
       {
         name = "dodoapps/tap/dodoshot";
         postinstall = "/usr/bin/xattr -cr /Applications/DodoShot.app";
       }
       { name = "finetune"; }
+      { name = "flux-markdown"; }
       { name = "gimp"; }
       { name = "karabiner-elements"; }
       { name = "kitty"; }
       { name = "lm-studio"; }
+      { name = "macfuse"; }
       { name = "middleclick"; }
     ];
   };
