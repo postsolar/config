@@ -52,7 +52,6 @@
     pkgs.raycast
     pkgs.sd
     pkgs.socat
-    pkgs.telegram-desktop
     pkgs.typescript-language-server
     pkgs.uni
     pkgs.vlc-bin

@@ -64,6 +64,7 @@
 
     taps = [
       "dodoapps/tap"
+      "thusvill/livewallpaper"
       "xykong/tap"
       {
         name = "jundot/omlx";
@@ -91,9 +92,15 @@
       { name = "gimp"; }
       { name = "karabiner-elements"; }
       { name = "kitty"; }
+      {
+        name = "livewallpaper";
+        postinstall = "/usr/bin/xattr -cr /Applications/LiveWallpaper.app";
+      }
       { name = "lm-studio"; }
       { name = "macfuse"; }
       { name = "middleclick"; }
+      # TODO: switch back to Home Manager's pkgs.telegram-desktop once it is cached/building again on Darwin.
+      { name = "telegram"; }
     ];
   };
 
